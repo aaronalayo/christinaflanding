@@ -45,23 +45,23 @@ export default function Services() {
   ];
 
   return (
-    <div style={styles.page}>
-      <div style={styles.container}>
-        <div style={styles.header}>
+    <div className="site-content-page" style={styles.page}>
+      <div className="site-content-container" style={styles.container}>
+        <div className="site-page-header" style={styles.header}>
           <span style={styles.badge}>🌿 Ydelser & Behandlinger</span>
-          <h1 style={styles.title}>Mine Behandlinger</h1>
-          <p style={styles.subtitle}>
+          <h1 className="site-page-title" style={styles.title}>Mine Behandlinger</h1>
+          <p className="site-page-subtitle" style={styles.subtitle}>
             Alle sessioner foregår i et trygt og fortroligt rum med fokus på din trivsel og balance.
           </p>
         </div>
 
         <div style={styles.treatmentList}>
           {treatments.map((t, idx) => (
-            <div key={idx} style={styles.treatmentCard}>
-              <div style={styles.cardTop}>
+            <div className="site-treatment-card" key={idx} style={styles.treatmentCard}>
+              <div className="site-treatment-card-top" style={styles.cardTop}>
                 <span style={styles.icon}>{t.icon}</span>
                 <div>
-                  <h2 style={styles.cardTitle}>{t.title}</h2>
+                  <h2 className="site-treatment-title" style={styles.cardTitle}>{t.title}</h2>
                   <div style={styles.metaRow}>
                     <span style={styles.metaBadge}>⏱ {t.duration}</span>
                     <span style={styles.metaBadge}>💳 {t.price}</span>

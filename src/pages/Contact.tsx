@@ -3,19 +3,19 @@ import type { Styles } from '../css';
 
 export default function Contact() {
   return (
-    <div style={styles.page}>
-      <div style={styles.container}>
-        <div style={styles.header}>
+    <div className="site-content-page" style={styles.page}>
+      <div className="site-content-container" style={styles.container}>
+        <div className="site-page-header" style={styles.header}>
           <span style={styles.badge}>🌿 Kom i kontakt</span>
-          <h1 style={styles.title}>Kontakt Christina</h1>
-          <p style={styles.subtitle}>
+          <h1 className="site-page-title" style={styles.title}>Kontakt Christina</h1>
+          <p className="site-page-subtitle" style={styles.subtitle}>
             Har du spørgsmål om behandlingerne, forløb eller specielle ønsker? Tøv ikke med at række ud.
           </p>
         </div>
 
-        <div style={styles.grid}>
+        <div className="site-contact-grid" style={styles.grid}>
           {/* Card 1: Contact Info */}
-          <div style={styles.card}>
+          <div className="site-contact-card" style={styles.card}>
             <h2 style={styles.cardHeading}>Kontaktoplysninger</h2>
             
             <div style={styles.infoRow}>
@@ -66,7 +66,7 @@ export default function Contact() {
           </div>
 
           {/* Card 2: Quick Booking Action */}
-          <div style={{ ...styles.card, backgroundColor: '#D9EDCC', border: '1.5px solid #7FAD65' }}>
+          <div className="site-contact-card" style={{ ...styles.card, backgroundColor: '#D9EDCC', border: '1.5px solid #7FAD65' }}>
             <h2 style={styles.cardHeading}>Klar til at booke?</h2>
             <p style={{ fontSize: '15px', lineHeight: '1.7', color: '#2D5A1B', marginBottom: '24px' }}>
               Du behøver ikke vente på svar for at reservere en tid. Vores online kalender viser ledige tider i realtid, og du kan sikre din session med det samme.

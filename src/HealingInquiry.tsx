@@ -214,7 +214,7 @@ export default function HealingInquiry() {
   }
 
   return (
-    <div style={s.container}>
+    <div className="booking-shell" style={s.container}>
       <div style={{ textAlign: 'center', marginBottom: '28px' }}>
         <h2 style={s.heading}>🌿 Book en Healingsession 🌿</h2>
         <p style={s.subheading}>Vælg dag, dato og tidspunkt — og udfyld dine oplysninger.</p>
@@ -486,12 +486,12 @@ function BookingForm({ onSubmit, submitting }: {
 }) {
   return (
     <form onSubmit={onSubmit} style={s.form}>
-      <div style={s.row}>
-        <div style={s.formGroup}>
+      <div className="booking-form-row" style={s.row}>
+        <div className="booking-form-group" style={s.formGroup}>
           <label style={s.label}>Dit Navn</label>
           <input type="text" name="name" required placeholder="Navn" style={s.input} />
         </div>
-        <div style={s.formGroup}>
+        <div className="booking-form-group" style={s.formGroup}>
           <label style={s.label}>Din E-mail</label>
           <input type="email" name="email" required placeholder="email@eksempel.dk" style={s.input} />
         </div>

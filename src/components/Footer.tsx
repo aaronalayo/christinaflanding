@@ -4,10 +4,10 @@ import type { Styles } from '../css';
 export default function Footer() {
   return (
     <footer style={styles.footer}>
-      <div style={styles.container}>
-        <div style={styles.grid}>
+      <div className="site-footer-container" style={styles.container}>
+        <div className="site-footer-grid" style={styles.grid}>
           {/* Col 1: Brand */}
-          <div style={styles.col}>
+          <div className="site-footer-column" style={styles.col}>
             <div style={styles.brandTitle}>🌿 Christina Flanding</div>
             <p style={styles.text}>
               Intuitiv healing, energiterapi og nærvær. Skab ro, balance og fornyet energi i krop og sind.
@@ -15,7 +15,7 @@ export default function Footer() {
           </div>
 
           {/* Col 2: Navigation */}
-          <div style={styles.col}>
+          <div className="site-footer-column" style={styles.col}>
             <div style={styles.colTitle}>Hurtige links</div>
             <ul style={styles.list}>
               <li><Link to="/" style={styles.link}>Forside</Link></li>
@@ -27,7 +27,7 @@ export default function Footer() {
           </div>
 
           {/* Col 3: Practical */}
-          <div style={styles.col}>
+          <div className="site-footer-column" style={styles.col}>
             <div style={styles.colTitle}>Åbningstider & Tider</div>
             <p style={styles.text}>
               Mandag – Onsdag: 09:30 – 13:30<br />

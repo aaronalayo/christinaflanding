@@ -3,17 +3,17 @@ import type { Styles } from '../css';
 
 export default function About() {
   return (
-    <div style={styles.page}>
-      <div style={styles.container}>
-        <div style={styles.header}>
+    <div className="site-content-page" style={styles.page}>
+      <div className="site-content-container" style={styles.container}>
+        <div className="site-page-header" style={styles.header}>
           <span style={styles.badge}>🌿 Mød Christina</span>
-          <h1 style={styles.title}>Om Christina Flanding</h1>
-          <p style={styles.subtitle}>
+          <h1 className="site-page-title" style={styles.title}>Om Christina Flanding</h1>
+          <p className="site-page-subtitle" style={styles.subtitle}>
             Healer, energiterapeut og formidler af ro, balance og personlig udvikling.
           </p>
         </div>
 
-        <div style={styles.contentBox}>
+        <div className="site-content-card" style={styles.contentBox}>
           <h2 style={styles.heading}>Min tilgang til healing</h2>
           <p style={styles.text}>
             Jeg tror på, at kroppen besidder en enestående evne til at hele sig selv, når vi giver den roen og energien til det. I mit arbejde møder jeg dig præcis der, hvor du er — med nærvær, empati og et trygt rum uden fordømmelse.
