@@ -1,5 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import type { Styles } from '../css';
 
 export default function Home() {
   return (
@@ -94,7 +94,7 @@ export default function Home() {
   );
 }
 
-const styles = {
+const styles: Styles = {
   hero: {
     backgroundColor: '#EEF6E8',
     padding: '72px 24px',

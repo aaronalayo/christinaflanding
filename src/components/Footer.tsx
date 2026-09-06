@@ -1,5 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import type { Styles } from '../css';
 
 export default function Footer() {
   return (
@@ -52,7 +52,7 @@ export default function Footer() {
   );
 }
 
-const styles = {
+const styles: Styles = {
   footer: {
     backgroundColor: '#1E3D14',
     color: '#E2EDD9',

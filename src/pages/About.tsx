@@ -1,5 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import type { Styles } from '../css';
 
 export default function About() {
   return (
@@ -61,7 +61,7 @@ export default function About() {
   );
 }
 
-const styles = {
+const styles: Styles = {
   page: {
     padding: '56px 24px 80px',
   },

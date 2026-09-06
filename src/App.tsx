@@ -1,5 +1,5 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import type { Styles } from './css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -29,7 +29,7 @@ export default function App() {
   );
 }
 
-const styles = {
+const styles: Styles = {
   appContainer: {
     display: 'flex',
     flexDirection: 'column',
