@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
+import type { Styles } from './css';
 
 // ─── Data ───────────────────────────────────────────────────────────────────
 
@@ -15,9 +17,21 @@ const SLOTS = ['09:30 – 10:30', '11:00 – 12:00', '12:30 – 13:30'];
 const DK_MONTHS = ['jan','feb','mar','apr','maj','jun','jul','aug','sep','okt','nov','dec'];
 const DAY_NAMES = ['søndag', 'mandag', 'tirsdag', 'onsdag', 'torsdag', 'fredag', 'lørdag'];
 
+type ScheduleEntry = (typeof SCHEDULE)[number];
+type BookedSlot = { date: string; time: string };
+type Booking = {
+  name: string;
+  email: string;
+  phone: string;
+  booking_date: string;
+  booking_time: string;
+  intentions: string;
+  displayDate: string;
+};
+
 // Returns next `count` dates (as Date objects) that fall on `dayOfWeek` (1=Mon…5=Fri)
-function getUpcomingDates(dayOfWeek, count = 5) {
-  const results = [];
+function getUpcomingDates(dayOfWeek: number, count = 5): Date[] {
+  const results: Date[] = [];
   const cursor  = new Date();
   cursor.setHours(0, 0, 0, 0);
   cursor.setDate(cursor.getDate() + 1); // start from tomorrow
@@ -28,22 +42,22 @@ function getUpcomingDates(dayOfWeek, count = 5) {
   return results;
 }
 
-function fmtDate(date) {
+function fmtDate(date: Date) {
   const currentYear = new Date().getFullYear();
   const yearStr = date.getFullYear() !== currentYear ? ` ${date.getFullYear()}` : '';
   return `${date.getDate()}. ${DK_MONTHS[date.getMonth()]}${yearStr}`;
 }
 
-function dateKey(date) {
+function dateKey(date: Date) {
   return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;
 }
 
-function getGoogleCalendarUrl(booking) {
+function getGoogleCalendarUrl(booking: Booking | null) {
   if (!booking || !booking.booking_date) return '#';
   const [y, m, d] = booking.booking_date.split('-');
   const timeMatch = (booking.booking_time || '').match(/(\d{1,2}):(\d{2})\s*–\s*(\d{1,2}):(\d{2})/);
-  let startISO = '';
-  let endISO = '';
+  let startISO: string;
+  let endISO: string;
 
   if (timeMatch) {
     const startH = timeMatch[1].padStart(2, '0');
@@ -67,11 +81,11 @@ function getGoogleCalendarUrl(booking) {
 // ─── Root ────────────────────────────────────────────────────────────────────
 
 export default function HealingInquiry() {
-  const [submittedBooking, setSubmittedBooking] = useState(null);
-  const [selectedDay,      setSelectedDay]      = useState(null);   // SCHEDULE entry
-  const [selectedDate,     setSelectedDate]     = useState(null);   // Date object
+  const [submittedBooking, setSubmittedBooking] = useState<Booking | null>(null);
+  const [selectedDay,      setSelectedDay]      = useState<ScheduleEntry | null>(null);
+  const [selectedDate,     setSelectedDate]     = useState<Date | null>(null);
   const [selectedTime,     setSelectedTime]     = useState('');     // slot string
-  const [bookedSlots,      setBookedSlots]      = useState([]);     // [{ date: 'YYYY-MM-DD', time: '...' }]
+  const [bookedSlots,      setBookedSlots]      = useState<BookedSlot[]>([]);
   const [submitting,       setSubmitting]       = useState(false);
 
   // Fetch booked slots on mount from Cloudflare D1 via /api/bookings
@@ -88,37 +102,37 @@ export default function HealingInquiry() {
       });
   }, []);
 
-  function isSlotBooked(date, time) {
+  function isSlotBooked(date: Date | null, time: string) {
     if (!date || !time) return false;
     const key = dateKey(date);
     return bookedSlots.some(b => b.date === key && b.time === time);
   }
 
-  function handleSelectDay(entry) {
+  function handleSelectDay(entry: ScheduleEntry) {
     setSelectedDay(entry);
     setSelectedDate(null);
     setSelectedTime('');
   }
 
-  function handleSelectDate(date) {
+  function handleSelectDate(date: Date) {
     setSelectedDate(date);
     setSelectedTime('');
   }
 
-  const handleFormSubmit = async (e) => {
+  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!selectedDay)  { alert('Vælg venligst en dag.');        return; }
     if (!selectedDate) { alert('Vælg venligst en dato.');       return; }
     if (!selectedTime) { alert('Vælg venligst et tidspunkt.');  return; }
 
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.currentTarget);
     const bookingData = {
-      name:         formData.get('name'),
-      email:        formData.get('email'),
-      phone:        formData.get('phone'),
+      name:         String(formData.get('name') || ''),
+      email:        String(formData.get('email') || ''),
+      phone:        String(formData.get('phone') || ''),
       booking_date: dateKey(selectedDate),
       booking_time: selectedTime,
-      intentions:   formData.get('intentions') || '',
+      intentions:   String(formData.get('intentions') || ''),
     };
 
     setSubmitting(true);
@@ -130,7 +144,7 @@ export default function HealingInquiry() {
         body: JSON.stringify(bookingData),
       });
 
-      let data;
+      let data: { success: boolean; error?: string; emailErrors?: string[] };
       try {
         data = await res.json();
       } catch {
@@ -152,7 +166,8 @@ export default function HealingInquiry() {
       }
     } catch (err) {
       console.error('Booking network error:', err);
-      alert(`Forbindelsesfejl: Kunne ikke få kontakt til serveren (${err.message}). Tjek din internetforbindelse eller om backend kører.`);
+      const message = err instanceof Error ? err.message : 'Ukendt netværksfejl';
+      alert(`Forbindelsesfejl: Kunne ikke få kontakt til serveren (${message}). Tjek din internetforbindelse eller om backend kører.`);
     } finally {
       setSubmitting(false);
     }
@@ -223,7 +238,7 @@ export default function HealingInquiry() {
       )}
 
       {/* ── Step 3: pick time ── */}
-      {selectedDate && (
+      {selectedDay && selectedDate && (
         <>
           <StepLabel step="3" label="Vælg tidspunkt" done={!!selectedTime} />
           <TimePicker
@@ -237,7 +252,7 @@ export default function HealingInquiry() {
       )}
 
       {/* ── Booking summary ── */}
-      {selectedTime && (
+      {selectedDay && selectedDate && selectedTime && (
         <div style={s.summary}>
           ✅ <strong>{selectedDay.day} {fmtDate(selectedDate)}</strong> — <strong>{selectedTime}</strong>
         </div>
@@ -254,7 +269,7 @@ export default function HealingInquiry() {
 
 // ─── Step label ───────────────────────────────────────────────────────────────
 
-function StepLabel({ step, label, done }) {
+function StepLabel({ step, label, done }: { step: string; label: string; done: boolean }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
       <span style={{
@@ -272,7 +287,7 @@ function StepLabel({ step, label, done }) {
 
 // ─── Day grid ─────────────────────────────────────────────────────────────────
 
-function DayGrid({ selectedDay, onSelect }) {
+function DayGrid({ selectedDay, onSelect }: { selectedDay: ScheduleEntry | null; onSelect: (entry: ScheduleEntry) => void }) {
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '22px' }}>
       {SCHEDULE.map(entry => {
@@ -297,14 +312,19 @@ function DayGrid({ selectedDay, onSelect }) {
 
 // ─── Date picker ──────────────────────────────────────────────────────────────
 
-function DatePicker({ entry, selectedDate, onSelect, isSlotBooked }) {
+function DatePicker({ entry, selectedDate, onSelect, isSlotBooked }: {
+  entry: ScheduleEntry;
+  selectedDate: Date | null;
+  onSelect: (date: Date) => void;
+  isSlotBooked: (date: Date | null, time: string) => boolean;
+}) {
   const [weeksToShow, setWeeksToShow] = useState(6);
   const [customError, setCustomError] = useState('');
 
   const dates = getUpcomingDates(entry.dayIndex, weeksToShow);
-  const tomorrowStr = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+  const [tomorrowStr] = useState(() => new Date(Date.now() + 86400000).toISOString().split('T')[0]);
 
-  function handleCustomDateChange(e) {
+  function handleCustomDateChange(e: ChangeEvent<HTMLInputElement>) {
     const val = e.target.value;
     if (!val) return;
     const [y, m, d] = val.split('-').map(Number);
@@ -390,7 +410,13 @@ function DatePicker({ entry, selectedDate, onSelect, isSlotBooked }) {
 
 // ─── Time picker ──────────────────────────────────────────────────────────────
 
-function TimePicker({ entry, selectedDate, selectedTime, onSelect, isSlotBooked }) {
+function TimePicker({ entry, selectedDate, selectedTime, onSelect, isSlotBooked }: {
+  entry: ScheduleEntry;
+  selectedDate: Date;
+  selectedTime: string;
+  onSelect: (time: string) => void;
+  isSlotBooked: (date: Date | null, time: string) => boolean;
+}) {
   if (entry.efterAftale) {
     return (
       <div style={{ marginBottom: '22px' }}>
@@ -454,7 +480,10 @@ function TimePicker({ entry, selectedDate, selectedTime, onSelect, isSlotBooked 
 
 // ─── Booking form ─────────────────────────────────────────────────────────────
 
-function BookingForm({ onSubmit, submitting }) {
+function BookingForm({ onSubmit, submitting }: {
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  submitting: boolean;
+}) {
   return (
     <form onSubmit={onSubmit} style={s.form}>
       <div style={s.row}>
@@ -492,7 +521,7 @@ function BookingForm({ onSubmit, submitting }) {
 
 // ─── Styles ───────────────────────────────────────────────────────────────────
 
-const s = {
+const s: Styles = {
   container:        { maxWidth: '620px', margin: '40px auto', padding: '34px', fontFamily: 'Georgia, serif', border: '2px solid #7FAD65', borderRadius: '16px', backgroundColor: '#EEF6E8', boxShadow: '0 10px 32px rgba(45,90,27,0.15)' },
   heading:          { color: '#1E3D14', margin: '0 0 10px 0', fontWeight: 'bold', fontSize: '24px' },
   subheading:       { color: '#4A6B35', margin: 0, fontSize: '14px', fontStyle: 'italic' },
@@ -510,7 +539,7 @@ const s = {
 };
 
 // Button variants
-const sc = {
+const sc: Styles = {
   dayBtn:        { flex: '1 1 90px', padding: '12px 8px', borderRadius: '10px', border: '1.5px solid #7FAD65', backgroundColor: '#F2F8EE', color: '#1E3D14', fontFamily: 'Georgia, serif', cursor: 'pointer', transition: 'all 0.15s', textAlign: 'center' },
   dayBtnActive:  { flex: '1 1 90px', padding: '12px 8px', borderRadius: '10px', border: '2px solid #2D5A1B', backgroundColor: '#2D5A1B', color: 'white', fontFamily: 'Georgia, serif', cursor: 'pointer', transition: 'all 0.15s', textAlign: 'center', boxShadow: '0 2px 8px rgba(45,90,27,0.25)' },
   dateBtn:       { padding: '9px 16px', borderRadius: '20px', border: '1.5px solid #7FAD65', backgroundColor: '#F2F8EE', color: '#1E3D14', fontFamily: 'sans-serif', fontSize: '13px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.15s' },

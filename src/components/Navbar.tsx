@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import type { Styles } from '../css';
 
 export default function Navbar() {
   const location = useLocation();
@@ -82,7 +83,7 @@ export default function Navbar() {
   );
 }
 
-const styles = {
+const styles: Styles = {
   header: {
     backgroundColor: '#F5FAF2',
     borderBottom: '1.5px solid #C5DEB8',

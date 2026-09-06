@@ -1,5 +1,5 @@
-import React from 'react';
 import HealingInquiry from '../HealingInquiry';
+import type { Styles } from '../css';
 
 export default function BookingPage() {
   return (
@@ -19,7 +19,7 @@ export default function BookingPage() {
   );
 }
 
-const styles = {
+const styles: Styles = {
   page: {
     padding: '48px 24px 80px',
   },
