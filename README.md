@@ -31,7 +31,6 @@ En holistisk hjemmeside med online booking for Christina Flanding, bygget med Re
 ## 🚀 Kom i gang lokalt
 
 ```bash
-cd christina-flanding
 npm install
 npm run dev
 ```
