@@ -69,9 +69,15 @@ export async function onRequestPost({ request, env }) {
 
 
     // 2. Send emails via Resend API (if configured in Cloudflare environment variables)
-    const resendApiKey = env?.RESEND_API_KEY;
+    const resendApiKey = String(env?.RESEND_API_KEY || "").replace(/^["']|["']$/g, "").trim();
     const senderEmail = env?.FROM_EMAIL || "Christina Flanding <onboarding@resend.dev>";
     const healerEmail = env?.HEALER_EMAIL || env?.NOTIFICATION_EMAIL;
+    const emailErrors = [];
+
+    if (!resendApiKey) {
+      console.error("RESEND_API_KEY is not set on this Pages deployment");
+      emailErrors.push("E-mail er ikke konfigureret (mangler RESEND_API_KEY).");
+    }
 
     if (resendApiKey) {
       // 2A. Confirmation email to the CLIENT (in Danish)
@@ -122,9 +128,11 @@ export async function onRequestPost({ request, env }) {
         if (!clientRes.ok) {
           const errData = await clientRes.json().catch(() => ({}));
           console.error("Resend error sending to client:", errData);
+          emailErrors.push(errData?.message || `Bekræftelsesmail kunne ikke sendes (${clientRes.status}).`);
         }
       } catch (err) {
         console.error("Failed sending email to client:", err);
+        emailErrors.push("Bekræftelsesmail kunne ikke sendes.");
       }
 
       // 2B. Notification email to CHRISTINA
@@ -161,9 +169,11 @@ export async function onRequestPost({ request, env }) {
           if (!healerRes.ok) {
             const errData = await healerRes.json().catch(() => ({}));
             console.error("Resend error sending to healer:", errData);
+            emailErrors.push(errData?.message || `Notifikationsmail kunne ikke sendes (${healerRes.status}).`);
           }
         } catch (err) {
           console.error("Failed sending email to healer:", err);
+          emailErrors.push("Notifikationsmail kunne ikke sendes.");
         }
       }
     }
@@ -192,7 +202,11 @@ export async function onRequestPost({ request, env }) {
       }
     }
 
-    return Response.json({ success: true });
+    return Response.json({
+      success: true,
+      emailSent: emailErrors.length === 0 && Boolean(resendApiKey),
+      emailErrors
+    });
   } catch (err) {
     return Response.json({ success: false, error: err.message }, { status: 500 });
   }

@@ -138,6 +138,9 @@ export default function HealingInquiry() {
       }
 
       if (res.ok && data.success) {
+        if (data.emailErrors?.length) {
+          alert('Din tid er booket, men e-mailen blev ikke sendt:\n' + data.emailErrors.join('\n'));
+        }
         setSubmittedBooking({
           ...bookingData,
           displayDate: `${selectedDay.day} ${fmtDate(selectedDate)}`
