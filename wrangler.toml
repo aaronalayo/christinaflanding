@@ -3,3 +3,8 @@
 name = "christinaflanding"
 compatibility_date = "2026-09-06"
 pages_build_output_dir = "./dist"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "christina-bookings"
+database_id = "23ec0ae1-2858-4a93-bc88-535d43abff34"
