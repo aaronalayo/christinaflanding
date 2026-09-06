@@ -16,18 +16,18 @@ export default function Navbar() {
 
   return (
     <header style={styles.header}>
-      <div style={styles.container}>
+      <div className="site-header-container" style={styles.container}>
         {/* Brand Logo */}
         <Link to="/" style={styles.brand}>
           <span style={styles.brandIcon}>🌿</span>
           <div>
-            <div style={styles.brandTitle}>Christina Flanding</div>
-            <div style={styles.brandSubtitle}>Healing & Velvære</div>
+            <div className="site-brand-title" style={styles.brandTitle}>Christina Flanding</div>
+            <div className="site-brand-subtitle" style={styles.brandSubtitle}>Healing & Velvære</div>
           </div>
         </Link>
 
         {/* Desktop Nav */}
-        <nav style={styles.desktopNav}>
+        <nav className="site-desktop-nav" style={styles.desktopNav}>
           {links.map(link => {
             const isActive = location.pathname === link.to;
             const isBooking = link.to === '/booking';
@@ -54,6 +54,7 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="site-menu-toggle"
           style={styles.mobileMenuToggle}
           aria-label="Toggle navigation menu"
         >
@@ -63,7 +64,7 @@ export default function Navbar() {
 
       {/* Mobile Nav dropdown */}
       {mobileMenuOpen && (
-        <div style={styles.mobileNav}>
+        <div className="site-mobile-nav" style={styles.mobileNav}>
           {links.map(link => {
             const isActive = location.pathname === link.to;
             return (

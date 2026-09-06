@@ -3,12 +3,12 @@ import type { Styles } from '../css';
 
 export default function BookingPage() {
   return (
-    <div style={styles.page}>
-      <div style={styles.container}>
-        <div style={styles.header}>
+    <div className="site-booking-page" style={styles.page}>
+      <div className="site-booking-container" style={styles.container}>
+        <div className="site-page-header" style={styles.header}>
           <span style={styles.badge}>🌿 Online Tidsbestilling</span>
-          <h1 style={styles.title}>Book Din Healingsession</h1>
-          <p style={styles.subtitle}>
+          <h1 className="site-page-title" style={styles.title}>Book Din Healingsession</h1>
+          <p className="site-page-subtitle" style={styles.subtitle}>
             Vælg en dato og et ledigt tidspunkt i kalenderen nedenfor. Når du har indsendt din forespørgsel, modtager du en bekræftelse på e-mail.
           </p>
         </div>

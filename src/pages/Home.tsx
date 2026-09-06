@@ -5,14 +5,14 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section style={styles.hero}>
+      <section className="site-hero" style={styles.hero}>
         <div style={styles.heroContent}>
           <span style={styles.heroBadge}>🌿 Velkommen til et trygt rum</span>
-          <h1 style={styles.heroTitle}>Genfind din indre ro og balance</h1>
-          <p style={styles.heroSubtitle}>
+          <h1 className="site-hero-title" style={styles.heroTitle}>Genfind din indre ro og balance</h1>
+          <p className="site-hero-subtitle" style={styles.heroSubtitle}>
             Intuitiv healing og energiterapi skræddersyet til dig, der ønsker at slippe stress, spændinger og genoprette harmoni i krop og sind.
           </p>
-          <div style={styles.heroBtns}>
+          <div className="site-hero-buttons" style={styles.heroBtns}>
             <Link to="/booking" style={styles.primaryBtn}>
               Book en session nu →
             </Link>
@@ -24,19 +24,19 @@ export default function Home() {
       </section>
 
       {/* Intro Section */}
-      <section style={styles.section}>
+      <section className="site-section" style={styles.section}>
         <div style={styles.container}>
           <div style={styles.introBox}>
             <span style={{ fontSize: '36px' }}>✨</span>
-            <h2 style={styles.sectionTitle}>Et nærværende pusterum for krop og sjæl</h2>
+            <h2 className="site-section-title" style={styles.sectionTitle}>Et nærværende pusterum for krop og sjæl</h2>
             <p style={styles.sectionText}>
               I en travl hverdag kan kroppen ophobe ubalancer, stress og blokeringer. Gennem blid og intuitiv healing hjælper jeg dit energisystem med at slippe det, der tynger, så du kan mærke dig selv med fornyet lethed, klarhed og ro.
             </p>
           </div>
 
           {/* Highlights */}
-          <div style={styles.grid}>
-            <div style={styles.card}>
+          <div className="site-grid" style={styles.grid}>
+            <div className="site-feature-card" style={styles.card}>
               <div style={styles.cardIcon}>🌸</div>
               <h3 style={styles.cardTitle}>Intuitiv Healing</h3>
               <p style={styles.cardText}>
@@ -45,7 +45,7 @@ export default function Home() {
               <Link to="/behandlinger" style={styles.cardLink}>Læs mere →</Link>
             </div>
 
-            <div style={styles.card}>
+            <div className="site-feature-card" style={styles.card}>
               <div style={styles.cardIcon}>💫</div>
               <h3 style={styles.cardTitle}>Chakra & Energi</h3>
               <p style={styles.cardText}>
@@ -54,7 +54,7 @@ export default function Home() {
               <Link to="/behandlinger" style={styles.cardLink}>Læs mere →</Link>
             </div>
 
-            <div style={styles.card}>
+            <div className="site-feature-card" style={styles.card}>
               <div style={styles.cardIcon}>🕊️</div>
               <h3 style={styles.cardTitle}>Fjernhealing</h3>
               <p style={styles.cardText}>
@@ -67,9 +67,9 @@ export default function Home() {
       </section>
 
       {/* Quote / Philosophy */}
-      <section style={styles.quoteSection}>
+      <section className="site-quote-section" style={styles.quoteSection}>
         <div style={styles.container}>
-          <blockquote style={styles.quote}>
+          <blockquote className="site-quote" style={styles.quote}>
             "Healing handler ikke om at fikse dig — det handler om at hjælpe dig med at huske, hvem du er, når støjen lægger sig."
           </blockquote>
           <p style={styles.quoteAuthor}>— Christina Flanding</p>
@@ -77,9 +77,9 @@ export default function Home() {
       </section>
 
       {/* CTA Banner */}
-      <section style={styles.ctaBanner}>
+      <section className="site-cta-banner" style={styles.ctaBanner}>
         <div style={styles.container}>
-          <h2 style={{ ...styles.sectionTitle, color: '#1E3D14' }}>
+          <h2 className="site-section-title" style={{ ...styles.sectionTitle, color: '#1E3D14' }}>
             Er du klar til at give dig selv et kærligt frirum?
           </h2>
           <p style={{ ...styles.sectionText, maxWidth: '600px', margin: '0 auto 24px' }}>
