@@ -42,23 +42,31 @@ export async function onRequestPost({ request, env }) {
       }, { status: 400 });
     }
 
-    // 1. If D1 database is bound, check conflict and insert
-    if (env && env.DB) {
-      const existing = await env.DB.prepare(
-        "SELECT id FROM bookings WHERE booking_date = ? AND booking_time = ? AND status != 'cancelled'"
-      ).bind(booking_date, booking_time).first();
-
-      if (existing) {
-        return Response.json({
-          success: false,
-          error: "Dette tidspunkt er desværre lige blevet booket. Vælg venligst et andet."
-        }, { status: 409 });
-      }
-
-      await env.DB.prepare(
-        "INSERT INTO bookings (name, email, phone, booking_date, booking_time, intentions) VALUES (?, ?, ?, ?, ?, ?)"
-      ).bind(name, email, phone, booking_date, booking_time, intentions || '').run();
+    // 1. Verify D1 database binding
+    if (!env || !env.DB) {
+      console.error("Missing env.DB binding in Cloudflare Pages");
+      return Response.json({
+        success: false,
+        error: "Databasen (D1) er ikke forbundet til Cloudflare Pages. Tilføj venligst bindingen 'DB' under Settings -> Functions -> D1 database bindings."
+      }, { status: 500 });
     }
+
+    // Check conflict and insert
+    const existing = await env.DB.prepare(
+      "SELECT id FROM bookings WHERE booking_date = ? AND booking_time = ? AND status != 'cancelled'"
+    ).bind(booking_date, booking_time).first();
+
+    if (existing) {
+      return Response.json({
+        success: false,
+        error: "Dette tidspunkt er desværre lige blevet booket. Vælg venligst et andet."
+      }, { status: 409 });
+    }
+
+    await env.DB.prepare(
+      "INSERT INTO bookings (name, email, phone, booking_date, booking_time, intentions) VALUES (?, ?, ?, ?, ?, ?)"
+    ).bind(name, email, phone, booking_date, booking_time, intentions || '').run();
+
 
     // 2. Send emails via Resend API (if configured in Cloudflare environment variables)
     const resendApiKey = env?.RESEND_API_KEY;
@@ -98,7 +106,7 @@ export async function onRequestPost({ request, env }) {
       `;
 
       try {
-        await fetch("https://api.resend.com/emails", {
+        const clientRes = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${resendApiKey}`,
@@ -111,6 +119,10 @@ export async function onRequestPost({ request, env }) {
             html: clientHtml
           })
         });
+        if (!clientRes.ok) {
+          const errData = await clientRes.json().catch(() => ({}));
+          console.error("Resend error sending to client:", errData);
+        }
       } catch (err) {
         console.error("Failed sending email to client:", err);
       }
@@ -133,7 +145,7 @@ export async function onRequestPost({ request, env }) {
         `;
 
         try {
-          await fetch("https://api.resend.com/emails", {
+          const healerRes = await fetch("https://api.resend.com/emails", {
             method: "POST",
             headers: {
               "Authorization": `Bearer ${resendApiKey}`,
@@ -146,6 +158,10 @@ export async function onRequestPost({ request, env }) {
               html: healerHtml
             })
           });
+          if (!healerRes.ok) {
+            const errData = await healerRes.json().catch(() => ({}));
+            console.error("Resend error sending to healer:", errData);
+          }
         } catch (err) {
           console.error("Failed sending email to healer:", err);
         }

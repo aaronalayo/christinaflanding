@@ -130,8 +130,14 @@ export default function HealingInquiry() {
         body: JSON.stringify(bookingData),
       });
 
-      const data = await res.json();
-      if (data.success) {
+      let data;
+      try {
+        data = await res.json();
+      } catch {
+        data = { success: false, error: `Serverfejl (${res.status}): Serveren returnerede ikke et gyldigt JSON-svar.` };
+      }
+
+      if (res.ok && data.success) {
         setSubmittedBooking({
           ...bookingData,
           displayDate: `${selectedDay.day} ${fmtDate(selectedDate)}`
@@ -139,18 +145,16 @@ export default function HealingInquiry() {
         // Optimistically update booked slots so slot is blocked immediately
         setBookedSlots(prev => [...prev, { date: bookingData.booking_date, time: bookingData.booking_time }]);
       } else {
-        alert(data.error || 'Noget gik galt. Prøv venligst igen.');
+        alert(data.error || `Fejl (${res.status}): Noget gik galt ved reservationen.`);
       }
     } catch (err) {
-      // Fallback for static dev environments
-      setSubmittedBooking({
-        ...bookingData,
-        displayDate: `${selectedDay.day} ${fmtDate(selectedDate)}`
-      });
+      console.error('Booking network error:', err);
+      alert(`Forbindelsesfejl: Kunne ikke få kontakt til serveren (${err.message}). Tjek din internetforbindelse eller om backend kører.`);
     } finally {
       setSubmitting(false);
     }
   };
+
 
   if (submittedBooking) {
     return (
