@@ -499,7 +499,7 @@ function BookingForm({ onSubmit, submitting }: {
 
       <div style={s.formGroup}>
         <label style={s.label}>Telefonnummer</label>
-        <input type="tel" name="phone" required placeholder="+45 12 34 56 78" style={s.input} />
+        <input type="tel" name="phone" required placeholder="31 33 13 32" style={s.input} />
       </div>
 
       <div style={s.formGroup}>
@@ -530,10 +530,10 @@ const s: Styles = {
   formGroup:        { display: 'flex', flexDirection: 'column', gap: '6px', flex: '1 1 200px' },
   label:            { fontSize: '13px', fontWeight: 'bold', color: '#1E3D14', fontFamily: 'sans-serif' },
   input:            { padding: '12px', borderRadius: '8px', border: '1.5px solid #7FAD65', fontSize: '15px', outline: 'none', backgroundColor: '#F5FAF2', fontFamily: 'sans-serif', color: '#1E3D14' },
-  button:           { padding: '14px', background: '#2D5A1B', color: 'white', border: 'none', borderRadius: '8px', fontWeight: 'bold', fontSize: '16px', marginTop: '6px', cursor: 'pointer', fontFamily: 'sans-serif', letterSpacing: '0.5px' },
+  button:           { padding: '14px', background: '#C3C8A8', color: '#000000', border: 'none', borderRadius: '8px', fontWeight: 'bold', fontSize: '16px', marginTop: '6px', cursor: 'pointer', fontFamily: 'sans-serif', letterSpacing: '0.5px' },
   successContainer: { maxWidth: '520px', margin: '60px auto', padding: '36px 28px', textAlign: 'center', fontFamily: 'Georgia, serif', background: '#E2F0D9', borderRadius: '16px', border: '2px solid #7FAD65', boxShadow: '0 10px 32px rgba(45,90,27,0.12)' },
   confirmedCard:    { backgroundColor: '#F2F8EE', padding: '16px', borderRadius: '10px', border: '1.5px solid #7FAD65', margin: '16px 0 20px', fontFamily: 'sans-serif' },
-  gcalBtn:          { display: 'inline-block', padding: '12px 20px', backgroundColor: '#2D5A1B', color: 'white', textDecoration: 'none', borderRadius: '8px', fontWeight: 'bold', fontSize: '14px', fontFamily: 'sans-serif', transition: 'background 0.2s', boxShadow: '0 2px 8px rgba(45,90,27,0.25)' },
+  gcalBtn:          { display: 'inline-block', padding: '12px 20px', backgroundColor: '#C3C8A8', color: '#000000', textDecoration: 'none', borderRadius: '8px', fontWeight: 'bold', fontSize: '14px', fontFamily: 'sans-serif', transition: 'background 0.2s', boxShadow: '0 2px 8px rgba(45,90,27,0.25)' },
   efterAftaleBox:   { display: 'flex', alignItems: 'flex-start', gap: '12px', padding: '14px', borderRadius: '8px', borderLeft: '4px solid #3D6B2C', backgroundColor: '#D9EDCC', fontFamily: 'sans-serif' },
   summary:          { fontFamily: 'sans-serif', fontSize: '14px', color: '#1E3D14', backgroundColor: '#C8E6B0', padding: '10px 16px', borderRadius: '8px', border: '1.5px solid #7FAD65', marginTop: '4px' },
 };
@@ -541,14 +541,14 @@ const s: Styles = {
 // Button variants
 const sc: Styles = {
   dayBtn:        { flex: '1 1 90px', padding: '12px 8px', borderRadius: '10px', border: '1.5px solid #7FAD65', backgroundColor: '#F2F8EE', color: '#1E3D14', fontFamily: 'Georgia, serif', cursor: 'pointer', transition: 'all 0.15s', textAlign: 'center' },
-  dayBtnActive:  { flex: '1 1 90px', padding: '12px 8px', borderRadius: '10px', border: '2px solid #2D5A1B', backgroundColor: '#2D5A1B', color: 'white', fontFamily: 'Georgia, serif', cursor: 'pointer', transition: 'all 0.15s', textAlign: 'center', boxShadow: '0 2px 8px rgba(45,90,27,0.25)' },
+  dayBtnActive:  { flex: '1 1 90px', padding: '12px 8px', borderRadius: '10px', border: '2px solid #C3C8A8', backgroundColor: '#C3C8A8', color: '#000000', fontFamily: 'Georgia, serif', cursor: 'pointer', transition: 'all 0.15s', textAlign: 'center', boxShadow: '0 2px 8px rgba(45,90,27,0.25)' },
   dateBtn:       { padding: '9px 16px', borderRadius: '20px', border: '1.5px solid #7FAD65', backgroundColor: '#F2F8EE', color: '#1E3D14', fontFamily: 'sans-serif', fontSize: '13px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.15s' },
-  dateBtnActive: { padding: '9px 16px', borderRadius: '20px', border: '2px solid #2D5A1B', backgroundColor: '#2D5A1B', color: 'white', fontFamily: 'sans-serif', fontSize: '13px', fontWeight: '700', cursor: 'pointer', transition: 'all 0.15s', boxShadow: '0 2px 6px rgba(45,90,27,0.3)' },
+  dateBtnActive: { padding: '9px 16px', borderRadius: '20px', border: '2px solid #C3C8A8', backgroundColor: '#C3C8A8', color: '#000000', fontFamily: 'sans-serif', fontSize: '13px', fontWeight: '700', cursor: 'pointer', transition: 'all 0.15s', boxShadow: '0 2px 6px rgba(45,90,27,0.3)' },
   dateBtnBooked: { padding: '9px 14px', borderRadius: '20px', border: '1.5px solid #ccc', backgroundColor: '#eee', color: '#999', fontFamily: 'sans-serif', fontSize: '12px', cursor: 'not-allowed', opacity: 0.75 },
   moreBtn:       { padding: '9px 15px', borderRadius: '20px', border: '1.5px dashed #7FAD65', backgroundColor: '#EBF4E5', color: '#2D5A1B', fontFamily: 'sans-serif', fontSize: '13px', fontWeight: 'bold', cursor: 'pointer', transition: 'all 0.15s' },
   customDateBox: { display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', marginTop: '6px', padding: '10px 14px', backgroundColor: '#E2F0D9', borderRadius: '8px', border: '1px solid #B8D9A0' },
   calendarInput: { padding: '8px 12px', borderRadius: '8px', border: '1.5px solid #7FAD65', backgroundColor: '#F5FAF2', color: '#1E3D14', fontFamily: 'sans-serif', fontSize: '13px', outline: 'none', cursor: 'pointer' },
   timeBtn:       { flex: '1 1 0', padding: '13px 8px', borderRadius: '8px', border: '1.5px solid #7FAD65', backgroundColor: '#F2F8EE', color: '#1E3D14', fontFamily: 'sans-serif', fontSize: '15px', fontWeight: '600', cursor: 'pointer', transition: 'all 0.15s', textAlign: 'center' },
-  timeBtnActive: { flex: '1 1 0', padding: '13px 8px', borderRadius: '8px', border: '2px solid #2D5A1B', backgroundColor: '#2D5A1B', color: 'white', fontFamily: 'sans-serif', fontSize: '15px', fontWeight: '700', cursor: 'pointer', transition: 'all 0.15s', textAlign: 'center', boxShadow: '0 2px 8px rgba(45,90,27,0.3)' },
+  timeBtnActive: { flex: '1 1 0', padding: '13px 8px', borderRadius: '8px', border: '2px solid #C3C8A8', backgroundColor: '#C3C8A8', color: '#000000', fontFamily: 'sans-serif', fontSize: '15px', fontWeight: '700', cursor: 'pointer', transition: 'all 0.15s', textAlign: 'center', boxShadow: '0 2px 8px rgba(45,90,27,0.3)' },
   timeBtnBooked: { flex: '1 1 0', padding: '10px 8px', borderRadius: '8px', border: '1.5px solid #ccc', backgroundColor: '#ebebeb', color: '#999', fontFamily: 'sans-serif', fontSize: '14px', cursor: 'not-allowed', textAlign: 'center', opacity: 0.7 },
 };
