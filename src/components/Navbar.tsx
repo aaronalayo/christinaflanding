@@ -86,7 +86,7 @@ export default function Navbar() {
 
 const styles: Styles = {
   header: {
-    backgroundColor: '#F5FAF2',
+    backgroundColor: '#F3CFB3',
     borderBottom: '1.5px solid #C5DEB8',
     position: 'sticky',
     top: 0,
@@ -142,13 +142,13 @@ const styles: Styles = {
     color: '#1E3D14',
     fontSize: '15px',
     fontWeight: 'bold',
-    borderBottom: '2px solid #2D5A1B',
+    borderBottom: '2px solid #C3C8A8',
     paddingBottom: '4px',
   },
   bookingBtn: {
     textDecoration: 'none',
-    backgroundColor: '#2D5A1B',
-    color: 'white',
+    backgroundColor: '#C3C8A8',
+    color: '#000000',
     padding: '9px 18px',
     borderRadius: '20px',
     fontWeight: 'bold',

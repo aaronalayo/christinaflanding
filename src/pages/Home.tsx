@@ -7,10 +7,10 @@ export default function Home() {
       {/* Hero Section */}
       <section className="site-hero" style={styles.hero}>
         <div style={styles.heroContent}>
-          <span style={styles.heroBadge}>🌿 Velkommen til et trygt rum</span>
-          <h1 className="site-hero-title" style={styles.heroTitle}>Genfind din indre ro og balance</h1>
+          <span style={styles.heroBadge}>🌿 Reiki Healing med Christina</span>
+          <h1 className="site-hero-title" style={styles.heroTitle}>Et frirum, hvor der er fokus på dig</h1>
           <p className="site-hero-subtitle" style={styles.heroSubtitle}>
-            Intuitiv healing og energiterapi skræddersyet til dig, der ønsker at slippe stress, spændinger og genoprette harmoni i krop og sind.
+            Reiki healing er en blid healingsform, der hjælper dig med at finde ro, slippe hverdagens støj og give kroppen mulighed for at restituere.
           </p>
           <div className="site-hero-buttons" style={styles.heroBtns}>
             <Link to="/booking" style={styles.primaryBtn}>
@@ -28,39 +28,39 @@ export default function Home() {
         <div style={styles.container}>
           <div style={styles.introBox}>
             <span style={{ fontSize: '36px' }}>✨</span>
-            <h2 className="site-section-title" style={styles.sectionTitle}>Et nærværende pusterum for krop og sjæl</h2>
+            <h2 className="site-section-title" style={styles.sectionTitle}>Giv dig selv en pause</h2>
             <p style={styles.sectionText}>
-              I en travl hverdag kan kroppen ophobe ubalancer, stress og blokeringer. Gennem blid og intuitiv healing hjælper jeg dit energisystem med at slippe det, der tynger, så du kan mærke dig selv med fornyet lethed, klarhed og ro.
+              Reiki healing er for dig, der oplever tankemylder, stresssymptomer, uro eller andre lignende udfordringer. Det er også for dig, der bare ønsker en helt afstressende oplevelse og en stund med dig selv.
             </p>
           </div>
 
           {/* Highlights */}
           <div className="site-grid" style={styles.grid}>
             <div className="site-feature-card" style={styles.card}>
-              <div style={styles.cardIcon}>🌸</div>
-              <h3 style={styles.cardTitle}>Intuitiv Healing</h3>
+              <div style={styles.cardIcon}>🌿</div>
+              <h3 style={styles.cardTitle}>Reiki Healing</h3>
               <p style={styles.cardText}>
-                Fokus på at løsne dybereliggende spændinger og genoprette den naturlige energistrøm i kroppen.
+                En blid behandling, hvor universel livsenergi kanaliseres videre til dig, så du kan komme helt ned i en dyb ro.
               </p>
               <Link to="/behandlinger" style={styles.cardLink}>Læs mere →</Link>
             </div>
 
             <div className="site-feature-card" style={styles.card}>
               <div style={styles.cardIcon}>💫</div>
-              <h3 style={styles.cardTitle}>Chakra & Energi</h3>
+              <h3 style={styles.cardTitle}>En personlig rejse</h3>
               <p style={styles.cardText}>
-                Balancering af dine energicentre (chakraer), så krop, følelser og tanker arbejder i harmoni.
+                Mød Christina, og læs om rejsen fra Caminoen og Nepal til Reiki, meditation, kunst og kunstterapi.
               </p>
-              <Link to="/behandlinger" style={styles.cardLink}>Læs mere →</Link>
+              <Link to="/om-mig" style={styles.cardLink}>Læs om Christina →</Link>
             </div>
 
             <div className="site-feature-card" style={styles.card}>
               <div style={styles.cardIcon}>🕊️</div>
-              <h3 style={styles.cardTitle}>Fjernhealing</h3>
+              <h3 style={styles.cardTitle}>Tid til dig</h3>
               <p style={styles.cardText}>
-                Modtag healing i trygheden af dit eget hjem. Energi kender ingen fysiske afstande.
+                Behandlingen foregår i trygge rammer, med tøj på og i et roligt tempo tilpasset dine behov.
               </p>
-              <Link to="/behandlinger" style={styles.cardLink}>Læs mere →</Link>
+              <Link to="/booking" style={styles.cardLink}>Book en tid →</Link>
             </div>
           </div>
         </div>
@@ -70,7 +70,7 @@ export default function Home() {
       <section className="site-quote-section" style={styles.quoteSection}>
         <div style={styles.container}>
           <blockquote className="site-quote" style={styles.quote}>
-            "Healing handler ikke om at fikse dig — det handler om at hjælpe dig med at huske, hvem du er, når støjen lægger sig."
+            "Reiki healing giver dig et frirum, hvor du kan være med dig selv, mens kroppen får mulighed for at finde ro."
           </blockquote>
           <p style={styles.quoteAuthor}>— Christina Flanding</p>
         </div>
@@ -80,10 +80,10 @@ export default function Home() {
       <section className="site-cta-banner" style={styles.ctaBanner}>
         <div style={styles.container}>
           <h2 className="site-section-title" style={{ ...styles.sectionTitle, color: '#1E3D14' }}>
-            Er du klar til at give dig selv et kærligt frirum?
+            Er du klar til at give dig selv et frirum?
           </h2>
           <p style={{ ...styles.sectionText, maxWidth: '600px', margin: '0 auto 24px' }}>
-            Se de ledige tider i kalenderen og book din session online i dag.
+            Book en Reiki healing og mærk, hvad en pause med fokus på dig kan give.
           </p>
           <Link to="/booking" style={styles.primaryBtn}>
             Gå til online booking →
@@ -96,7 +96,7 @@ export default function Home() {
 
 const styles: Styles = {
   hero: {
-    backgroundColor: '#EEF6E8',
+    backgroundColor: '#F3CFB3',
     padding: '72px 24px',
     textAlign: 'center',
     borderBottom: '1px solid #C5DEB8',
@@ -137,8 +137,8 @@ const styles: Styles = {
   },
   primaryBtn: {
     display: 'inline-block',
-    backgroundColor: '#2D5A1B',
-    color: 'white',
+    backgroundColor: '#C3C8A8',
+    color: '#000000',
     padding: '14px 28px',
     borderRadius: '24px',
     fontSize: '16px',

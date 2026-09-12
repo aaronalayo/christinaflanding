@@ -34,7 +34,7 @@ const styles: Styles = {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-    backgroundColor: '#F8FAF6',
+    backgroundColor: '#F3CFB3',
     fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
     color: '#1E3D14',
   },

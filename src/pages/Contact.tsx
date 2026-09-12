@@ -32,8 +32,8 @@ export default function Contact() {
               <span style={styles.infoIcon}>📞</span>
               <div>
                 <strong style={styles.infoLabel}>Telefon & SMS</strong>
-                <a href="tel:+4512345678" style={styles.infoLink}>
-                  +45 12 34 56 78
+                <a href="tel:+4531331332" style={styles.infoLink}>
+                  31 33 13 32
                 </a>
                 <p style={{ margin: '4px 0 0', fontSize: '13px', color: '#5A8048' }}>
                   Send gerne en SMS, hvis jeg er optaget i en session.
@@ -46,8 +46,9 @@ export default function Contact() {
               <div>
                 <strong style={styles.infoLabel}>Sted</strong>
                 <p style={{ margin: 0, fontSize: '15px', color: '#2D5A1B' }}>
-                  Klinik i rolige omgivelser<br />
-                  (Præcis adresse oplyses ved bekræftet booking)
+                  Behandlingen foregår i mit anneks<br />
+                  Herstedvesterstræde 41<br />
+                  Herstedvester Landsby i Albertslund
                 </p>
               </div>
             </div>
@@ -172,8 +173,8 @@ const styles: Styles = {
   },
   bookBtn: {
     display: 'inline-block',
-    backgroundColor: '#2D5A1B',
-    color: 'white',
+    backgroundColor: '#C3C8A8',
+    color: '#000000',
     padding: '14px 28px',
     borderRadius: '24px',
     textDecoration: 'none',

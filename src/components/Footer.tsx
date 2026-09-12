@@ -34,6 +34,11 @@ export default function Footer() {
               Torsdag & Fredag: Efter aftale<br />
               Lørdag & Søndag: Lukket
             </p>
+            <p style={{ ...styles.text, marginTop: '12px' }}>
+              Herstedvesterstræde 41<br />
+              Herstedvester Landsby i Albertslund<br />
+              Tlf. 31 33 13 32
+            </p>
             <div style={{ marginTop: '12px' }}>
               <Link to="/booking" style={styles.ctaLink}>
                 Find ledig tid her →
@@ -54,8 +59,8 @@ export default function Footer() {
 
 const styles: Styles = {
   footer: {
-    backgroundColor: '#1E3D14',
-    color: '#E2EDD9',
+    backgroundColor: '#C3C8A8',
+    color: '#000000',
     marginTop: 'auto',
     borderTop: '3px solid #7FAD65',
   },
@@ -78,7 +83,7 @@ const styles: Styles = {
     fontFamily: 'Georgia, serif',
     fontSize: '20px',
     fontWeight: 'bold',
-    color: '#FFF',
+    color: '#000000',
     marginBottom: '12px',
   },
   colTitle: {
@@ -87,13 +92,13 @@ const styles: Styles = {
     fontWeight: 'bold',
     textTransform: 'uppercase',
     letterSpacing: '0.8px',
-    color: '#B8D9A0',
+    color: '#000000',
     marginBottom: '14px',
   },
   text: {
     fontSize: '14px',
     lineHeight: '1.7',
-    color: '#D5E6CB',
+    color: '#000000',
     margin: 0,
   },
   list: {
@@ -105,13 +110,13 @@ const styles: Styles = {
     gap: '8px',
   },
   link: {
-    color: '#D5E6CB',
+    color: '#000000',
     textDecoration: 'none',
     fontSize: '14px',
     transition: 'color 0.2s',
   },
   ctaLink: {
-    color: '#B8D9A0',
+    color: '#000000',
     textDecoration: 'none',
     fontWeight: 'bold',
     fontSize: '14px',
@@ -121,7 +126,7 @@ const styles: Styles = {
     paddingTop: '20px',
     textAlign: 'center',
     fontSize: '13px',
-    color: '#9AB88A',
+    color: '#000000',
   },
 };
 
