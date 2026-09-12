@@ -10,12 +10,10 @@
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
     "noEmit": true,
-    "allowJs": true,
-    "checkJs": false,
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "types": ["@cloudflare/workers-types"]
   },
-  "include": ["functions/**/*.js"]
+  "include": ["functions/**/*.ts"]
 }

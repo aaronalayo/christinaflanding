@@ -1,7 +1,27 @@
 // Cloudflare Pages Function: /api/bookings
 // Edge serverless handler interacting with Cloudflare D1 (env.DB) and Resend Email API
 
-export async function onRequestGet({ env }) {
+interface Env {
+  DB?: D1Database;
+  RESEND_API_KEY?: string;
+  FROM_EMAIL?: string;
+  HEALER_EMAIL?: string;
+  NOTIFICATION_EMAIL?: string;
+  WEB3FORMS_ACCESS_KEY?: string;
+}
+
+interface BookingRequest {
+  name?: string;
+  email?: string;
+  phone?: string;
+  booking_date?: string;
+  booking_time?: string;
+  intentions?: string;
+}
+
+type PagesContext = { env: Env; request: Request };
+
+export async function onRequestGet({ env }: PagesContext): Promise<Response> {
   try {
     // If D1 is not bound yet (e.g. local dev without wrangler D1), return empty list gracefully
     if (!env || !env.DB) {
@@ -26,13 +46,13 @@ export async function onRequestGet({ env }) {
       }
     });
   } catch (err) {
-    return Response.json({ success: false, error: err.message }, { status: 500 });
+    return Response.json({ success: false, error: getErrorMessage(err) }, { status: 500 });
   }
 }
 
-export async function onRequestPost({ request, env }) {
+export async function onRequestPost({ request, env }: PagesContext): Promise<Response> {
   try {
-    const data = await request.json();
+    const data = await request.json() as BookingRequest;
     const { name, email, phone, booking_date, booking_time, intentions } = data;
 
     if (!name || !email || !phone || !booking_date || !booking_time) {
@@ -126,7 +146,7 @@ export async function onRequestPost({ request, env }) {
           })
         });
         if (!clientRes.ok) {
-          const errData = await clientRes.json().catch(() => ({}));
+          const errData = await clientRes.json().catch(() => ({})) as { message?: string };
           console.error("Resend error sending to client:", errData);
           emailErrors.push(errData?.message || `Bekræftelsesmail kunne ikke sendes (${clientRes.status}).`);
         }
@@ -167,7 +187,7 @@ export async function onRequestPost({ request, env }) {
             })
           });
           if (!healerRes.ok) {
-            const errData = await healerRes.json().catch(() => ({}));
+            const errData = await healerRes.json().catch(() => ({})) as { message?: string };
             console.error("Resend error sending to healer:", errData);
             emailErrors.push(errData?.message || `Notifikationsmail kunne ikke sendes (${healerRes.status}).`);
           }
@@ -208,11 +228,11 @@ export async function onRequestPost({ request, env }) {
       emailErrors
     });
   } catch (err) {
-    return Response.json({ success: false, error: err.message }, { status: 500 });
+    return Response.json({ success: false, error: getErrorMessage(err) }, { status: 500 });
   }
 }
 
-function escapeHtml(str) {
+function escapeHtml(str: string | undefined): string {
   if (!str) return '';
   return String(str)
     .replace(/&/g, "&amp;")
@@ -220,5 +240,9 @@ function escapeHtml(str) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
+}
+
+function getErrorMessage(err: unknown): string {
+  return err instanceof Error ? err.message : 'Ukendt serverfejl';
 }
 
