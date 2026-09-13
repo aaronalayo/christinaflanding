@@ -12,6 +12,7 @@ export default function Navbar() {
     { to: '/behandlinger', label: 'Behandlinger' },
     { to: '/booking', label: 'Book session' },
     { to: '/kontakt', label: 'Kontakt' },
+    { to: '/privatlivspolitik', label: 'Privatliv' },
   ];
 
   return (
