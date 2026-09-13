@@ -25,7 +25,6 @@ type Booking = {
   phone: string;
   booking_date: string;
   booking_time: string;
-  intentions: string;
   displayDate: string;
 };
 
@@ -72,7 +71,7 @@ function getGoogleCalendarUrl(booking: Booking | null) {
   }
 
   const title = encodeURIComponent("Healingsession - Christina Flanding");
-  const details = encodeURIComponent(`Healingsession hos Christina Flanding\nTid: ${booking.booking_time}\nNavn: ${booking.name}\nTelefon: ${booking.phone}`);
+  const details = encodeURIComponent(`Healingsession hos Christina Flanding\nTid: ${booking.booking_time}`);
   const location = encodeURIComponent("Christina Flanding Healing");
 
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startISO}/${endISO}&details=${details}&location=${location}`;
@@ -132,7 +131,6 @@ export default function HealingInquiry() {
       phone:        String(formData.get('phone') || ''),
       booking_date: dateKey(selectedDate),
       booking_time: selectedTime,
-      intentions:   String(formData.get('intentions') || ''),
     };
 
     setSubmitting(true);
@@ -502,15 +500,14 @@ function BookingForm({ onSubmit, submitting }: {
         <input type="tel" name="phone" required placeholder="31 33 13 32" style={s.input} />
       </div>
 
-      <div style={s.formGroup}>
-        <label style={s.label}>Hvad er dine primære mål eller intentioner for denne session?</label>
-        <textarea
-          name="intentions"
-          placeholder="F.eks. følelsesmæssig rensning, stressreduktion, fysiske blokeringer..."
-          style={{ ...s.input, height: '100px', resize: 'vertical' }}
-          required
-        />
-      </div>
+      <p style={s.privacyNote}>
+        Skriv ikke helbredsoplysninger eller andre følsomme oplysninger i formularen. Vi bruger kun dine oplysninger til at håndtere din booking.
+      </p>
+
+      <label style={s.checkboxLabel}>
+        <input type="checkbox" name="privacy_acknowledged" required />
+        <span>Jeg har læst og forstået <a href="/privatlivspolitik" target="_blank" rel="noreferrer">privatlivspolitikken</a>.</span>
+      </label>
 
       <button type="submit" disabled={submitting} style={{ ...s.button, opacity: submitting ? 0.7 : 1 }}>
         {submitting ? 'Sender forespørgsel...' : 'Send Forespørgsel'}
@@ -536,6 +533,8 @@ const s: Styles = {
   gcalBtn:          { display: 'inline-block', padding: '12px 20px', backgroundColor: '#C3C8A8', color: '#000000', textDecoration: 'none', borderRadius: '8px', fontWeight: 'bold', fontSize: '14px', fontFamily: 'sans-serif', transition: 'background 0.2s', boxShadow: '0 2px 8px rgba(45,90,27,0.25)' },
   efterAftaleBox:   { display: 'flex', alignItems: 'flex-start', gap: '12px', padding: '14px', borderRadius: '8px', borderLeft: '4px solid #3D6B2C', backgroundColor: '#D9EDCC', fontFamily: 'sans-serif' },
   summary:          { fontFamily: 'sans-serif', fontSize: '14px', color: '#1E3D14', backgroundColor: '#C8E6B0', padding: '10px 16px', borderRadius: '8px', border: '1.5px solid #7FAD65', marginTop: '4px' },
+  privacyNote:      { margin: 0, padding: '12px 14px', backgroundColor: '#F8F3E8', borderLeft: '3px solid #C3C8A8', color: '#4A6B35', fontFamily: 'sans-serif', fontSize: '13px', lineHeight: '1.5' },
+  checkboxLabel:    { display: 'flex', alignItems: 'flex-start', gap: '9px', color: '#2D5A1B', fontFamily: 'sans-serif', fontSize: '13px', lineHeight: '1.5' },
 };
 
 // Button variants

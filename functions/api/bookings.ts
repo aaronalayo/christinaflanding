@@ -7,7 +7,6 @@ interface Env {
   FROM_EMAIL?: string;
   HEALER_EMAIL?: string;
   NOTIFICATION_EMAIL?: string;
-  WEB3FORMS_ACCESS_KEY?: string;
 }
 
 interface BookingRequest {
@@ -16,7 +15,6 @@ interface BookingRequest {
   phone?: string;
   booking_date?: string;
   booking_time?: string;
-  intentions?: string;
 }
 
 type PagesContext = { env: Env; request: Request };
@@ -53,13 +51,35 @@ export async function onRequestGet({ env }: PagesContext): Promise<Response> {
 export async function onRequestPost({ request, env }: PagesContext): Promise<Response> {
   try {
     const data = await request.json() as BookingRequest;
-    const { name, email, phone, booking_date, booking_time, intentions } = data;
+    const { name, email, phone, booking_date, booking_time } = data;
 
     if (!name || !email || !phone || !booking_date || !booking_time) {
       return Response.json({
         success: false,
         error: "Udfyld venligst alle obligatoriske felter."
       }, { status: 400 });
+    }
+
+    const normalizedName = name.trim();
+    const normalizedEmail = email.trim().toLowerCase();
+    const normalizedPhone = phone.trim();
+    const normalizedDate = booking_date.trim();
+    const normalizedTime = booking_time.trim();
+
+    if (normalizedName.length > 120 || normalizedEmail.length > 254 || normalizedPhone.length > 40 || normalizedDate.length !== 10 || normalizedTime.length > 40) {
+      return Response.json({ success: false, error: "Et eller flere felter er for lange." }, { status: 400 });
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+      return Response.json({ success: false, error: "Indtast venligst en gyldig e-mailadresse." }, { status: 400 });
+    }
+
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(normalizedDate) || Number.isNaN(Date.parse(`${normalizedDate}T00:00:00Z`))) {
+      return Response.json({ success: false, error: "Vælg venligst en gyldig dato." }, { status: 400 });
+    }
+
+    if (!/^\d{2}:\d{2}\s*[–-]\s*\d{2}:\d{2}$/.test(normalizedTime) && !/^.{2,40}$/.test(normalizedTime)) {
+      return Response.json({ success: false, error: "Indtast venligst et gyldigt tidspunkt." }, { status: 400 });
     }
 
     // 1. Verify D1 database binding
@@ -74,7 +94,7 @@ export async function onRequestPost({ request, env }: PagesContext): Promise<Res
     // Check conflict and insert
     const existing = await env.DB.prepare(
       "SELECT id FROM bookings WHERE booking_date = ? AND booking_time = ? AND status != 'cancelled'"
-    ).bind(booking_date, booking_time).first();
+    ).bind(normalizedDate, normalizedTime).first();
 
     if (existing) {
       return Response.json({
@@ -84,8 +104,8 @@ export async function onRequestPost({ request, env }: PagesContext): Promise<Res
     }
 
     await env.DB.prepare(
-      "INSERT INTO bookings (name, email, phone, booking_date, booking_time, intentions) VALUES (?, ?, ?, ?, ?, ?)"
-    ).bind(name, email, phone, booking_date, booking_time, intentions || '').run();
+      "INSERT INTO bookings (name, email, phone, booking_date, booking_time) VALUES (?, ?, ?, ?, ?)"
+    ).bind(normalizedName, normalizedEmail, normalizedPhone, normalizedDate, normalizedTime).run();
 
 
     // 2. Send emails via Resend API (if configured in Cloudflare environment variables)
@@ -104,16 +124,15 @@ export async function onRequestPost({ request, env }: PagesContext): Promise<Res
       const clientHtml = `
         <div style="font-family: Georgia, serif; max-width: 560px; margin: 0 auto; padding: 24px; color: #1E3D14; background-color: #F8FAF6; border: 1px solid #C5DEB8; borderRadius: 12px;">
           <h2 style="color: #1E3D14; margin-top: 0;">🌿 Tak for din booking hos Christina Flanding</h2>
-          <p style="font-size: 16px; line-height: 1.6;">Kære ${escapeHtml(name)},</p>
+          <p style="font-size: 16px; line-height: 1.6;">Kære ${escapeHtml(normalizedName)},</p>
           <p style="font-size: 15px; line-height: 1.6; color: #4A6B35;">
             Vi har modtaget din forespørgsel på en healingsession. Her er detaljerne for din reservation:
           </p>
 
           <div style="background-color: #EEF6E8; border-left: 4px solid #3D6B2C; padding: 14px 18px; margin: 20px 0; border-radius: 6px;">
-            <p style="margin: 6px 0;"><strong>📅 Dato:</strong> ${escapeHtml(booking_date)}</p>
-            <p style="margin: 6px 0;"><strong>⏰ Tidspunkt:</strong> ${escapeHtml(booking_time)}</p>
-            <p style="margin: 6px 0;"><strong>📞 Dit telefonnummer:</strong> ${escapeHtml(phone)}</p>
-            ${intentions ? `<p style="margin: 6px 0;"><strong>🎯 Dine intentioner:</strong> ${escapeHtml(intentions)}</p>` : ''}
+            <p style="margin: 6px 0;"><strong>📅 Dato:</strong> ${escapeHtml(normalizedDate)}</p>
+            <p style="margin: 6px 0;"><strong>⏰ Tidspunkt:</strong> ${escapeHtml(normalizedTime)}</p>
+            <p style="margin: 6px 0;"><strong>📞 Dit telefonnummer:</strong> ${escapeHtml(normalizedPhone)}</p>
           </div>
 
           <p style="font-size: 14px; line-height: 1.6; color: #4A6B35;">
@@ -140,8 +159,8 @@ export async function onRequestPost({ request, env }: PagesContext): Promise<Res
           },
           body: JSON.stringify({
             from: senderEmail,
-            to: [email],
-            subject: `Bekræftelse på din healingsession (${booking_date} kl. ${booking_time})`,
+            to: [normalizedEmail],
+            subject: `Bekræftelse på din healingsession (${normalizedDate} kl. ${normalizedTime})`,
             html: clientHtml
           })
         });
@@ -162,12 +181,11 @@ export async function onRequestPost({ request, env }: PagesContext): Promise<Res
             <h2 style="color: #2D5A1B;">✨ Ny Healingsession Booking</h2>
             <p>Du har modtaget en ny booking via din hjemmeside:</p>
             <ul>
-              <li><strong>Navn:</strong> ${escapeHtml(name)}</li>
-              <li><strong>E-mail:</strong> <a href="mailto:${escapeHtml(email)}">${escapeHtml(email)}</a></li>
-              <li><strong>Telefon:</strong> <a href="tel:${escapeHtml(phone)}">${escapeHtml(phone)}</a></li>
-              <li><strong>Dato:</strong> ${escapeHtml(booking_date)}</li>
-              <li><strong>Tidspunkt:</strong> ${escapeHtml(booking_time)}</li>
-              <li><strong>Intentioner / Mål:</strong> ${escapeHtml(intentions || 'Ingen angivet')}</li>
+              <li><strong>Navn:</strong> ${escapeHtml(normalizedName)}</li>
+              <li><strong>E-mail:</strong> <a href="mailto:${escapeHtml(normalizedEmail)}">${escapeHtml(normalizedEmail)}</a></li>
+              <li><strong>Telefon:</strong> <a href="tel:${escapeHtml(normalizedPhone)}">${escapeHtml(normalizedPhone)}</a></li>
+              <li><strong>Dato:</strong> ${escapeHtml(normalizedDate)}</li>
+              <li><strong>Tidspunkt:</strong> ${escapeHtml(normalizedTime)}</li>
             </ul>
           </div>
         `;
@@ -182,7 +200,7 @@ export async function onRequestPost({ request, env }: PagesContext): Promise<Res
             body: JSON.stringify({
               from: senderEmail,
               to: [healerEmail],
-              subject: `✨ Ny booking: ${name} (${booking_date} kl. ${booking_time})`,
+              subject: `✨ Ny booking: ${normalizedName} (${normalizedDate} kl. ${normalizedTime})`,
               html: healerHtml
             })
           });
@@ -195,30 +213,6 @@ export async function onRequestPost({ request, env }: PagesContext): Promise<Res
           console.error("Failed sending email to healer:", err);
           emailErrors.push("Notifikationsmail kunne ikke sendes.");
         }
-      }
-    }
-
-    // 3. Fallback to Web3Forms if RESEND_API_KEY is not set but WEB3FORMS_ACCESS_KEY is set
-    const web3Key = env?.WEB3FORMS_ACCESS_KEY;
-    if (!resendApiKey && web3Key && web3Key !== "YOUR_ACCESS_KEY_HERE") {
-      try {
-        await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: { "Content-Type": "application/json", "Accept": "application/json" },
-          body: JSON.stringify({
-            access_key: web3Key,
-            subject: `✨ Ny Healing Booking: ${name} (${booking_date} kl. ${booking_time})`,
-            from_name: "Christina Flanding Booking",
-            "Klient Navn": name,
-            "Klient E-mail": email,
-            "Klient Telefon": phone,
-            "Dato": booking_date,
-            "Tidspunkt": booking_time,
-            "Intentioner": intentions || "Ingen angivet",
-          })
-        });
-      } catch (emailErr) {
-        console.error("Web3Forms dispatch error:", emailErr);
       }
     }
 

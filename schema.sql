@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS bookings (
   phone TEXT NOT NULL,
   booking_date TEXT NOT NULL,       -- Format: YYYY-MM-DD
   booking_time TEXT NOT NULL,       -- Format: '09:30 – 10:30' or custom time
-  intentions TEXT,
   status TEXT DEFAULT 'confirmed',  -- 'confirmed', 'pending', 'cancelled'
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );

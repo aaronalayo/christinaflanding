@@ -24,7 +24,16 @@ En holistisk hjemmeside med online booking for Christina Flanding, bygget med Re
 - **Hosting**: Cloudflare Pages
 - **Database**: Cloudflare D1 (Serverless SQLite at the edge)
 - **API**: Cloudflare Pages Functions (`/functions/api/bookings.js`)
-- **E-mails**: Resend API (To-vejs bekræftelse til klient og healer) med Web3Forms fallback
+- **E-mails**: Resend API (bekræftelse til klient og notifikation til Christina)
+
+## 🔐 GDPR-drift
+
+- Kør `migrations/0001_remove_intentions.sql` én gang på produktions-D1 før lancering. Migrationen sletter det tidligere fritekstfelt, som kunne indeholde følsomme oplysninger.
+- Bookingdata skal slettes løbende efter den retention-periode, der står i privatlivspolitikken. Kør kun oprydning efter at have afklaret eventuelle bogføringskrav.
+- `cleanup-worker.ts` er konfigureret til at slette bookingrækker 90 dage efter den bookede dato hver dag kl. 03:00 UTC. Deploy den separat med `npx wrangler deploy --config wrangler.cleanup.toml`.
+- Udfyld CVR-nummeret i privatlivspolitikken før lancering.
+- Kontroller databehandleraftaler og internationale dataoverførsler for Cloudflare og Resend før brug.
+- Hjemmesiden bruger aktuelt ingen cookies, analyseværktøjer, marketingpixels eller lokal browserlagring, så der er ikke behov for et cookie-banner i den nuværende version. Tilføj samtykkeløsning før eventuel tracking aktiveres.
 
 ---
 

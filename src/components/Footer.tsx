@@ -23,6 +23,8 @@ export default function Footer() {
               <li><Link to="/behandlinger" style={styles.link}>Behandlinger</Link></li>
               <li><Link to="/booking" style={styles.link}>Book session</Link></li>
               <li><Link to="/kontakt" style={styles.link}>Kontakt</Link></li>
+              <li><Link to="/privatlivspolitik" style={styles.link}>Privatlivspolitik</Link></li>
+              <li><Link to="/vilkaar" style={styles.link}>Vilkår for booking</Link></li>
             </ul>
           </div>
 

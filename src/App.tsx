@@ -7,6 +7,8 @@ import About from './pages/About';
 import Services from './pages/Services';
 import BookingPage from './pages/BookingPage';
 import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import Terms from './pages/Terms';
 
 export default function App() {
   return (
@@ -20,6 +22,8 @@ export default function App() {
             <Route path="/behandlinger" element={<Services />} />
             <Route path="/booking" element={<BookingPage />} />
             <Route path="/kontakt" element={<Contact />} />
+            <Route path="/privatlivspolitik" element={<PrivacyPolicy />} />
+            <Route path="/vilkaar" element={<Terms />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
