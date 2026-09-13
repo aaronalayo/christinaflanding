@@ -519,10 +519,10 @@ function BookingForm({ onSubmit, submitting }: {
 // ─── Styles ───────────────────────────────────────────────────────────────────
 
 const s: Styles = {
-  container:        { maxWidth: '620px', margin: '40px auto', padding: '34px', fontFamily: 'Georgia, serif', border: '2px solid #7FAD65', borderRadius: '16px', backgroundColor: '#EEF6E8', boxShadow: '0 10px 32px rgba(45,90,27,0.15)' },
+  container:        { maxWidth: '620px', margin: '28px auto', padding: '26px', fontFamily: 'Georgia, serif', border: '2px solid #7FAD65', borderRadius: '16px', backgroundColor: '#EEF6E8', boxShadow: '0 10px 32px rgba(45,90,27,0.15)' },
   heading:          { color: '#1E3D14', margin: '0 0 10px 0', fontWeight: 'bold', fontSize: '24px' },
   subheading:       { color: '#4A6B35', margin: 0, fontSize: '14px', fontStyle: 'italic' },
-  form:             { display: 'flex', flexDirection: 'column', gap: '18px' },
+  form:             { display: 'flex', flexDirection: 'column', gap: '12px' },
   row:              { display: 'flex', gap: '15px', flexWrap: 'wrap' },
   formGroup:        { display: 'flex', flexDirection: 'column', gap: '6px', flex: '1 1 200px' },
   label:            { fontSize: '13px', fontWeight: 'bold', color: '#1E3D14', fontFamily: 'sans-serif' },
