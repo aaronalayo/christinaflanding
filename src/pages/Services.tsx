@@ -11,7 +11,7 @@ export default function Services() {
           <p className="site-page-subtitle" style={styles.subtitle}>
             “Her får du et frirum, hvor der er fokus på dig”
           </p>
-          <Link to="/booking" style={styles.bookBtn}>
+          <Link to="/booking" style={{ ...styles.bookBtn, marginTop: '14px' }}>
             Book nu →
           </Link>
         </div>
