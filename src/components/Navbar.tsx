@@ -7,12 +7,10 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const links = [
-    { to: '/', label: 'Forside' },
-    { to: '/om-mig', label: 'Om mig' },
     { to: '/behandlinger', label: 'Behandlinger' },
-    { to: '/booking', label: 'Book session' },
-    { to: '/kontakt', label: 'Kontakt' },
-    { to: '/privatlivspolitik', label: 'Privatliv' },
+    { to: '/om-mig', label: 'OM MIG' },
+    { to: '/booking', label: 'BOOKING' },
+    { to: '/kontakt', label: 'KONTAKT' },
   ];
 
   return (
@@ -20,10 +18,9 @@ export default function Navbar() {
       <div className="site-header-container" style={styles.container}>
         {/* Brand Logo */}
         <Link to="/" style={styles.brand}>
-          <span style={styles.brandIcon}>🌿</span>
           <div>
-            <div className="site-brand-title" style={styles.brandTitle}>Christina Flanding</div>
-            <div className="site-brand-subtitle" style={styles.brandSubtitle}>Healing & Velvære</div>
+            <div className="site-brand-title" style={styles.brandTitle}>CHRISTINA FLANDING</div>
+            <div className="site-brand-subtitle" style={styles.brandSubtitle}>REIKI HEALING</div>
           </div>
         </Link>
 
@@ -31,19 +28,12 @@ export default function Navbar() {
         <nav className="site-desktop-nav" style={styles.desktopNav}>
           {links.map(link => {
             const isActive = location.pathname === link.to;
-            const isBooking = link.to === '/booking';
-            if (isBooking) {
-              return (
-                <Link key={link.to} to={link.to} style={styles.bookingBtn}>
-                  {link.label}
-                </Link>
-              );
-            }
             return (
               <Link
                 key={link.to}
                 to={link.to}
-                style={isActive ? styles.navLinkActive : styles.navLink}
+                className="nav-link"
+                style={isActive ? { ...styles.navLink, color: '#1E3D14' } : styles.navLink}
               >
                 {link.label}
               </Link>
@@ -105,12 +95,8 @@ const styles: Styles = {
   brand: {
     display: 'flex',
     alignItems: 'center',
-    gap: '12px',
     textDecoration: 'none',
     color: '#1E3D14',
-  },
-  brandIcon: {
-    fontSize: '28px',
   },
   brandTitle: {
     fontFamily: 'Georgia, serif',
@@ -118,6 +104,7 @@ const styles: Styles = {
     fontWeight: 'bold',
     letterSpacing: '0.3px',
     color: '#1E3D14',
+    textTransform: 'uppercase',
   },
   brandSubtitle: {
     fontSize: '12px',
@@ -136,27 +123,19 @@ const styles: Styles = {
     color: '#3D5A2C',
     fontSize: '15px',
     fontWeight: '600',
-    transition: 'color 0.2s',
+    position: 'relative',
+    paddingBottom: '6px',
+    transition: 'color 0.2s ease',
   },
   navLinkActive: {
     textDecoration: 'none',
     color: '#1E3D14',
     fontSize: '15px',
-    fontWeight: 'bold',
-    borderBottom: '2px solid #C3C8A8',
-    paddingBottom: '4px',
+    fontWeight: '600',
+    position: 'relative',
+    paddingBottom: '6px',
   },
-  bookingBtn: {
-    textDecoration: 'none',
-    backgroundColor: '#C3C8A8',
-    color: '#000000',
-    padding: '9px 18px',
-    borderRadius: '20px',
-    fontWeight: 'bold',
-    fontSize: '14px',
-    boxShadow: '0 2px 6px rgba(45,90,27,0.25)',
-    transition: 'background-color 0.2s',
-  },
+
   mobileMenuToggle: {
     display: 'none',
     background: 'none',

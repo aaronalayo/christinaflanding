@@ -6,31 +6,30 @@ export default function Services() {
     <div className="site-content-page" style={styles.page}>
       <div className="site-content-container" style={styles.container}>
         <div className="site-page-header" style={styles.header}>
-          <span style={styles.badge}>🌿 Healing & Velvære</span>
-          <h1 className="site-page-title" style={styles.title}>REIKI HEALING</h1>
+          <h1 className="site-page-title" style={styles.title}>REIKI</h1>
           <p className="site-page-subtitle" style={styles.subtitle}>
             “Her får du et frirum, hvor der er fokus på dig”
           </p>
           <Link to="/booking" style={{ ...styles.bookBtn, marginTop: '14px' }}>
-            Book nu →
+            BOOK BEHANDLING
           </Link>
         </div>
 
         <div style={styles.treatmentList}>
           <div className="site-treatment-card" style={styles.treatmentCard}>
-            <h2 className="site-treatment-title" style={styles.cardTitle}>Om reiki healing</h2>
+            <h2 className="site-treatment-title" style={styles.cardTitle}>Om reiki</h2>
             <p style={styles.desc}>
-              Reiki healing kan hjælpe dig, som har tankemylder, stresssymptomer, uro og andre lignende udfordringer. Eller bare til dig, som vil give dig selv en helt afstressende oplevelse.
+              Reiki kan hjælpe dig, som har tankemylder, stresssymptomer, uro og andre lignende udfordringer. Eller bare til dig, som vil give dig selv en helt afstressende oplevelse.
             </p>
             <p style={styles.desc}>
-              Først og fremmest er Reiki healing for alle, som vil give sig selv en pause fra hverdagens støj og bare være med sig selv.
+              Først og fremmest er Reiki for alle, som vil give sig selv en pause fra hverdagens støj og bare være med sig selv.
             </p>
             <p style={styles.desc}>
-              Reiki healing stammer fra Japan, hvor “Rei” betyder liv og “ki” energi på japansk. Reikihealing er en blid healingsform, hvor behandleren kanaliserer universel livsenergi videre til modtageren. Kroppen får mulighed for at komme helt ned i en dyb ro og restituere.
+              Reiki stammer fra Japan, hvor “Rei” betyder liv og “ki” energi på japansk. Reiki er en blid healingsform, hvor behandleren kanaliserer universel livsenergi videre til modtageren. Kroppen får mulighed for at komme helt ned i en dyb ro og restituere.
             </p>
 
-            <h3 style={styles.sectionHeading}>Hvad kan Reiki healing hjælpe med?</h3>
-            <p style={styles.desc}>Reikihealing kan afhjælpe:</p>
+            <h3 style={styles.sectionHeading}>Hvad kan Reiki hjælpe med?</h3>
+            <p style={styles.desc}>Reiki kan afhjælpe:</p>
             <ul style={styles.pointsList}>
               <li style={styles.pointItem}>Stresssymptomer</li>
               <li style={styles.pointItem}>Tankemylder</li>
@@ -55,9 +54,9 @@ export default function Services() {
             <div style={styles.practicalBox}>
               <h3 style={styles.sectionHeading}>Praktisk</h3>
               <ul style={styles.priceList}>
-                <li style={styles.priceItem}><strong>Reiki healing 60 min:</strong> 400 kr.</li>
+                <li style={styles.priceItem}><strong>Reiki 60 min:</strong> 400 kr.</li>
                 <li style={styles.priceItem}>Inkl. samtale, healing og snak som afslutning på behandlingen.</li>
-                <li style={styles.priceItem}><strong>3 x klippekort Reiki-behandling:</strong> 1.100 kr.</li>
+                <li style={styles.priceItem}><strong>3 x klippekort Reiki:</strong> 1.100 kr.</li>
                 <li style={styles.priceItem}>Et forløb anbefales for at komme i dybden med behandlingen.</li>
                 <li style={styles.priceItem}>Du kan betale med MobilePay.</li>
               </ul>
@@ -65,7 +64,7 @@ export default function Services() {
 
             <div style={{ marginTop: '28px' }}>
               <Link to="/booking" style={styles.bookBtn}>
-                Book nu →
+                BOOK BEHANDLING
               </Link>
             </div>
           </div>
@@ -87,16 +86,6 @@ const styles: Styles = {
     textAlign: 'center',
     marginBottom: '48px',
   },
-  badge: {
-    display: 'inline-block',
-    padding: '6px 14px',
-    backgroundColor: '#D9EDCC',
-    color: '#1E3D14',
-    borderRadius: '20px',
-    fontSize: '13px',
-    fontWeight: 'bold',
-    marginBottom: '14px',
-  },
   title: {
     fontFamily: 'Georgia, serif',
     fontSize: '38px',
@@ -116,11 +105,11 @@ const styles: Styles = {
     marginBottom: '48px',
   },
   treatmentCard: {
-    backgroundColor: '#F5FAF2',
-    border: '1.5px solid #C5DEB8',
-    borderRadius: '16px',
+    backgroundColor: 'rgba(247, 243, 239, 0.78)',
+    border: '1px solid rgba(30, 61, 20, 0.18)',
+    borderRadius: '0',
     padding: '36px',
-    boxShadow: '0 8px 24px rgba(45,90,27,0.06)',
+    boxShadow: '0 2px 12px rgba(40, 52, 36, 0.08)',
   },
   cardTop: {
     display: 'flex',
@@ -144,10 +133,10 @@ const styles: Styles = {
     flexWrap: 'wrap',
   },
   metaBadge: {
-    backgroundColor: '#E2F0D9',
+    backgroundColor: 'rgba(247, 243, 239, 0.78)',
     color: '#2D5A1B',
     padding: '4px 10px',
-    borderRadius: '14px',
+    borderRadius: '0',
     fontSize: '13px',
     fontWeight: '600',
   },
@@ -166,7 +155,7 @@ const styles: Styles = {
   pointsBox: {
     backgroundColor: '#EEF6E8',
     padding: '16px 20px',
-    borderRadius: '10px',
+    borderRadius: '0',
     border: '1px solid #D9EDCC',
   },
   pointsList: {
@@ -183,20 +172,24 @@ const styles: Styles = {
   },
   bookBtn: {
     display: 'inline-block',
-    backgroundColor: '#C3C8A8',
-    color: '#000000',
-    padding: '12px 24px',
-    borderRadius: '20px',
+    backgroundColor: '#E9D8C5',
+    color: '#182A1A',
+    padding: '14px 26px',
+    borderRadius: '0',
     textDecoration: 'none',
     fontWeight: 'bold',
     fontSize: '15px',
-    boxShadow: '0 2px 8px rgba(45,90,27,0.2)',
+    letterSpacing: '0.05em',
+    textTransform: 'uppercase',
+    border: '1px solid rgba(30, 61, 20, 0.25)',
+    boxShadow: '0 6px 18px rgba(9, 10, 9, 0.12)',
+    transition: 'transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
   },
   practicalBox: {
-    backgroundColor: '#D9EDCC',
+    backgroundColor: 'rgba(247, 243, 239, 0.78)',
     padding: '28px 32px',
-    borderRadius: '14px',
-    border: '1.5px solid #7FAD65',
+    borderRadius: '0',
+    border: '1px solid rgba(30, 61, 20, 0.18)',
   },
   practicalText: {
     fontSize: '15px',

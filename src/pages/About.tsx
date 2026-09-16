@@ -1,14 +1,13 @@
 import { Link } from 'react-router-dom';
 import type { Styles } from '../css';
-import christinaPhoto from '../assets/christina.jpg';
+import christinaPhoto from '../assets/foto-portrait.jpeg';
 
 export default function About() {
   return (
     <div className="site-content-page" style={styles.page}>
       <div className="site-content-container" style={styles.container}>
         <div className="site-page-header" style={styles.header}>
-          <span style={styles.badge}>🌿 Mød Christina</span>
-          <h1 className="site-page-title" style={styles.title}>Om Christina Flanding</h1>
+          <h1 className="site-page-title" style={styles.title}>OM CHRISTINA FLANDING</h1>
           <p className="site-page-subtitle" style={styles.subtitle}>
             Healer, energiterapeut og formidler af ro, balance og personlig udvikling.
           </p>
@@ -57,7 +56,7 @@ export default function About() {
               Du er altid velkommen til at booke en session eller kontakte mig med eventuelle spørgsmål.
             </p>
             <Link to="/booking" style={styles.ctaBtn}>
-              Book en tid online →
+              BOOK BEHANDLING
             </Link>
           </div>
         </div>
@@ -69,6 +68,7 @@ export default function About() {
 const styles: Styles = {
   page: {
     padding: '56px 24px 80px',
+    backgroundColor: '#F3CFB3',
   },
   container: {
     maxWidth: '820px',
@@ -77,16 +77,6 @@ const styles: Styles = {
   header: {
     textAlign: 'center',
     marginBottom: '40px',
-  },
-  badge: {
-    display: 'inline-block',
-    padding: '6px 14px',
-    backgroundColor: '#D9EDCC',
-    color: '#1E3D14',
-    borderRadius: '20px',
-    fontSize: '13px',
-    fontWeight: 'bold',
-    marginBottom: '14px',
   },
   title: {
     fontFamily: 'Georgia, serif',
@@ -110,10 +100,10 @@ const styles: Styles = {
     justifyContent: 'center',
     gap: '10px',
     backgroundColor: '#D9EDCC',
-    border: '1.5px solid #7FAD65',
-    borderRadius: '16px',
+    border: '1px solid rgba(30, 61, 20, 0.18)',
+    borderRadius: '0',
     overflow: 'hidden',
-    boxShadow: '0 8px 24px rgba(45,90,27,0.08)',
+    boxShadow: '0 2px 12px rgba(40, 52, 36, 0.08)',
   },
   photoImage: {
     width: '100%',
@@ -122,11 +112,11 @@ const styles: Styles = {
     objectFit: 'cover',
   },
   contentBox: {
-    backgroundColor: '#F5FAF2',
-    border: '1.5px solid #C5DEB8',
-    borderRadius: '16px',
+    backgroundColor: 'rgba(247, 243, 239, 0.78)',
+    border: '1px solid rgba(30, 61, 20, 0.18)',
+    borderRadius: '0',
     padding: '40px 36px',
-    boxShadow: '0 8px 24px rgba(45,90,27,0.06)',
+    boxShadow: '0 2px 12px rgba(40, 52, 36, 0.08)',
   },
   heading: {
     fontFamily: 'Georgia, serif',
@@ -161,20 +151,26 @@ const styles: Styles = {
   ctaBox: {
     backgroundColor: '#D9EDCC',
     padding: '24px',
-    borderRadius: '12px',
+    borderRadius: '0',
     textAlign: 'center',
     marginTop: '36px',
-    border: '1px solid #7FAD65',
+    border: '1px solid rgba(30, 61, 20, 0.18)',
   },
   ctaBtn: {
     display: 'inline-block',
-    backgroundColor: '#C3C8A8',
-    color: '#000000',
-    padding: '12px 24px',
-    borderRadius: '20px',
+    backgroundColor: '#E9D8C5',
+    color: '#182A1A',
+    padding: '14px 26px',
+    borderRadius: '0',
     textDecoration: 'none',
     fontWeight: 'bold',
     fontSize: '15px',
+    letterSpacing: '0.05em',
+    textTransform: 'uppercase',
+    border: '1px solid rgba(30, 61, 20, 0.25)',
+    boxShadow: '0 6px 18px rgba(9, 10, 9, 0.12)',
+    transition: 'transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
+    cursor: 'pointer',
   },
 };
 

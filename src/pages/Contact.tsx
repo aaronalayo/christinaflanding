@@ -6,8 +6,7 @@ export default function Contact() {
     <div className="site-content-page" style={styles.page}>
       <div className="site-content-container" style={styles.container}>
         <div className="site-page-header" style={styles.header}>
-          <span style={styles.badge}>🌿 Kom i kontakt</span>
-          <h1 className="site-page-title" style={styles.title}>Kontakt Christina</h1>
+          <h1 className="site-page-title" style={styles.title}>KONTAKT</h1>
           <p className="site-page-subtitle" style={styles.subtitle}>
             Har du spørgsmål om behandlingerne, forløb eller specielle ønsker? Tøv ikke med at række ud.
           </p>
@@ -19,7 +18,7 @@ export default function Contact() {
             <h2 style={styles.cardHeading}>Kontaktoplysninger</h2>
             
             <div style={styles.infoRow}>
-              <span style={styles.infoIcon}>✉️</span>
+              <span style={styles.infoIcon}>💌</span>
               <div>
                 <strong style={styles.infoLabel}>E-mail</strong>
                 <a href="mailto:kontakt@christinaflanding.dk" style={styles.infoLink}>
@@ -54,7 +53,7 @@ export default function Contact() {
             </div>
 
             <div style={styles.infoRow}>
-              <span style={styles.infoIcon}>⏰</span>
+              <span style={styles.infoIcon}>🕰️</span>
               <div>
                 <strong style={styles.infoLabel}>Behandlingstider</strong>
                 <p style={{ margin: 0, fontSize: '14px', color: '#3D5A2C', lineHeight: '1.6' }}>
@@ -67,17 +66,17 @@ export default function Contact() {
           </div>
 
           {/* Card 2: Quick Booking Action */}
-          <div className="site-contact-card" style={{ ...styles.card, backgroundColor: '#D9EDCC', border: '1.5px solid #7FAD65' }}>
+          <div className="site-contact-card" style={{ ...styles.card, backgroundColor: '#E9E0D6', border: '1px solid rgba(30, 61, 20, 0.18)' }}>
             <h2 style={styles.cardHeading}>Klar til at booke?</h2>
             <p style={{ fontSize: '15px', lineHeight: '1.7', color: '#2D5A1B', marginBottom: '24px' }}>
               Du behøver ikke vente på svar for at reservere en tid. Vores online kalender viser ledige tider i realtid, og du kan sikre din session med det samme.
             </p>
 
             <Link to="/booking" style={styles.bookBtn}>
-              Gå direkte til booking →
+              BOOK BEHANDLING
             </Link>
 
-            <div style={{ marginTop: '28px', borderTop: '1px solid #B8D9A0', paddingTop: '20px' }}>
+            <div style={{ marginTop: '28px', borderTop: '1px solid rgba(30, 61, 20, 0.18)', paddingTop: '20px' }}>
               <strong style={{ color: '#1E3D14', fontSize: '14px', display: 'block', marginBottom: '6px' }}>
                 Afbud & ændringer:
               </strong>
@@ -95,6 +94,7 @@ export default function Contact() {
 const styles: Styles = {
   page: {
     padding: '56px 24px 80px',
+    backgroundColor: '#F3CFB3',
   },
   container: {
     maxWidth: '960px',
@@ -103,16 +103,6 @@ const styles: Styles = {
   header: {
     textAlign: 'center',
     marginBottom: '48px',
-  },
-  badge: {
-    display: 'inline-block',
-    padding: '6px 14px',
-    backgroundColor: '#D9EDCC',
-    color: '#1E3D14',
-    borderRadius: '20px',
-    fontSize: '13px',
-    fontWeight: 'bold',
-    marginBottom: '14px',
   },
   title: {
     fontFamily: 'Georgia, serif',
@@ -134,11 +124,11 @@ const styles: Styles = {
   },
   card: {
     flex: '1 1 380px',
-    backgroundColor: '#F5FAF2',
-    border: '1.5px solid #C5DEB8',
-    borderRadius: '16px',
+    backgroundColor: 'rgba(247, 243, 239, 0.78)',
+    border: '1px solid rgba(30, 61, 20, 0.18)',
+    borderRadius: '0',
     padding: '36px',
-    boxShadow: '0 8px 24px rgba(45,90,27,0.06)',
+    boxShadow: '0 2px 12px rgba(40, 52, 36, 0.08)',
   },
   cardHeading: {
     fontFamily: 'Georgia, serif',
@@ -173,14 +163,19 @@ const styles: Styles = {
   },
   bookBtn: {
     display: 'inline-block',
-    backgroundColor: '#C3C8A8',
-    color: '#000000',
+    backgroundColor: '#E9D8C5',
+    color: '#182A1A',
     padding: '14px 28px',
-    borderRadius: '24px',
+    borderRadius: '0',
     textDecoration: 'none',
     fontWeight: 'bold',
-    fontSize: '16px',
-    boxShadow: '0 4px 12px rgba(45,90,27,0.25)',
+    fontSize: '15px',
+    letterSpacing: '0.05em',
+    textTransform: 'uppercase',
+    border: '1px solid rgba(30, 61, 20, 0.25)',
+    boxShadow: '0 6px 18px rgba(9, 10, 9, 0.12)',
+    transition: 'transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
+    cursor: 'pointer',
   },
 };
 

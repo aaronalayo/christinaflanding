@@ -1,182 +1,167 @@
 import { Link } from 'react-router-dom';
 import type { Styles } from '../css';
+import heroBackground from '../assets/forside_foto.jpeg';
 
 export default function Home() {
   return (
-    <div>
-      {/* Hero Section */}
+    <div style={styles.pageShell}>
       <section className="site-hero" style={styles.hero}>
         <div style={styles.heroContent}>
-          <span style={styles.heroBadge}>🌿 Reiki Healing med Christina</span>
-          <h1 className="site-hero-title" style={styles.heroTitle}>Et frirum, hvor der er fokus på dig</h1>
-          <p className="site-hero-subtitle" style={styles.heroSubtitle}>
-            Reiki healing er en blid healingsform, der hjælper dig med at finde ro, slippe hverdagens støj og give kroppen mulighed for at restituere.
-          </p>
+          <div style={styles.heroTextBlock}>
+            <h1 className="site-hero-title" style={styles.heroTitle}>REIKI</h1>
+            <p className="site-hero-subtitle" style={styles.heroSubtitle}>
+              Blide, rogivende behandlinger, der hjælper dig med at komme ned i kroppen, finde ro og skabe plads til det, der virkelig betyder noget.
+            </p>
+          </div>
+
           <div className="site-hero-buttons" style={styles.heroBtns}>
-            <Link to="/booking" style={styles.primaryBtn}>
-              Book en session nu →
-            </Link>
-            <Link to="/behandlinger" style={styles.secondaryBtn}>
-              Se behandlinger
-            </Link>
+            <Link to="/booking" style={styles.primaryBtn}>BOOK BEHANDLING</Link>
           </div>
         </div>
       </section>
 
-      {/* Intro Section */}
       <section className="site-section" style={styles.section}>
         <div style={styles.container}>
           <div style={styles.introBox}>
-            <span style={{ fontSize: '36px' }}>✨</span>
             <h2 className="site-section-title" style={styles.sectionTitle}>Giv dig selv en pause</h2>
             <p style={styles.sectionText}>
-              Reiki healing er for dig, der oplever tankemylder, stresssymptomer, uro eller andre lignende udfordringer. Det er også for dig, der bare ønsker en helt afstressende oplevelse og en stund med dig selv.
+              Reiki healing er for dig, der oplever tankemylder, stress, uro eller bare har brug for et stille sted at komme tilbage til dig selv.
             </p>
           </div>
 
-          {/* Highlights */}
           <div className="site-grid" style={styles.grid}>
             <div className="site-feature-card" style={styles.card}>
-              <div style={styles.cardIcon}>🌿</div>
-              <h3 style={styles.cardTitle}>Reiki Healing</h3>
+              <h3 style={styles.cardTitle}>Reiki</h3>
               <p style={styles.cardText}>
-                En blid behandling, hvor universel livsenergi kanaliseres videre til dig, så du kan komme helt ned i en dyb ro.
+                En blid behandling, hvor livsenergi flyder gennem dig, så du kan finde ro og balance.
               </p>
               <Link to="/behandlinger" style={styles.cardLink}>Læs mere →</Link>
             </div>
 
             <div className="site-feature-card" style={styles.card}>
-              <div style={styles.cardIcon}>💫</div>
-              <h3 style={styles.cardTitle}>En personlig rejse</h3>
+              <h3 style={styles.cardTitle}>Min Kunst</h3>
               <p style={styles.cardText}>
-                Mød Christina, og læs om rejsen fra Caminoen og Nepal til Reiki, meditation, kunst og kunstterapi.
+                Kreative praksisser, kunstnerisk nærvær og udtryk, der kan gøre plads til forandring og ro.
               </p>
               <Link to="/om-mig" style={styles.cardLink}>Læs om Christina →</Link>
             </div>
 
             <div className="site-feature-card" style={styles.card}>
-              <div style={styles.cardIcon}>🕊️</div>
-              <h3 style={styles.cardTitle}>Tid til dig</h3>
+              <h3 style={styles.cardTitle}>Uld Arbejde</h3>
               <p style={styles.cardText}>
-                Behandlingen foregår i trygge rammer, med tøj på og i et roligt tempo tilpasset dine behov.
+                Tænkning, materialitet og naturens værdi i et roligt og jordet hverdagsrum.
               </p>
-              <Link to="/booking" style={styles.cardLink}>Book en tid →</Link>
+              <Link to="/booking" style={styles.cardLink}>Læs mere →</Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Quote / Philosophy */}
-      <section className="site-quote-section" style={styles.quoteSection}>
-        <div style={styles.container}>
-          <blockquote className="site-quote" style={styles.quote}>
-            "Reiki healing giver dig et frirum, hvor du kan være med dig selv, mens kroppen får mulighed for at finde ro."
-          </blockquote>
-          <p style={styles.quoteAuthor}>— Christina Flanding</p>
-        </div>
-      </section>
-
-      {/* CTA Banner */}
-      <section className="site-cta-banner" style={styles.ctaBanner}>
-        <div style={styles.container}>
-          <h2 className="site-section-title" style={{ ...styles.sectionTitle, color: '#1E3D14' }}>
-            Er du klar til at give dig selv et frirum?
-          </h2>
-          <p style={{ ...styles.sectionText, maxWidth: '600px', margin: '0 auto 24px' }}>
-            Book en Reiki healing og mærk, hvad en pause med fokus på dig kan give.
-          </p>
-          <Link to="/booking" style={styles.primaryBtn}>
-            Gå til online booking →
-          </Link>
-        </div>
-      </section>
     </div>
   );
 }
 
 const styles: Styles = {
+  pageShell: {
+    background: '#F3CFB3',
+  },
   hero: {
-    backgroundColor: '#F3CFB3',
-    padding: '72px 24px',
-    textAlign: 'center',
-    borderBottom: '1px solid #C5DEB8',
+    backgroundImage: `linear-gradient(rgba(17, 26, 19, 0.42), rgba(17, 26, 19, 0.56)), url(${heroBackground})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    minHeight: '540px',
+    padding: '54px 24px 72px',
+    borderBottom: '1px solid rgba(30, 61, 20, 0.18)',
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
   },
   heroContent: {
-    maxWidth: '750px',
+    maxWidth: '980px',
     margin: '0 auto',
+    textAlign: 'center',
+    animation: 'heroFadeUp 0.9s ease-out both',
   },
-  heroBadge: {
-    display: 'inline-block',
-    padding: '6px 14px',
-    backgroundColor: '#D9EDCC',
-    color: '#1E3D14',
-    borderRadius: '20px',
-    fontSize: '13px',
-    fontWeight: 'bold',
-    marginBottom: '18px',
+  heroTextBlock: {
+    maxWidth: '760px',
+    margin: '0 auto',
+    animation: 'heroFadeUp 1.1s ease-out both',
   },
   heroTitle: {
     fontFamily: 'Georgia, serif',
-    fontSize: '44px',
-    lineHeight: '1.2',
-    color: '#1E3D14',
-    margin: '0 0 20px 0',
+    fontSize: 'clamp(34px, 5.8vw, 72px)',
+    lineHeight: '0.96',
+    color: '#FFFFFF',
+    margin: '0 0 18px 0',
     fontWeight: 'bold',
+    letterSpacing: '-0.06em',
+    textShadow: '0 2px 18px rgba(9, 10, 9, 0.42)',
+    animation: 'heroFadeUp 0.8s ease-out both',
   },
   heroSubtitle: {
+    maxWidth: '640px',
     fontSize: '18px',
-    lineHeight: '1.6',
-    color: '#4A6B35',
-    margin: '0 0 32px 0',
+    lineHeight: '1.7',
+    color: '#F8F3EE',
+    margin: '0 0 26px 0',
+    textShadow: '0 1px 12px rgba(9, 10, 9, 0.28)',
+    animation: 'heroFadeUp 1s ease-out both',
   },
   heroBtns: {
     display: 'flex',
     gap: '14px',
     justifyContent: 'center',
     flexWrap: 'wrap',
+    animation: 'heroFadeUp 1.2s ease-out both',
   },
   primaryBtn: {
     display: 'inline-block',
-    backgroundColor: '#C3C8A8',
-    color: '#000000',
-    padding: '14px 28px',
-    borderRadius: '24px',
-    fontSize: '16px',
+    backgroundColor: '#E9D8C5',
+    color: '#182A1A',
+    padding: '14px 26px',
+    borderRadius: '0',
+    fontSize: '15px',
     fontWeight: 'bold',
     textDecoration: 'none',
-    boxShadow: '0 4px 12px rgba(45,90,27,0.25)',
-    transition: 'background-color 0.2s',
+    border: '1px solid rgba(255, 255, 255, 0.55)',
+    boxShadow: '0 6px 18px rgba(9, 10, 9, 0.18)',
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
+    transition: 'transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
+    cursor: 'pointer',
   },
   secondaryBtn: {
     display: 'inline-block',
-    backgroundColor: '#FFF',
+    backgroundColor: '#f8f4ee',
     color: '#1E3D14',
     padding: '14px 24px',
-    borderRadius: '24px',
-    fontSize: '16px',
+    borderRadius: '999px',
+    fontSize: '15px',
     fontWeight: 'bold',
     textDecoration: 'none',
-    border: '1.5px solid #7FAD65',
-    transition: 'all 0.2s',
+    border: '1px solid rgba(30, 61, 20, 0.28)',
   },
   section: {
     padding: '64px 24px',
+    backgroundColor: '#F3CFB3',
   },
   container: {
-    maxWidth: '1000px',
+    maxWidth: '1040px',
     margin: '0 auto',
     textAlign: 'center',
   },
   introBox: {
-    maxWidth: '700px',
-    margin: '0 auto 48px',
+    maxWidth: '720px',
+    margin: '0 auto 36px',
   },
   sectionTitle: {
     fontFamily: 'Georgia, serif',
-    fontSize: '32px',
+    fontSize: 'clamp(30px, 4vw, 48px)',
     color: '#1E3D14',
     margin: '12px 0 16px',
     fontWeight: 'bold',
+    letterSpacing: '-0.04em',
   },
   sectionText: {
     fontSize: '17px',
@@ -186,68 +171,38 @@ const styles: Styles = {
   },
   grid: {
     display: 'flex',
-    gap: '24px',
+    gap: '22px',
     flexWrap: 'wrap',
     justifyContent: 'center',
   },
   card: {
-    flex: '1 1 280px',
-    maxWidth: '340px',
-    backgroundColor: '#F5FAF2',
-    border: '1.5px solid #C5DEB8',
-    borderRadius: '16px',
-    padding: '32px 24px',
+    flex: '1 1 260px',
+    maxWidth: '300px',
+    backgroundColor: 'rgba(247, 243, 239, 0.78)',
+    border: '1px solid rgba(30, 61, 20, 0.18)',
+    borderRadius: '0',
+    padding: '26px 20px',
     textAlign: 'center',
-    boxShadow: '0 6px 20px rgba(45,90,27,0.06)',
-  },
-  cardIcon: {
-    fontSize: '36px',
-    marginBottom: '16px',
+    boxShadow: '0 2px 12px rgba(40, 52, 36, 0.08)',
+    transform: 'translateY(0)',
   },
   cardTitle: {
     fontFamily: 'Georgia, serif',
-    fontSize: '20px',
+    fontSize: '22px',
     color: '#1E3D14',
     margin: '0 0 12px 0',
   },
   cardText: {
     fontSize: '15px',
-    lineHeight: '1.6',
-    color: '#5A8048',
-    marginBottom: '20px',
+    lineHeight: '1.65',
+    color: '#55704b',
+    marginBottom: '18px',
   },
   cardLink: {
     color: '#2D5A1B',
     textDecoration: 'none',
     fontWeight: 'bold',
     fontSize: '14px',
-  },
-  quoteSection: {
-    backgroundColor: '#D9EDCC',
-    padding: '56px 24px',
-    borderTop: '1px solid #C5DEB8',
-    borderBottom: '1px solid #C5DEB8',
-  },
-  quote: {
-    fontFamily: 'Georgia, serif',
-    fontSize: '22px',
-    fontStyle: 'italic',
-    lineHeight: '1.6',
-    color: '#1E3D14',
-    maxWidth: '750px',
-    margin: '0 auto 16px',
-  },
-  quoteAuthor: {
-    fontFamily: 'sans-serif',
-    fontSize: '14px',
-    color: '#4A6B35',
-    fontWeight: 'bold',
-    margin: 0,
-  },
-  ctaBanner: {
-    backgroundColor: '#EEF6E8',
-    padding: '64px 24px',
-    textAlign: 'center',
   },
 };
 
