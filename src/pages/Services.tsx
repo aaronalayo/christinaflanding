@@ -106,7 +106,7 @@ const styles: Styles = {
   },
   treatmentCard: {
     backgroundColor: 'rgba(247, 243, 239, 0.78)',
-    border: '1px solid rgba(30, 61, 20, 0.18)',
+    border: '0',
     borderRadius: '0',
     padding: '36px',
     boxShadow: '0 2px 12px rgba(40, 52, 36, 0.08)',
@@ -189,7 +189,7 @@ const styles: Styles = {
     backgroundColor: 'rgba(247, 243, 239, 0.78)',
     padding: '28px 32px',
     borderRadius: '0',
-    border: '1px solid rgba(30, 61, 20, 0.18)',
+    border: '0',
   },
   practicalText: {
     fontSize: '15px',

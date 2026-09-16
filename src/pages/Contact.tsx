@@ -125,7 +125,7 @@ const styles: Styles = {
   card: {
     flex: '1 1 380px',
     backgroundColor: 'rgba(247, 243, 239, 0.78)',
-    border: '1px solid rgba(30, 61, 20, 0.18)',
+    border: '0',
     borderRadius: '0',
     padding: '36px',
     boxShadow: '0 2px 12px rgba(40, 52, 36, 0.08)',

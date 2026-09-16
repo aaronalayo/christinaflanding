@@ -113,7 +113,7 @@ const styles: Styles = {
   },
   contentBox: {
     backgroundColor: 'rgba(247, 243, 239, 0.78)',
-    border: '1px solid rgba(30, 61, 20, 0.18)',
+    border: '0',
     borderRadius: '0',
     padding: '40px 36px',
     boxShadow: '0 2px 12px rgba(40, 52, 36, 0.08)',
@@ -154,7 +154,7 @@ const styles: Styles = {
     borderRadius: '0',
     textAlign: 'center',
     marginTop: '36px',
-    border: '1px solid rgba(30, 61, 20, 0.18)',
+    border: '0',
   },
   ctaBtn: {
     display: 'inline-block',

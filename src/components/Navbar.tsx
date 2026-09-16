@@ -46,10 +46,14 @@ export default function Navbar() {
           type="button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="site-menu-toggle"
-          style={styles.mobileMenuToggle}
+          style={mobileMenuOpen ? { ...styles.mobileMenuToggle, backgroundColor: 'rgba(255,255,255,0.12)' } : styles.mobileMenuToggle}
           aria-label="Toggle navigation menu"
         >
-          {mobileMenuOpen ? '✕' : '☰'}
+          <span className="site-menu-toggle-lines" aria-hidden="true">
+            <span className={mobileMenuOpen ? 'site-menu-toggle-line site-menu-toggle-line--1 open' : 'site-menu-toggle-line site-menu-toggle-line--1'} />
+            <span className={mobileMenuOpen ? 'site-menu-toggle-line site-menu-toggle-line--2 open' : 'site-menu-toggle-line site-menu-toggle-line--2'} />
+            <span className={mobileMenuOpen ? 'site-menu-toggle-line site-menu-toggle-line--3 open' : 'site-menu-toggle-line site-menu-toggle-line--3'} />
+          </span>
         </button>
       </div>
 
@@ -77,14 +81,16 @@ export default function Navbar() {
 
 const styles: Styles = {
   header: {
-    backgroundColor: '#f1efec',
-    borderBottom: '1.5px solid #C5DEB8',
+    backgroundColor: 'rgba(241, 239, 236, 0.62)',
+    borderBottom: '1.5px solid rgba(197, 222, 184, 0.55)',
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)',
     position: 'fixed',
     top: 0,
     left: 0,
     width: '100%',
     zIndex: 1000,
-    boxShadow: '0 2px 10px rgba(45,90,27,0.06)',
+    boxShadow: '0 2px 10px rgba(45,90,27,0.04)',
   },
   container: {
     maxWidth: '1100px',
@@ -141,19 +147,30 @@ const styles: Styles = {
 
   mobileMenuToggle: {
     display: 'none',
-    background: 'none',
+    background: 'transparent',
     border: 'none',
-    fontSize: '24px',
+    width: '42px',
+    height: '42px',
+    borderRadius: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 0,
     cursor: 'pointer',
     color: '#1E3D14',
+    transition: 'all 0.2s ease',
   },
   mobileNav: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     gap: '12px',
-    padding: '16px 24px',
-    backgroundColor: '#EEF6E8',
-    borderTop: '1px solid #C5DEB8',
+    padding: '18px 24px 22px',
+    backgroundColor: 'rgba(238, 246, 232, 0.38)',
+    backdropFilter: 'blur(10px)',
+    WebkitBackdropFilter: 'blur(10px)',
+    borderTop: '1px solid rgba(197, 222, 184, 0.38)',
+    animation: 'mobileMenuSlide 0.22s ease-out',
   },
   mobileNavLink: {
     textDecoration: 'none',
