@@ -166,10 +166,7 @@ const styles: Styles = {
     justifyContent: 'center',
     gap: '12px',
     padding: '18px 24px 22px',
-    backgroundColor: 'rgba(238, 246, 232, 0.38)',
-    backdropFilter: 'blur(10px)',
-    WebkitBackdropFilter: 'blur(10px)',
-    borderTop: '1px solid rgba(197, 222, 184, 0.38)',
+    backgroundColor: 'transparent',
     animation: 'mobileMenuSlide 0.22s ease-out',
   },
   mobileNavLink: {
