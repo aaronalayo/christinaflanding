@@ -21,7 +21,7 @@ export default function BookingPage() {
 
 const styles: Styles = {
   page: {
-    padding: '48px 24px 80px',
+    padding: '104px 24px 80px',
     backgroundColor: '#F3CFB3',
     minHeight: '100%',
   },

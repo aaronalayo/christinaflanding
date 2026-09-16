@@ -8,7 +8,7 @@ export default function Home() {
       <section className="site-hero" style={styles.hero}>
         <div style={styles.heroContent}>
           <div style={styles.heroTextBlock}>
-            <h1 className="site-hero-title" style={styles.heroTitle}>REIKI</h1>
+            <h1 className="site-hero-title" style={styles.heroTitle}>REIKI HEALING</h1>
             <p className="site-hero-subtitle" style={styles.heroSubtitle}>
               Blide, rogivende behandlinger, der hjælper dig med at komme ned i kroppen, finde ro og skabe plads til det, der virkelig betyder noget.
             </p>
@@ -66,7 +66,7 @@ const styles: Styles = {
     background: '#F3CFB3',
   },
   hero: {
-    backgroundImage: `linear-gradient(rgba(17, 26, 19, 0.42), rgba(17, 26, 19, 0.56)), url(${heroBackground})`,
+    backgroundImage: `linear-gradient(rgba(132, 134, 132, 0.42), rgba(17, 26, 19, 0.56)), url(${heroBackground})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
