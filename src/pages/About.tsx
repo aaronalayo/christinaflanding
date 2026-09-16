@@ -67,7 +67,7 @@ export default function About() {
 
 const styles: Styles = {
   page: {
-    padding: '56px 24px 80px',
+    padding: '104px 24px 80px',
     backgroundColor: '#F3CFB3',
   },
   container: {

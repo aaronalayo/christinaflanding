@@ -6,7 +6,7 @@ export default function Services() {
     <div className="site-content-page" style={styles.page}>
       <div className="site-content-container" style={styles.container}>
         <div className="site-page-header" style={styles.header}>
-          <h1 className="site-page-title" style={styles.title}>REIKI</h1>
+          <h1 className="site-page-title" style={styles.title}>REIKI HEALING</h1>
           <p className="site-page-subtitle" style={styles.subtitle}>
             “Her får du et frirum, hvor der er fokus på dig”
           </p>
@@ -76,7 +76,7 @@ export default function Services() {
 
 const styles: Styles = {
   page: {
-    padding: '56px 24px 80px',
+    padding: '104px 24px 80px',
   },
   container: {
     maxWidth: '920px',

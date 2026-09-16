@@ -7,7 +7,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const links = [
-    { to: '/behandlinger', label: 'Behandlinger' },
+    { to: '/behandlinger', label: 'BEHANDLINGER' },
     { to: '/om-mig', label: 'OM MIG' },
     { to: '/booking', label: 'BOOKING' },
     { to: '/kontakt', label: 'KONTAKT' },
@@ -77,11 +77,13 @@ export default function Navbar() {
 
 const styles: Styles = {
   header: {
-    backgroundColor: '#F3CFB3',
+    backgroundColor: '#f1efec',
     borderBottom: '1.5px solid #C5DEB8',
-    position: 'sticky',
+    position: 'fixed',
     top: 0,
-    zIndex: 100,
+    left: 0,
+    width: '100%',
+    zIndex: 1000,
     boxShadow: '0 2px 10px rgba(45,90,27,0.06)',
   },
   container: {
@@ -112,6 +114,7 @@ const styles: Styles = {
     letterSpacing: '0.5px',
     textTransform: 'uppercase',
     fontWeight: '500',
+    float: 'right',
   },
   desktopNav: {
     display: 'flex',

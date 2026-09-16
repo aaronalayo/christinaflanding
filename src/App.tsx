@@ -45,5 +45,6 @@ const styles: Styles = {
   mainContent: {
     flex: '1 0 auto',
     backgroundColor: '#F3CFB3',
+    paddingTop: '0',
   },
 };
