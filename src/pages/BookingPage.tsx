@@ -6,8 +6,8 @@ export default function BookingPage() {
     <div className="site-booking-page" style={styles.page}>
       <div className="site-booking-container" style={styles.container}>
         <div className="site-page-header" style={styles.header}>
-          <span style={styles.badge}>🌿 Online Tidsbestilling</span>
-          <h1 className="site-page-title" style={styles.title}>Book Din Healingsession</h1>
+          <span style={styles.badge}>Book behandlinger</span>
+          <h1 className="site-page-title" style={styles.title}>Book din session</h1>
           <p className="site-page-subtitle" style={styles.subtitle}>
             Vælg en dato og et ledigt tidspunkt i kalenderen nedenfor. Når du har indsendt din forespørgsel, modtager du en bekræftelse på e-mail.
           </p>
@@ -22,6 +22,8 @@ export default function BookingPage() {
 const styles: Styles = {
   page: {
     padding: '48px 24px 80px',
+    backgroundColor: '#F3CFB3',
+    minHeight: '100%',
   },
   container: {
     maxWidth: '900px',
@@ -34,23 +36,26 @@ const styles: Styles = {
   badge: {
     display: 'inline-block',
     padding: '6px 14px',
-    backgroundColor: '#D9EDCC',
-    color: '#1E3D14',
-    borderRadius: '20px',
+    backgroundColor: 'rgba(122, 146, 116, 0.12)',
+    color: '#2d4b2d',
+    borderRadius: '0',
     fontSize: '13px',
-    fontWeight: 'bold',
+    fontWeight: '700',
+    letterSpacing: '0.08em',
+    textTransform: 'uppercase',
     marginBottom: '14px',
   },
   title: {
     fontFamily: 'Georgia, serif',
-    fontSize: '38px',
-    color: '#1E3D14',
+    fontSize: 'clamp(2.2rem, 5vw, 3.5rem)',
+    color: '#1f2c22',
     margin: '0 0 16px 0',
+    letterSpacing: '-0.03em',
   },
   subtitle: {
     fontSize: '17px',
     lineHeight: '1.6',
-    color: '#4A6B35',
+    color: '#4f5f4d',
     margin: '0 auto',
     maxWidth: '650px',
   },

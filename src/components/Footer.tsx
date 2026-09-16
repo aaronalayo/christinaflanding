@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="site-footer-grid" style={styles.grid}>
           {/* Col 1: Brand */}
           <div className="site-footer-column" style={styles.col}>
-            <div style={styles.brandTitle}>🌿 Christina Flanding</div>
+            <div style={styles.brandTitle}>Christina Flanding</div>
             <p style={styles.text}>
               Intuitiv healing, energiterapi og nærvær. Skab ro, balance og fornyet energi i krop og sind.
             </p>
@@ -16,7 +16,7 @@ export default function Footer() {
 
           {/* Col 2: Navigation */}
           <div className="site-footer-column" style={styles.col}>
-            <div style={styles.colTitle}>Hurtige links</div>
+            <div style={styles.colTitle}>Links</div>
             <ul style={styles.list}>
               <li><Link to="/" style={styles.link}>Forside</Link></li>
               <li><Link to="/om-mig" style={styles.link}>Om Christina</Link></li>
@@ -30,12 +30,7 @@ export default function Footer() {
 
           {/* Col 3: Practical */}
           <div className="site-footer-column" style={styles.col}>
-            <div style={styles.colTitle}>Åbningstider & Tider</div>
-            <p style={styles.text}>
-              Mandag – Onsdag: 09:30 – 13:30<br />
-              Torsdag & Fredag: Efter aftale<br />
-              Lørdag & Søndag: Lukket
-            </p>
+            <div style={styles.colTitle}>Åbningstider</div>
             <p style={{ ...styles.text, marginTop: '12px' }}>
               Herstedvesterstræde 41<br />
               Herstedvester Landsby i Albertslund<br />
