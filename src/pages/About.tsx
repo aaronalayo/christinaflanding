@@ -49,7 +49,7 @@ export default function About() {
           </p>
 
           <div style={styles.ctaBox}>
-            <h3 style={{ color: '#1E3D14', margin: '0 0 12px', fontFamily: 'Georgia, serif' }}>
+            <h3 style={{ color: '#1E3D14', margin: '0 0 12px', fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif', fontWeight: 600 }}>
               Vil du opleve en session?
             </h3>
             <p style={{ color: '#4A6B35', margin: '0 0 20px', fontSize: '15px' }}>
@@ -79,16 +79,19 @@ const styles: Styles = {
     marginBottom: '40px',
   },
   title: {
-    fontFamily: 'Georgia, serif',
+    fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
     fontSize: '38px',
     color: '#1E3D14',
     margin: '0 0 16px 0',
+    fontWeight: 600,
+    letterSpacing: '-0.04em',
   },
   subtitle: {
     fontSize: '18px',
     lineHeight: '1.6',
     color: '#4A6B35',
     margin: 0,
+    fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
   },
   photoSlot: {
     width: 'min(100%, 360px)',
@@ -119,16 +122,18 @@ const styles: Styles = {
     boxShadow: '0 2px 12px rgba(40, 52, 36, 0.08)',
   },
   heading: {
-    fontFamily: 'Georgia, serif',
+    fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
     fontSize: '24px',
     color: '#1E3D14',
     margin: '28px 0 14px',
+    fontWeight: 600,
   },
   text: {
     fontSize: '16px',
     lineHeight: '1.8',
     color: '#3D5A2C',
     margin: '0 0 16px',
+    fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
   },
   featureList: {
     display: 'flex',

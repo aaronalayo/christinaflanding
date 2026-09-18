@@ -87,16 +87,19 @@ const styles: Styles = {
     marginBottom: '48px',
   },
   title: {
-    fontFamily: 'Georgia, serif',
+    fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
     fontSize: '38px',
     color: '#1E3D14',
     margin: '0 0 16px 0',
+    fontWeight: 600,
+    letterSpacing: '-0.04em',
   },
   subtitle: {
     fontSize: '18px',
     lineHeight: '1.6',
     color: '#4A6B35',
     margin: 0,
+    fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
   },
   treatmentList: {
     display: 'flex',
@@ -122,10 +125,11 @@ const styles: Styles = {
     flexShrink: 0,
   },
   cardTitle: {
-    fontFamily: 'Georgia, serif',
+    fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
     fontSize: '24px',
     color: '#1E3D14',
     margin: '0 0 8px 0',
+    fontWeight: 600,
   },
   metaRow: {
     display: 'flex',
@@ -145,12 +149,14 @@ const styles: Styles = {
     lineHeight: '1.7',
     color: '#3D5A2C',
     margin: '0 0 20px',
+    fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
   },
   sectionHeading: {
-    fontFamily: 'Georgia, serif',
+    fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
     fontSize: '22px',
     color: '#1E3D14',
     margin: '32px 0 14px',
+    fontWeight: 600,
   },
   pointsBox: {
     backgroundColor: '#EEF6E8',

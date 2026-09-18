@@ -46,7 +46,7 @@ export default function Navbar() {
           type="button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="site-menu-toggle"
-          style={mobileMenuOpen ? { ...styles.mobileMenuToggle, backgroundColor: 'rgba(255,255,255,0.12)' } : styles.mobileMenuToggle}
+          style={mobileMenuOpen ? { ...styles.mobileMenuToggle, backgroundColor: 'transparent', boxShadow: 'none' } : { ...styles.mobileMenuToggle, backgroundColor: 'transparent', boxShadow: 'none' }}
           aria-label="Toggle navigation menu"
         >
           <span className="site-menu-toggle-lines" aria-hidden="true">
@@ -81,21 +81,21 @@ export default function Navbar() {
 
 const styles: Styles = {
   header: {
-    backgroundColor: 'rgba(241, 239, 236, 0.62)',
-    borderBottom: '1.5px solid rgba(197, 222, 184, 0.55)',
-    backdropFilter: 'blur(10px)',
-    WebkitBackdropFilter: 'blur(10px)',
+    backgroundColor: 'rgb(255, 255, 255)',
+    borderBottom: '1px solid rgba(22, 24, 20, 0.06)',
+    backdropFilter: 'blur(18px)',
+    WebkitBackdropFilter: 'blur(18px)',
     position: 'fixed',
     top: 0,
     left: 0,
     width: '100%',
     zIndex: 1000,
-    boxShadow: '0 2px 10px rgba(45,90,27,0.04)',
+    boxShadow: '0 10px 28px rgba(31, 27, 24, 0.03)',
   },
   container: {
     maxWidth: '1100px',
     margin: '0 auto',
-    padding: '16px 24px',
+    padding: '18px 24px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -104,43 +104,47 @@ const styles: Styles = {
     display: 'flex',
     alignItems: 'center',
     textDecoration: 'none',
-    color: '#1E3D14',
+    color: '#1d1d1f',
   },
   brandTitle: {
-    fontFamily: 'Georgia, serif',
+    fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
     fontSize: '20px',
-    fontWeight: 'bold',
-    letterSpacing: '0.3px',
-    color: '#1E3D14',
+    fontWeight: 600,
+    letterSpacing: '0.08em',
+    color: '#1d1d1f',
     textTransform: 'uppercase',
   },
   brandSubtitle: {
-    fontSize: '12px',
-    color: '#5A8048',
-    letterSpacing: '0.5px',
+    fontSize: '11px',
+    color: '#646464',
+    letterSpacing: '0.24em',
     textTransform: 'uppercase',
-    fontWeight: '500',
+    fontWeight: 600,
     float: 'right',
   },
   desktopNav: {
     display: 'flex',
     alignItems: 'center',
-    gap: '24px',
+    gap: '26px',
   },
   navLink: {
     textDecoration: 'none',
-    color: '#3D5A2C',
-    fontSize: '15px',
-    fontWeight: '600',
+    color: '#1d1d1f',
+    fontSize: '12px',
+    fontWeight: 600,
+    letterSpacing: '0.12em',
+    textTransform: 'uppercase',
     position: 'relative',
     paddingBottom: '6px',
     transition: 'color 0.2s ease',
   },
   navLinkActive: {
     textDecoration: 'none',
-    color: '#1E3D14',
-    fontSize: '15px',
-    fontWeight: '600',
+    color: '#1d1d1f',
+    fontSize: '12px',
+    fontWeight: 700,
+    letterSpacing: '0.12em',
+    textTransform: 'uppercase',
     position: 'relative',
     paddingBottom: '6px',
   },
@@ -156,8 +160,9 @@ const styles: Styles = {
     justifyContent: 'center',
     padding: 0,
     cursor: 'pointer',
-    color: '#1E3D14',
+    color: '#1d1d1f',
     transition: 'all 0.2s ease',
+    boxShadow: 'none',
   },
   mobileNav: {
     display: 'flex',
