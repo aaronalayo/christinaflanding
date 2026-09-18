@@ -38,13 +38,13 @@ const styles: Styles = {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-    backgroundColor: '#F3CFB3',
-    fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-    color: '#1E3D14',
+    background: 'linear-gradient(180deg, #f7f3ee 0%, #f3d7c0 100%)',
+    fontFamily: '"Avenir Next", "Avenir", "Montserrat", "Helvetica Neue", "Segoe UI", sans-serif',
+    color: '#1d1d1f',
   },
   mainContent: {
     flex: '1 0 auto',
-    backgroundColor: '#F3CFB3',
+    background: 'linear-gradient(180deg, #f7f3ee 0%, #f3d7c0 100%)',
     paddingTop: '0',
   },
 };

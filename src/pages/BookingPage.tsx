@@ -46,11 +46,12 @@ const styles: Styles = {
     marginBottom: '14px',
   },
   title: {
-    fontFamily: 'Georgia, serif',
+    fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
     fontSize: 'clamp(2.2rem, 5vw, 3.5rem)',
     color: '#1f2c22',
     margin: '0 0 16px 0',
     letterSpacing: '-0.03em',
+    fontWeight: 600,
   },
   subtitle: {
     fontSize: '17px',
@@ -58,6 +59,7 @@ const styles: Styles = {
     color: '#4f5f4d',
     margin: '0 auto',
     maxWidth: '650px',
+    fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
   },
 };
 

@@ -105,10 +105,12 @@ const styles: Styles = {
     marginBottom: '48px',
   },
   title: {
-    fontFamily: 'Georgia, serif',
+    fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
     fontSize: '38px',
     color: '#1E3D14',
     margin: '0 0 16px 0',
+    fontWeight: 600,
+    letterSpacing: '-0.04em',
   },
   subtitle: {
     fontSize: '18px',
@@ -116,6 +118,7 @@ const styles: Styles = {
     color: '#4A6B35',
     margin: '0 auto',
     maxWidth: '650px',
+    fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
   },
   grid: {
     display: 'flex',
@@ -131,10 +134,11 @@ const styles: Styles = {
     boxShadow: '0 2px 12px rgba(40, 52, 36, 0.08)',
   },
   cardHeading: {
-    fontFamily: 'Georgia, serif',
+    fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
     fontSize: '22px',
     color: '#1E3D14',
     margin: '0 0 24px 0',
+    fontWeight: 600,
   },
   infoRow: {
     display: 'flex',
