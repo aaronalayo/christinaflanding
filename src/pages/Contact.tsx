@@ -21,7 +21,7 @@ export default function Contact() {
               <span style={styles.infoIcon}>💌</span>
               <div>
                 <strong style={styles.infoLabel}>E-mail</strong>
-                <a href="mailto:kontakt@christinaflanding.dk" style={styles.infoLink}>
+                <a href="mailto:kontakt@christinaflanding.dk" className="site-contact-info-link" style={styles.infoLink}>
                   kontakt@christinaflanding.dk
                 </a>
               </div>
@@ -31,7 +31,7 @@ export default function Contact() {
               <span style={styles.infoIcon}>📞</span>
               <div>
                 <strong style={styles.infoLabel}>Telefon & SMS</strong>
-                <a href="tel:+4531331332" style={styles.infoLink}>
+                <a href="tel:+4531331332" className="site-contact-info-link" style={styles.infoLink}>
                   31 33 13 32
                 </a>
                 <p style={{ margin: '4px 0 0', fontSize: '13px', color: '#5A8048' }}>

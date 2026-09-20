@@ -3,7 +3,7 @@ import type { Styles } from '../css';
 
 export default function Footer() {
   return (
-    <footer style={styles.footer}>
+    <footer className="site-footer" style={styles.footer}>
       <div className="site-footer-container" style={styles.container}>
         <div className="site-footer-grid" style={styles.grid}>
           {/* Col 1: Brand */}
@@ -18,13 +18,13 @@ export default function Footer() {
           <div className="site-footer-column" style={styles.col}>
             <div style={styles.colTitle}>Links</div>
             <ul style={styles.list}>
-              <li><Link to="/" style={styles.link}>Forside</Link></li>
-              <li><Link to="/om-mig" style={styles.link}>Om Christina</Link></li>
-              <li><Link to="/behandlinger" style={styles.link}>Behandlinger</Link></li>
-              <li><Link to="/booking" style={styles.link}>Book session</Link></li>
-              <li><Link to="/kontakt" style={styles.link}>Kontakt</Link></li>
-              <li><Link to="/privatlivspolitik" style={styles.link}>Privatlivspolitik</Link></li>
-              <li><Link to="/vilkaar" style={styles.link}>Vilkår for booking</Link></li>
+              <li><Link to="/" className="site-footer-link" style={styles.link}>Forside</Link></li>
+              <li><Link to="/om-mig" className="site-footer-link" style={styles.link}>Om Christina</Link></li>
+              <li><Link to="/behandlinger" className="site-footer-link" style={styles.link}>Behandlinger</Link></li>
+              <li><Link to="/booking" className="site-footer-link" style={styles.link}>Book session</Link></li>
+              <li><Link to="/kontakt" className="site-footer-link" style={styles.link}>Kontakt</Link></li>
+              <li><Link to="/privatlivspolitik" className="site-footer-link" style={styles.link}>Privatlivspolitik</Link></li>
+              <li><Link to="/vilkaar" className="site-footer-link" style={styles.link}>Vilkår for booking</Link></li>
             </ul>
           </div>
 
@@ -34,12 +34,24 @@ export default function Footer() {
             <p style={{ ...styles.text, marginTop: '12px' }}>
               Herstedvesterstræde 41<br />
               Herstedvester Landsby i Albertslund<br />
-              Tlf. 31 33 13 32
+              Tlf. <a href="tel:+4531331332" className="site-footer-link" style={styles.link}>31 33 13 32</a>
             </p>
             <div style={{ marginTop: '12px' }}>
-              <Link to="/booking" style={styles.ctaLink}>
+              <Link to="/booking" className="site-footer-link" style={styles.ctaLink}>
                 Find ledig tid her →
               </Link>
+            </div>
+            <div style={{ marginTop: '28px' }}>
+              <div style={styles.colTitle}>Følg med</div>
+              <a
+                href="https://www.instagram.com/christina_kongsmark_flanding_/"
+                className="site-footer-link"
+                style={styles.link}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Instagram
+              </a>
             </div>
           </div>
         </div>
