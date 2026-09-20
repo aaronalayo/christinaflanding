@@ -47,7 +47,8 @@ export default function Navbar() {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="site-menu-toggle"
           style={mobileMenuOpen ? { ...styles.mobileMenuToggle, backgroundColor: 'transparent', boxShadow: 'none' } : { ...styles.mobileMenuToggle, backgroundColor: 'transparent', boxShadow: 'none' }}
-          aria-label="Toggle navigation menu"
+          aria-expanded={mobileMenuOpen}
+          aria-controls="site-mobile-nav"
         >
           <span className="site-menu-toggle-lines" aria-hidden="true">
             <span className={mobileMenuOpen ? 'site-menu-toggle-line site-menu-toggle-line--1 open' : 'site-menu-toggle-line site-menu-toggle-line--1'} />
@@ -59,7 +60,7 @@ export default function Navbar() {
 
       {/* Mobile Nav dropdown */}
       {mobileMenuOpen && (
-        <div className="site-mobile-nav" style={styles.mobileNav}>
+        <div id="site-mobile-nav" className="site-mobile-nav" style={styles.mobileNav}>
           {links.map(link => {
             const isActive = location.pathname === link.to;
             return (
