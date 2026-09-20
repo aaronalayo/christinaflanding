@@ -116,6 +116,30 @@ a[href]:not(.nav-link):hover {
   outline-offset: 4px;
 }
 
+.site-footer-link:hover,
+.site-footer-link:focus-visible {
+  color: #7FAD65 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.site-footer,
+.site-footer * {
+  color: #FFFFFF !important;
+}
+
+.site-footer .site-footer-link:hover,
+.site-footer .site-footer-link:focus-visible {
+  color: #7FAD65 !important;
+}
+
+.site-contact-info-link:hover,
+.site-contact-info-link:focus-visible {
+  color: #7FAD65 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
 @keyframes heroFadeUp {
   0% {
     opacity: 0;

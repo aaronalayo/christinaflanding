@@ -47,6 +47,7 @@ export default function Navbar() {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="site-menu-toggle"
           style={mobileMenuOpen ? { ...styles.mobileMenuToggle, backgroundColor: 'transparent', boxShadow: 'none' } : { ...styles.mobileMenuToggle, backgroundColor: 'transparent', boxShadow: 'none' }}
+          aria-label="Toggle navigation menu"
           aria-expanded={mobileMenuOpen}
           aria-controls="site-mobile-nav"
         >
