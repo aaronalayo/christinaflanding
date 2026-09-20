@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { Styles } from '../css';
-import heroBackground from '../assets/forside_foto.jpeg';
+import heroBackground from '../assets/forside_foto_2.png';
 
 export default function Home() {
   return (
@@ -30,29 +30,26 @@ export default function Home() {
           </div>
 
           <div className="site-grid" style={styles.grid}>
-            <div className="site-feature-card" style={styles.card}>
+            <Link to="/behandlinger" className="site-feature-card" style={styles.card}>
               <h3 style={styles.cardTitle}>Reiki</h3>
               <p style={styles.cardText}>
                 En blid behandling, hvor livsenergi flyder gennem dig, så du kan finde ro og balance.
               </p>
-              <Link to="/behandlinger" style={styles.cardLink}>Læs mere →</Link>
-            </div>
+            </Link>
 
-            <div className="site-feature-card" style={styles.card}>
+            <Link to="/om-mig" className="site-feature-card" style={styles.card}>
               <h3 style={styles.cardTitle}>Min Kunst</h3>
               <p style={styles.cardText}>
                 Kreative praksisser, kunstnerisk nærvær og udtryk, der kan gøre plads til forandring og ro.
               </p>
-              <Link to="/om-mig" style={styles.cardLink}>Læs om Christina →</Link>
-            </div>
+            </Link>
 
-            <div className="site-feature-card" style={styles.card}>
+            <Link to="/booking" className="site-feature-card" style={styles.card}>
               <h3 style={styles.cardTitle}>Uld Arbejde</h3>
               <p style={styles.cardText}>
                 Tænkning, materialitet og naturens værdi i et roligt og jordet hverdagsrum.
               </p>
-              <Link to="/booking" style={styles.cardLink}>Læs mere →</Link>
-            </div>
+            </Link>
           </div>
         </div>
       </section>
@@ -177,6 +174,7 @@ const styles: Styles = {
     justifyContent: 'center',
   },
   card: {
+    display: 'block',
     flex: '1 1 260px',
     maxWidth: '300px',
     background: 'rgba(255, 255, 255, 0.5)',
@@ -184,8 +182,10 @@ const styles: Styles = {
     borderRadius: '0',
     padding: '28px 24px',
     textAlign: 'center',
-    boxShadow: '0 8px 28px rgba(37, 35, 33, 0.06)',
-    transform: 'translateY(0)',
+    color: 'inherit',
+    textDecoration: 'none',
+    cursor: 'pointer',
+    transition: 'transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
   },
   cardTitle: {
     fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
@@ -200,12 +200,6 @@ const styles: Styles = {
     lineHeight: '1.65',
     color: '#4d4d4d',
     marginBottom: '18px',
-  },
-  cardLink: {
-    color: '#1d1d1f',
-    textDecoration: 'none',
-    fontWeight: 600,
-    fontSize: '14px',
   },
 };
 

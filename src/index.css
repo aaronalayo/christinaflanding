@@ -91,12 +91,29 @@ a[href]:not(.nav-link):hover {
 }
 
 .site-hero-buttons a:hover,
+.site-feature-card:hover,
 .site-content-card a:hover,
 .site-contact-card a:hover,
 .site-booking-page a:hover,
 .site-content-page a:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 22px rgba(9, 10, 9, 0.18);
+}
+
+.site-feature-card:hover {
+  transform: translateY(-2px);
+  background-color: rgba(255, 255, 255, 0.72) !important;
+  box-shadow: 0 10px 22px rgba(9, 10, 9, 0.16) !important;
+}
+
+.site-feature-card {
+  transform: translateY(0);
+  box-shadow: 0 8px 28px rgba(37, 35, 33, 0.06);
+}
+
+.site-feature-card:focus-visible {
+  outline: 2px solid #1e3d14;
+  outline-offset: 4px;
 }
 
 @keyframes heroFadeUp {
