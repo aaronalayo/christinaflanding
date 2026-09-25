@@ -31,21 +31,21 @@ export default function Home() {
 
           <div className="site-grid" style={styles.grid}>
             <Link to="/behandlinger" className="site-feature-card" style={styles.card}>
-              <h3 style={styles.cardTitle}>Reiki</h3>
+              <h3 style={styles.cardTitle}>Reiki Healing</h3>
               <p style={styles.cardText}>
                 En blid behandling, hvor livsenergi flyder gennem dig, så du kan finde ro og balance.
               </p>
             </Link>
 
-            <Link to="/om-mig" className="site-feature-card" style={styles.card}>
+            <Link to="/kunst" className="site-feature-card" style={styles.card}>
               <h3 style={styles.cardTitle}>Min Kunst</h3>
               <p style={styles.cardText}>
                 Kreative praksisser, kunstnerisk nærvær og udtryk, der kan gøre plads til forandring og ro.
               </p>
             </Link>
 
-            <Link to="/booking" className="site-feature-card" style={styles.card}>
-              <h3 style={styles.cardTitle}>Uld Arbejde</h3>
+            <Link to="/uld" className="site-feature-card" style={styles.card}>
+              <h3 style={styles.cardTitle}>Filtning i Uld</h3>
               <p style={styles.cardText}>
                 Tænkning, materialitet og naturens værdi i et roligt og jordet hverdagsrum.
               </p>
@@ -189,10 +189,11 @@ const styles: Styles = {
   },
   cardTitle: {
     fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
+    textTransform: 'uppercase',
     fontSize: '22px',
     color: '#1d1d1f',
     margin: '0 0 12px 0',
-    letterSpacing: '-0.04em',
+    letterSpacing: '-0.02em',
     fontWeight: 600,
   },
   cardText: {

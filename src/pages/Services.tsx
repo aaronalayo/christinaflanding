@@ -17,7 +17,7 @@ export default function Services() {
 
         <div style={styles.treatmentList}>
           <div className="site-treatment-card" style={styles.treatmentCard}>
-            <h2 className="site-treatment-title" style={styles.cardTitle}>Om reiki</h2>
+            <h2 className="site-treatment-title" style={styles.cardTitle}>Om Reiki</h2>
             <p style={styles.desc}>
               Reiki kan hjælpe dig, som har tankemylder, stresssymptomer, uro og andre lignende udfordringer. Eller bare til dig, som vil give dig selv en helt afstressende oplevelse.
             </p>
@@ -52,11 +52,11 @@ export default function Services() {
             <p style={styles.desc}>Jeg har tavshedspligt.</p>
 
             <div style={styles.practicalBox}>
-              <h3 style={styles.sectionHeading}>Praktisk</h3>
+              <h3 style={styles.sectionHeading}>Priser for Behandlinger</h3>
               <ul style={styles.priceList}>
                 <li style={styles.priceItem}><strong>Reiki 60 min:</strong> 400 kr.</li>
                 <li style={styles.priceItem}>Inkl. samtale, healing og snak som afslutning på behandlingen.</li>
-                <li style={styles.priceItem}><strong>3 x klippekort Reiki:</strong> 1.100 kr.</li>
+                <li style={styles.priceItem}><strong>3 x klippekort Reiki:</strong> 1.050 kr.</li>
                 <li style={styles.priceItem}>Et forløb anbefales for at komme i dybden med behandlingen.</li>
                 <li style={styles.priceItem}>Du kan betale med MobilePay.</li>
               </ul>
@@ -155,7 +155,7 @@ const styles: Styles = {
     fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
     fontSize: '22px',
     color: '#1E3D14',
-    margin: '32px 0 14px',
+    margin: '12px 0 14px',
     fontWeight: 600,
   },
   pointsBox: {
@@ -178,7 +178,7 @@ const styles: Styles = {
   },
   bookBtn: {
     display: 'inline-block',
-    backgroundColor: '#E9D8C5',
+    backgroundColor: '#ffffff',
     color: '#182A1A',
     padding: '14px 26px',
     borderRadius: '0',
@@ -187,13 +187,13 @@ const styles: Styles = {
     fontSize: '14px',
     letterSpacing: '0.05em',
     textTransform: 'uppercase',
-    border: '1px solid rgba(30, 61, 20, 0.25)',
+    // border: '1px solid rgb(249, 249, 249)',
     boxShadow: '0 6px 18px rgba(9, 10, 9, 0.12)',
     transition: 'transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
   },
   practicalBox: {
     backgroundColor: 'rgba(247, 243, 239, 0.78)',
-    padding: '28px 32px',
+    padding: '14px 26px',
     borderRadius: '0',
     border: '0',
   },

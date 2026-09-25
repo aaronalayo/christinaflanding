@@ -6,8 +6,8 @@ export default function BookingPage() {
     <div className="site-booking-page" style={styles.page}>
       <div className="site-booking-container" style={styles.container}>
         <div className="site-page-header" style={styles.header}>
-          <span style={styles.badge}>Book behandlinger</span>
-          <h1 className="site-page-title" style={styles.title}>Book din session</h1>
+          {/* <span style={styles.badge}>Book behandlinger</span> */}
+          <h1 className="site-page-title" style={styles.title}>Book behandling</h1>
           <p className="site-page-subtitle" style={styles.subtitle}>
             Vælg en dato og et ledigt tidspunkt i kalenderen nedenfor. Når du har indsendt din forespørgsel, modtager du en bekræftelse på e-mail.
           </p>
@@ -47,11 +47,14 @@ const styles: Styles = {
   },
   title: {
     fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
-    fontSize: 'clamp(2.2rem, 5vw, 3.5rem)',
+    fontSize: 'clamp(2rem, 4vw, 2.5rem)',
+    textTransform: 'uppercase',
     color: '#1f2c22',
     margin: '0 0 16px 0',
-    letterSpacing: '-0.03em',
     fontWeight: 600,
+    lineHeight: '0.96',
+    letterSpacing: '0.08em',
+    textShadow: '0 10px 35px rgba(12, 12, 12, 0.28)',
   },
   subtitle: {
     fontSize: '17px',
