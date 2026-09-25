@@ -55,8 +55,8 @@ Sanity-projektet skal oprettes af Christina med hendes egen e-mail. GitHub-repos
 
 1. Christina opretter en konto på [sanity.io](https://www.sanity.io/) og opretter projektet under sin organisation.
 2. Hun inviterer udvikleren som `Developer` eller `Administrator` under projektets medlemmer. Christina beholder selv ejerskabet.
-3. Opret et Sanity Studio i en mappe i dette repository med `npm create sanity@latest`, vælg det eksisterende projekt og datasættet `production`.
-4. Registrer schemaet i `sanity/schema.artwork.ts` i Studioets schema-index, og deploy Studioet med `npx sanity deploy`.
+3. Studioet ligger i `sanity-studio/` og er koblet til Christina Flanding-projektet og datasættet `production`.
+4. Artwork-schemaet er registreret i `sanity-studio/schemaTypes/artwork.ts`. Kør `cd sanity-studio && npm run dev` lokalt eller `cd sanity-studio && npx sanity deploy` for at udgive Studioet.
 5. Tilføj `VITE_SANITY_PROJECT_ID` og `VITE_SANITY_DATASET` lokalt i `.env.local`. De samme to værdier skal sættes som almindelige environment variables i Cloudflare Pages.
 
 Christina kan derefter logge ind på det deployede Studio og oprette, ændre eller slette `Artwork`-dokumenter. Vælg `Kunst` eller `Uld` som kategori; dokumenterne vises automatisk på `/kunst` og `/uld`.

@@ -26,7 +26,16 @@ html, body {
 
 .site-content-page,
 .site-booking-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
   background-color: #F3CFB3;
+}
+
+.site-content-container,
+.site-booking-container {
+  width: min(100%, 1100px);
+  margin: 0 auto;
 }
 
 a {

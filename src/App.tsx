@@ -47,7 +47,10 @@ const styles: Styles = {
   },
   mainContent: {
     flex: '1 0 auto',
+    width: '100%',
     background: 'linear-gradient(180deg, #f7f3ee 0%, #f3d7c0 100%)',
     paddingTop: '0',
+    display: 'flex',
+    justifyContent: 'center',
   },
 };
