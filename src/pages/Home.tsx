@@ -67,7 +67,7 @@ const styles: Styles = {
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    minHeight: '560px',
+    minHeight: '980px',
     padding: '72px 24px 88px',
     borderBottom: '1px solid rgba(31, 31, 31, 0.08)',
     position: 'relative',

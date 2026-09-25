@@ -45,12 +45,11 @@ const styles: Styles = {
     fontFamily: '"Avenir Next", "Avenir", "Montserrat", "Helvetica Neue", "Segoe UI", sans-serif',
     color: '#1d1d1f',
   },
-  mainContent: {
+   mainContent: {
     flex: '1 0 auto',
     width: '100%',
     background: 'linear-gradient(180deg, #f7f3ee 0%, #f3d7c0 100%)',
     paddingTop: '0',
-    display: 'flex',
-    justifyContent: 'center',
+    display: 'block', /* Changed from flex to block so pages can fill 100% width */
   },
 };
