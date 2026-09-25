@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { Styles } from '../css';
-import christinaPhoto from '../assets/foto-portrait.jpeg';
+import christinaPhoto from '../assets/christina_portrait.jpeg';
 
 export default function About() {
   return (
@@ -172,7 +172,7 @@ const styles: Styles = {
     fontSize: '14px',
     letterSpacing: '0.05em',
     textTransform: 'uppercase',
-    border: '1px solid rgba(30, 61, 20, 0.25)',
+    border: '0',
     boxShadow: '0 6px 18px rgba(9, 10, 9, 0.12)',
     transition: 'transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
     cursor: 'pointer',

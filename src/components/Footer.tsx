@@ -33,7 +33,7 @@ export default function Footer() {
             <div style={styles.colTitle}>Åbningstider</div>
             <p style={{ ...styles.text, marginTop: '12px' }}>
               Herstedvesterstræde 41<br />
-              Herstedvester Landsby i Albertslund<br />
+              2620 Albertslund<br />
               Tlf. <a href="tel:+4531331332" className="site-footer-link" style={styles.link}>31 33 13 32</a>
             </p>
             <div style={{ marginTop: '12px' }}>
