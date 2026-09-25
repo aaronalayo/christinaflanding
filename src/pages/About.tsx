@@ -163,7 +163,7 @@ const styles: Styles = {
   },
   ctaBtn: {
     display: 'inline-block',
-    backgroundColor: '#E9D8C5',
+    backgroundColor: '#ffffff',
     color: '#182A1A',
     padding: '14px 26px',
     borderRadius: '0',
