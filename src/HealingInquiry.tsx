@@ -214,8 +214,8 @@ export default function HealingInquiry() {
   return (
     <div className="booking-shell" style={s.container}>
       <div style={{ textAlign: 'center', marginBottom: '28px' }}>
-        <h2 style={s.heading}>🌿 Book en Healingsession 🌿</h2>
-        <p style={s.subheading}>Vælg dag, dato og tidspunkt — og udfyld dine oplysninger.</p>
+        {/* <h2 style={s.heading}>🌿 Book en Healingsession 🌿</h2> */}
+        <h2 style={s.subheading}>Vælg dag, dato og tidspunkt — og udfyld dine oplysninger.</h2>
       </div>
 
       {/* ── Step 1: pick day ── */}

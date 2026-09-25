@@ -149,6 +149,7 @@ const styles: Styles = {
   infoIcon: {
     fontSize: '24px',
     flexShrink: 0,
+    color: '#1E3D14 !important',
   },
   infoLabel: {
     display: 'block',
@@ -167,19 +168,18 @@ const styles: Styles = {
   },
   bookBtn: {
     display: 'inline-block',
-    backgroundColor: '#E9D8C5',
+    backgroundColor: '#ffffff',
     color: '#182A1A',
-    padding: '14px 28px',
+    padding: '14px 26px',
     borderRadius: '0',
     textDecoration: 'none',
     fontWeight: '600',
     fontSize: '14px',
     letterSpacing: '0.05em',
     textTransform: 'uppercase',
-    border: '1px solid rgba(30, 61, 20, 0.25)',
+    // border: '1px solid rgb(249, 249, 249)',
     boxShadow: '0 6px 18px rgba(9, 10, 9, 0.12)',
     transition: 'transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
-    cursor: 'pointer',
   },
 };
 

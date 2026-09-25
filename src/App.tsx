@@ -9,6 +9,7 @@ import BookingPage from './pages/BookingPage';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import Terms from './pages/Terms';
+import ArtworkPage from './pages/ArtworkPage';
 
 export default function App() {
   return (
@@ -20,6 +21,8 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/om-mig" element={<About />} />
             <Route path="/behandlinger" element={<Services />} />
+            <Route path="/kunst" element={<ArtworkPage category="kunst" title="MIN KUNST" subtitle="Billedkunst, nærvær og materialer fra Christinas kreative praksis." />} />
+            <Route path="/uld" element={<ArtworkPage category="uld" title="ULD" subtitle="Filtning, fibre og håndlavede værker med naturen som medspiller." />} />
             <Route path="/booking" element={<BookingPage />} />
             <Route path="/kontakt" element={<Contact />} />
             <Route path="/privatlivspolitik" element={<PrivacyPolicy />} />
