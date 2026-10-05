@@ -55,7 +55,7 @@ export default function Navbar() {
         >
           <span className="site-menu-toggle-lines" aria-hidden="true">
             <span className={mobileMenuOpen ? 'site-menu-toggle-line site-menu-toggle-line--1 open' : 'site-menu-toggle-line site-menu-toggle-line--1'} />
-            <span className={mobileMenuOpen ? 'site-menu-toggle-line site-menu-toggle-line--2 open' : 'site-menu-toggle-line site-menu-toggle-line--2'} />
+            {/* <span className={mobileMenuOpen ? 'site-menu-toggle-line site-menu-toggle-line--2 open' : 'site-menu-toggle-line site-menu-toggle-line--2'} /> */}
             <span className={mobileMenuOpen ? 'site-menu-toggle-line site-menu-toggle-line--3 open' : 'site-menu-toggle-line site-menu-toggle-line--3'} />
           </span>
         </button>

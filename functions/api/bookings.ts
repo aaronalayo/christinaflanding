@@ -15,6 +15,7 @@ interface BookingRequest {
   phone?: string;
   booking_date?: string;
   booking_time?: string;
+  status?: 'confirmed' | 'pending';
 }
 
 type PagesContext = { env: Env; request: Request };
@@ -51,7 +52,7 @@ export async function onRequestGet({ env }: PagesContext): Promise<Response> {
 export async function onRequestPost({ request, env }: PagesContext): Promise<Response> {
   try {
     const data = await request.json() as BookingRequest;
-    const { name, email, phone, booking_date, booking_time } = data;
+    const { name, email, phone, booking_date, booking_time, status } = data;
 
     if (!name || !email || !phone || !booking_date || !booking_time) {
       return Response.json({
@@ -65,6 +66,7 @@ export async function onRequestPost({ request, env }: PagesContext): Promise<Res
     const normalizedPhone = phone.trim();
     const normalizedDate = booking_date.trim();
     const normalizedTime = booking_time.trim();
+    const normalizedStatus = status === 'pending' ? 'pending' : 'confirmed';
 
     if (normalizedName.length > 120 || normalizedEmail.length > 254 || normalizedPhone.length > 40 || normalizedDate.length !== 10 || normalizedTime.length > 40) {
       return Response.json({ success: false, error: "Et eller flere felter er for lange." }, { status: 400 });
@@ -104,8 +106,8 @@ export async function onRequestPost({ request, env }: PagesContext): Promise<Res
     }
 
     await env.DB.prepare(
-      "INSERT INTO bookings (name, email, phone, booking_date, booking_time) VALUES (?, ?, ?, ?, ?)"
-    ).bind(normalizedName, normalizedEmail, normalizedPhone, normalizedDate, normalizedTime).run();
+      "INSERT INTO bookings (name, email, phone, booking_date, booking_time, status) VALUES (?, ?, ?, ?, ?, ?)"
+    ).bind(normalizedName, normalizedEmail, normalizedPhone, normalizedDate, normalizedTime, normalizedStatus).run();
 
 
     // 2. Send emails via Resend API (if configured in Cloudflare environment variables)
@@ -126,7 +128,9 @@ export async function onRequestPost({ request, env }: PagesContext): Promise<Res
           <h2 style="color: #1E3D14; margin-top: 0;">🌿 Tak for din booking hos Christina Flanding</h2>
           <p style="font-size: 16px; line-height: 1.6;">Kære ${escapeHtml(normalizedName)},</p>
           <p style="font-size: 15px; line-height: 1.6; color: #4A6B35;">
-            Vi har modtaget din forespørgsel på en healingsession. Her er detaljerne for din reservation:
+            ${normalizedStatus === 'pending'
+              ? 'Vi har modtaget din forespørgsel på en healingsession. Vores team vil bekræfte din tid, før den er endeligt booket.'
+              : 'Vi har modtaget din forespørgsel på en healingsession. Her er detaljerne for din reservation:'}
           </p>
 
           <div style="background-color: #EEF6E8; border-left: 4px solid #3D6B2C; padding: 14px 18px; margin: 20px 0; border-radius: 6px;">
@@ -136,7 +140,7 @@ export async function onRequestPost({ request, env }: PagesContext): Promise<Res
           </div>
 
           <p style="font-size: 14px; line-height: 1.6; color: #4A6B35;">
-            Christina gennemgår din tid og kontakter dig snarest for at bekræfte de praktiske detaljer.
+            Vores team gennemgår din forespørgsel og kontakter dig snarest for at bekræfte de praktiske detaljer.
           </p>
           <p style="font-size: 14px; line-height: 1.6; color: #4A6B35;">
             Hvis du har spørgsmål forinden, kan du besvare denne e-mail direkte.
