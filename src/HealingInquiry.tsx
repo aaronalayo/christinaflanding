@@ -25,6 +25,7 @@ type Booking = {
   phone: string;
   booking_date: string;
   booking_time: string;
+  status?: 'confirmed' | 'pending';
   displayDate: string;
 };
 
@@ -131,7 +132,12 @@ export default function HealingInquiry() {
       phone:        String(formData.get('phone') || ''),
       booking_date: dateKey(selectedDate),
       booking_time: selectedTime,
+      status: selectedDay.efterAftale ? 'pending' as const : 'confirmed' as const,
     };
+
+    if (selectedDay.efterAftale) {
+      alert('Vigtigt: Din forespørgsel skal bekræftes af vores team, før din tid er endeligt booket.');
+    }
 
     setSubmitting(true);
 
@@ -181,7 +187,11 @@ export default function HealingInquiry() {
         </h3>
         <p style={{ color: '#4A6B35', lineHeight: '1.6', margin: '0 0 16px' }}>
           Tak for din reservation, <strong>{submittedBooking.name}</strong>.<br />
-          Vi glæder os til at byde dig velkommen:
+          {submittedBooking.status === 'pending' ? (
+            'Din forespørgsel er registreret og vil blive bekræftet af vores team, før den er endeligt booket.'
+          ) : (
+            'Vi glæder os til at byde dig velkommen:'
+          )}
         </p>
 
         {/* Confirmed booking card */}
@@ -251,9 +261,16 @@ export default function HealingInquiry() {
 
       {/* ── Booking summary ── */}
       {selectedDay && selectedDate && selectedTime && (
-        <div style={s.summary}>
-          ✅ <strong>{selectedDay.day} {fmtDate(selectedDate)}</strong> — <strong>{selectedTime}</strong>
-        </div>
+        <>
+          <div style={s.summary}>
+            ✅ <strong>{selectedDay.day} {fmtDate(selectedDate)}</strong> — <strong>{selectedTime}</strong>
+          </div>
+          {selectedDay.efterAftale && (
+            <div style={{ ...s.privacyNote, marginTop: '10px', borderLeft: '3px solid #7FAD65' }}>
+              Vigtigt: Denne forespørgsel skal bekræftes af vores team, før din tid er endeligt booket.
+            </div>
+          )}
+        </>
       )}
 
       {/* ── Step 4: form ── */}
@@ -415,63 +432,54 @@ function TimePicker({ entry, selectedDate, selectedTime, onSelect, isSlotBooked 
   onSelect: (time: string) => void;
   isSlotBooked: (date: Date | null, time: string) => boolean;
 }) {
-  if (entry.efterAftale) {
-    return (
-      <div style={{ marginBottom: '22px' }}>
+  return (
+    <div style={{ marginBottom: '22px' }}>
+      {entry.efterAftale && (
         <div style={s.efterAftaleBox}>
           <span style={{ fontSize: '18px' }}>🌿</span>
           <div>
             <strong style={{ color: '#1E3D14' }}>{entry.day}: Efter aftale</strong>
             <p style={{ margin: '4px 0 0', fontSize: '12px', color: '#4A6B35' }}>
-              Skriv dit ønskede tidspunkt — vi aftaler nærmere.
+              Vigtigt: Vælg et af nedenstående tidspunkter. Vores team bekræfter den endelige tid.
             </p>
           </div>
         </div>
-        <input
-          type="text"
-          placeholder="F.eks. 10:00 eller omkring middag"
-          style={{ ...s.input, marginTop: '8px' }}
-          value={selectedTime}
-          onChange={e => onSelect(e.target.value)}
-        />
-      </div>
-    );
-  }
+      )}
 
-  return (
-    <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginBottom: '22px' }}>
-      {SLOTS.map(slot => {
-        const active = selectedTime === slot;
-        const booked = isSlotBooked(selectedDate, slot);
+      <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: entry.efterAftale ? '12px' : '0' }}>
+        {SLOTS.map(slot => {
+          const active = selectedTime === slot;
+          const booked = isSlotBooked(selectedDate, slot);
 
-        if (booked) {
+          if (booked) {
+            return (
+              <button
+                key={slot}
+                type="button"
+                disabled
+                style={sc.timeBtnBooked}
+                title="Dette tidspunkt er optaget"
+              >
+                <s>{slot}</s>
+                <span style={{ display: 'block', fontSize: '10px', fontWeight: 'bold', color: '#888' }}>
+                  Optaget
+                </span>
+              </button>
+            );
+          }
+
           return (
             <button
               key={slot}
               type="button"
-              disabled
-              style={sc.timeBtnBooked}
-              title="Dette tidspunkt er optaget"
+              onClick={() => onSelect(slot)}
+              style={active ? sc.timeBtnActive : sc.timeBtn}
             >
-              <s>{slot}</s>
-              <span style={{ display: 'block', fontSize: '10px', fontWeight: 'bold', color: '#888' }}>
-                Optaget
-              </span>
+              {slot}
             </button>
           );
-        }
-
-        return (
-          <button
-            key={slot}
-            type="button"
-            onClick={() => onSelect(slot)}
-            style={active ? sc.timeBtnActive : sc.timeBtn}
-          >
-            {slot}
-          </button>
-        );
-      })}
+        })}
+      </div>
     </div>
   );
 }

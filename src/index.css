@@ -203,7 +203,7 @@ a[href]:not(.nav-link):hover {
   .site-menu-toggle-lines {
     position: relative;
     width: 20px;
-    height: 16px;
+    height: 12px;
     display: block;
   }
   .site-menu-toggle-line {
