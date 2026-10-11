@@ -1,7 +1,11 @@
 import HealingInquiry from '../HealingInquiry';
 import type { Styles } from '../css';
+import { useSearchParams } from 'react-router-dom';
 
 export default function BookingPage() {
+  const [searchParams] = useSearchParams();
+  const serviceType = searchParams.get('service')?.trim() || 'Healingsession';
+
   return (
     <div className="site-booking-page" style={styles.page}>
       <div className="site-booking-container" style={styles.container}>
@@ -9,11 +13,11 @@ export default function BookingPage() {
           {/* <span style={styles.badge}>Book behandlinger</span> */}
           <h1 className="site-page-title" style={styles.title}>Book behandling</h1>
           <p className="site-page-subtitle" style={styles.subtitle}>
-            Vælg en dato og et ledigt tidspunkt i kalenderen nedenfor. Når du har indsendt din forespørgsel, modtager du en bekræftelse på e-mail.
+            Booking vedrørende: <strong>{serviceType}</strong>. Vælg en dato og et ledigt tidspunkt i kalenderen nedenfor. Når du har indsendt din forespørgsel, modtager du en bekræftelse på e-mail.
           </p>
         </div>
 
-        <HealingInquiry />
+        <HealingInquiry serviceType={serviceType} />
       </div>
     </div>
   );
@@ -65,4 +69,3 @@ const styles: Styles = {
     fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
   },
 };
-

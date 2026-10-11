@@ -13,6 +13,7 @@ interface BookingRequest {
   name?: string;
   email?: string;
   phone?: string;
+  service_type?: string;
   booking_date?: string;
   booking_time?: string;
   status?: 'confirmed' | 'pending';
@@ -52,7 +53,7 @@ export async function onRequestGet({ env }: PagesContext): Promise<Response> {
 export async function onRequestPost({ request, env }: PagesContext): Promise<Response> {
   try {
     const data = await request.json() as BookingRequest;
-    const { name, email, phone, booking_date, booking_time, status } = data;
+    const { name, email, phone, service_type, booking_date, booking_time, status } = data;
 
     if (!name || !email || !phone || !booking_date || !booking_time) {
       return Response.json({
@@ -61,14 +62,19 @@ export async function onRequestPost({ request, env }: PagesContext): Promise<Res
       }, { status: 400 });
     }
 
+    if (service_type !== undefined && typeof service_type !== 'string') {
+      return Response.json({ success: false, error: "Vælg venligst en gyldig behandling." }, { status: 400 });
+    }
+
     const normalizedName = name.trim();
     const normalizedEmail = email.trim().toLowerCase();
     const normalizedPhone = phone.trim();
+    const normalizedServiceType = service_type?.trim() || 'Healingsession';
     const normalizedDate = booking_date.trim();
     const normalizedTime = booking_time.trim();
     const normalizedStatus = status === 'pending' ? 'pending' : 'confirmed';
 
-    if (normalizedName.length > 120 || normalizedEmail.length > 254 || normalizedPhone.length > 40 || normalizedDate.length !== 10 || normalizedTime.length > 40) {
+    if (normalizedName.length > 120 || normalizedEmail.length > 254 || normalizedPhone.length > 40 || normalizedServiceType.length > 120 || normalizedDate.length !== 10 || normalizedTime.length > 40) {
       return Response.json({ success: false, error: "Et eller flere felter er for lange." }, { status: 400 });
     }
 
@@ -106,8 +112,8 @@ export async function onRequestPost({ request, env }: PagesContext): Promise<Res
     }
 
     await env.DB.prepare(
-      "INSERT INTO bookings (name, email, phone, booking_date, booking_time, status) VALUES (?, ?, ?, ?, ?, ?)"
-    ).bind(normalizedName, normalizedEmail, normalizedPhone, normalizedDate, normalizedTime, normalizedStatus).run();
+      "INSERT INTO bookings (name, email, phone, service_type, booking_date, booking_time, status) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    ).bind(normalizedName, normalizedEmail, normalizedPhone, normalizedServiceType, normalizedDate, normalizedTime, normalizedStatus).run();
 
 
     // 2. Send emails via Resend API (if configured in Cloudflare environment variables)
@@ -129,11 +135,12 @@ export async function onRequestPost({ request, env }: PagesContext): Promise<Res
           <p style="font-size: 16px; line-height: 1.6;">Kære ${escapeHtml(normalizedName)},</p>
           <p style="font-size: 15px; line-height: 1.6; color: #4A6B35;">
             ${normalizedStatus === 'pending'
-              ? 'Vi har modtaget din forespørgsel på en healingsession. Vores team vil bekræfte din tid, før den er endeligt booket.'
-              : 'Vi har modtaget din forespørgsel på en healingsession. Her er detaljerne for din reservation:'}
+              ? 'Vi har modtaget din forespørgsel på ' + escapeHtml(normalizedServiceType) + '. Vores team vil bekræfte din tid, før den er endeligt booket.'
+              : 'Vi har modtaget din forespørgsel på ' + escapeHtml(normalizedServiceType) + '. Her er detaljerne for din reservation:'}
           </p>
 
           <div style="background-color: #EEF6E8; border-left: 4px solid #3D6B2C; padding: 14px 18px; margin: 20px 0; border-radius: 6px;">
+            <p style="margin: 6px 0;"><strong>💆 Behandling:</strong> ${escapeHtml(normalizedServiceType)}</p>
             <p style="margin: 6px 0;"><strong>📅 Dato:</strong> ${escapeHtml(normalizedDate)}</p>
             <p style="margin: 6px 0;"><strong>⏰ Tidspunkt:</strong> ${escapeHtml(normalizedTime)}</p>
             <p style="margin: 6px 0;"><strong>📞 Dit telefonnummer:</strong> ${escapeHtml(normalizedPhone)}</p>
@@ -164,7 +171,7 @@ export async function onRequestPost({ request, env }: PagesContext): Promise<Res
           body: JSON.stringify({
             from: senderEmail,
             to: [normalizedEmail],
-            subject: `Bekræftelse på din healingsession (${normalizedDate} kl. ${normalizedTime})`,
+            subject: `Bekræftelse på ${normalizedServiceType} (${normalizedDate} kl. ${normalizedTime})`,
             html: clientHtml
           })
         });
@@ -182,12 +189,13 @@ export async function onRequestPost({ request, env }: PagesContext): Promise<Res
       if (healerEmail) {
         const healerHtml = `
           <div style="font-family: sans-serif; max-width: 560px; padding: 20px; color: #1E3D14;">
-            <h2 style="color: #2D5A1B;">✨ Ny Healingsession Booking</h2>
+            <h2 style="color: #2D5A1B;">✨ Ny booking: ${escapeHtml(normalizedServiceType)}</h2>
             <p>Du har modtaget en ny booking via din hjemmeside:</p>
             <ul>
               <li><strong>Navn:</strong> ${escapeHtml(normalizedName)}</li>
               <li><strong>E-mail:</strong> <a href="mailto:${escapeHtml(normalizedEmail)}">${escapeHtml(normalizedEmail)}</a></li>
               <li><strong>Telefon:</strong> <a href="tel:${escapeHtml(normalizedPhone)}">${escapeHtml(normalizedPhone)}</a></li>
+              <li><strong>Behandling:</strong> ${escapeHtml(normalizedServiceType)}</li>
               <li><strong>Dato:</strong> ${escapeHtml(normalizedDate)}</li>
               <li><strong>Tidspunkt:</strong> ${escapeHtml(normalizedTime)}</li>
             </ul>
@@ -204,7 +212,7 @@ export async function onRequestPost({ request, env }: PagesContext): Promise<Res
             body: JSON.stringify({
               from: senderEmail,
               to: [healerEmail],
-              subject: `✨ Ny booking: ${normalizedName} (${normalizedDate} kl. ${normalizedTime})`,
+              subject: `✨ Ny booking: ${normalizedServiceType} - ${normalizedName} (${normalizedDate} kl. ${normalizedTime})`,
               html: healerHtml
             })
           });
@@ -243,4 +251,3 @@ function escapeHtml(str: string | undefined): string {
 function getErrorMessage(err: unknown): string {
   return err instanceof Error ? err.message : 'Ukendt serverfejl';
 }
-

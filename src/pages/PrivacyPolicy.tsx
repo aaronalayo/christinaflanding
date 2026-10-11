@@ -27,8 +27,8 @@ function LegalPage({ title, intro, children }: { title: string; intro: string; c
 }
 
 const styles: Styles = {
-  page: { padding: '56px 24px 80px' },
-  container: { maxWidth: '800px', margin: '0 auto', backgroundColor: '#F5FAF2', border: '1.5px solid #C5DEB8', borderRadius: '16px', padding: '42px', boxShadow: '0 8px 24px rgba(45,90,27,0.06)' },
+  page: { padding: '96px 24px 80px'  },
+  container: { maxWidth: '800px', margin: '0 auto', backgroundColor: '#F5FAF2', border: '0', borderRadius: '0', padding: '42px', boxShadow: '0 8px 24px rgba(45,90,27,0.06)' },
   header: { textAlign: 'center', marginBottom: '36px' },
   title: {
     fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',

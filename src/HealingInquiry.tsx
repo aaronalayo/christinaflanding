@@ -23,6 +23,7 @@ type Booking = {
   name: string;
   email: string;
   phone: string;
+  service_type: string;
   booking_date: string;
   booking_time: string;
   status?: 'confirmed' | 'pending';
@@ -71,8 +72,8 @@ function getGoogleCalendarUrl(booking: Booking | null) {
     endISO   = `${y}${m}${d}`;
   }
 
-  const title = encodeURIComponent("Healingsession - Christina Flanding");
-  const details = encodeURIComponent(`Healingsession hos Christina Flanding\nTid: ${booking.booking_time}`);
+  const title = encodeURIComponent(`${booking.service_type} - Christina Flanding`);
+  const details = encodeURIComponent(`${booking.service_type} hos Christina Flanding\nTid: ${booking.booking_time}`);
   const location = encodeURIComponent("Christina Flanding Healing");
 
   return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${startISO}/${endISO}&details=${details}&location=${location}`;
@@ -80,7 +81,7 @@ function getGoogleCalendarUrl(booking: Booking | null) {
 
 // ─── Root ────────────────────────────────────────────────────────────────────
 
-export default function HealingInquiry() {
+export default function HealingInquiry({ serviceType }: { serviceType: string }) {
   const [submittedBooking, setSubmittedBooking] = useState<Booking | null>(null);
   const [selectedDay,      setSelectedDay]      = useState<ScheduleEntry | null>(null);
   const [selectedDate,     setSelectedDate]     = useState<Date | null>(null);
@@ -130,6 +131,7 @@ export default function HealingInquiry() {
       name:         String(formData.get('name') || ''),
       email:        String(formData.get('email') || ''),
       phone:        String(formData.get('phone') || ''),
+      service_type: serviceType,
       booking_date: dateKey(selectedDate),
       booking_time: selectedTime,
       status: selectedDay.efterAftale ? 'pending' as const : 'confirmed' as const,
@@ -197,6 +199,9 @@ export default function HealingInquiry() {
         {/* Confirmed booking card */}
         <div style={s.confirmedCard}>
           <div style={{ fontWeight: 'bold', fontSize: '15px', color: '#1E3D14', marginBottom: '4px' }}>
+            💆 {submittedBooking.service_type}
+          </div>
+          <div style={{ fontWeight: 'bold', fontSize: '15px', color: '#1E3D14', marginBottom: '4px' }}>
             📅 {submittedBooking.displayDate}
           </div>
           <div style={{ fontSize: '14px', color: '#2D5A1B', fontWeight: '600' }}>
@@ -225,6 +230,9 @@ export default function HealingInquiry() {
     <div className="booking-shell" style={s.container}>
       <div style={{ textAlign: 'center', marginBottom: '28px' }}>
         {/* <h2 style={s.heading}>🌿 Book en Healingsession 🌿</h2> */}
+        <p style={{ ...s.subheading, fontStyle: 'normal', marginBottom: '8px' }}>
+          Booking vedrørende: <strong>{serviceType}</strong>
+        </p>
         <h2 style={s.subheading}>Vælg dag, dato og tidspunkt — og udfyld dine oplysninger.</h2>
       </div>
 
