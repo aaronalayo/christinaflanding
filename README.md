@@ -29,6 +29,7 @@ En holistisk hjemmeside med online booking for Christina Flanding, bygget med Re
 ## 🔐 GDPR-drift
 
 - Kør `migrations/0001_remove_intentions.sql` én gang på produktions-D1 før lancering. Migrationen sletter det tidligere fritekstfelt, som kunne indeholde følsomme oplysninger.
+- Kør `migrations/0002_add_service_type.sql` én gang på produktions-D1 for at gemme behandlingen, som bookingforespørgslen gælder.
 - Bookingdata skal slettes løbende efter den retention-periode, der står i privatlivspolitikken. Kør kun oprydning efter at have afklaret eventuelle bogføringskrav.
 - `cleanup-worker.ts` er konfigureret til at slette bookingrækker 90 dage efter den bookede dato hver dag kl. 03:00 UTC. Deploy den separat med `npx wrangler deploy --config wrangler.cleanup.toml`.
 - Udfyld CVR-nummeret i privatlivspolitikken før lancering.
@@ -56,10 +57,9 @@ Sanity-projektet skal oprettes af Christina med hendes egen e-mail. GitHub-repos
 1. Christina opretter en konto på [sanity.io](https://www.sanity.io/) og opretter projektet under sin organisation.
 2. Hun inviterer udvikleren som `Developer` eller `Administrator` under projektets medlemmer. Christina beholder selv ejerskabet.
 3. Studioet ligger i `sanity-studio/` og er koblet til Christina Flanding-projektet og datasættet `production`.
-4. Artwork-schemaet er registreret i `sanity-studio/schemaTypes/artwork.ts`. Kør `cd sanity-studio && npm run dev` lokalt eller `cd sanity-studio && npx sanity deploy` for at udgive Studioet.
+4. Artwork- og service-schemaerne er registreret i `sanity-studio/schemaTypes/`. Kør `cd sanity-studio && npm run dev` lokalt eller `cd sanity-studio && npx sanity deploy` for at udgive Studioet.
 5. Tilføj `VITE_SANITY_PROJECT_ID` og `VITE_SANITY_DATASET` lokalt i `.env.local`. De samme to værdier skal sættes som almindelige environment variables i Cloudflare Pages.
 
-Christina kan derefter logge ind på det deployede Studio og oprette, ændre eller slette `Artwork`-dokumenter. Vælg `Kunst` eller `Uld` som kategori; dokumenterne vises automatisk på `/kunst` og `/uld`.
+Christina kan derefter logge ind på det deployede Studio og oprette, ændre eller slette `Artwork`- og `Service`-dokumenter. Vælg `Kunst` eller `Uld` for værker. Aktive service-dokumenter vises som kort på `/behandlinger` og får hver sin detaljeside på `/behandlinger/<slug>`.
 
 `VITE_SANITY_PROJECT_ID` og dataset-navnet er offentlige læseindstillinger. Brug aldrig en Sanity write token i frontend eller i GitHub.
-

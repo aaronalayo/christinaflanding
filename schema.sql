@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS bookings (
   name TEXT NOT NULL,
   email TEXT NOT NULL,
   phone TEXT NOT NULL,
+  service_type TEXT NOT NULL DEFAULT 'Healingsession',
   booking_date TEXT NOT NULL,       -- Format: YYYY-MM-DD
   booking_time TEXT NOT NULL,       -- Format: '09:30 – 10:30' or custom time
   status TEXT DEFAULT 'confirmed',  -- 'confirmed', 'pending', 'cancelled'
@@ -14,4 +15,3 @@ CREATE TABLE IF NOT EXISTS bookings (
 
 -- Index for fast slot lookup by date
 CREATE INDEX IF NOT EXISTS idx_bookings_date ON bookings(booking_date, status);
-

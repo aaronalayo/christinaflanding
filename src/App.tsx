@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
+import ServiceDetailPage from './pages/ServiceDetailPage';
 import BookingPage from './pages/BookingPage';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -21,6 +22,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/om-mig" element={<About />} />
             <Route path="/behandlinger" element={<Services />} />
+            <Route path="/behandlinger/:slug" element={<ServiceDetailPage />} />
             <Route path="/kunst" element={<ArtworkPage category="kunst" title="MIN KUNST" subtitle="Billedkunst, nærvær og materialer fra Christinas kreative praksis." />} />
             <Route path="/uld" element={<ArtworkPage category="uld" title="ULD" subtitle="Filtning, fibre og håndlavede værker med naturen som medspiller." />} />
             <Route path="/booking" element={<BookingPage />} />

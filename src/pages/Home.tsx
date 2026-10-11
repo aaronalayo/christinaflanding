@@ -1,8 +1,63 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Styles } from '../css';
 import heroBackground from '../assets/forside_foto_2.png';
+import { artworkImageUrl, getArtwork, getServices, sanityConfigured } from '../lib/sanity';
+
+const cardConfig = [
+  {
+    key: 'behandlinger',
+    title: 'Behandlinger',
+    to: '/behandlinger',
+    text: 'Udforsk behandlinger, der støtter ro, nærvær og balance.',
+  },
+  {
+    key: 'kunst',
+    title: 'Min Kunst',
+    to: '/kunst',
+    text: 'Kreative praksisser, kunstnerisk nærvær og udtryk, der kan gøre plads til forandring og ro.',
+  },
+  {
+    key: 'uld',
+    title: 'Filtning i Uld',
+    to: '/uld',
+    text: 'Tænkning, materialitet og naturens værdi i et roligt og jordet hverdagsrum.',
+  },
+] as const;
 
 export default function Home() {
+  const [featuredImages, setFeaturedImages] = useState<Record<string, string | undefined>>({});
+
+  useEffect(() => {
+    if (!sanityConfigured) {
+      return;
+    }
+
+    let isCurrent = true;
+
+    Promise.all([getServices(), getArtwork('kunst'), getArtwork('uld')])
+      .then(([services, kunstArtwork, uldArtwork]) => {
+        if (!isCurrent) {
+          return;
+        }
+
+        setFeaturedImages({
+          behandlinger: artworkImageUrl(services[0]?.image),
+          kunst: artworkImageUrl(kunstArtwork[0]?.image),
+          uld: artworkImageUrl(uldArtwork[0]?.image),
+        });
+      })
+      .catch(() => {
+        if (isCurrent) {
+          setFeaturedImages({});
+        }
+      });
+
+    return () => {
+      isCurrent = false;
+    };
+  }, []);
+
   return (
     <div style={styles.pageShell}>
       <section className="site-hero" style={styles.hero}>
@@ -30,26 +85,19 @@ export default function Home() {
           </div>
 
           <div className="site-grid" style={styles.grid}>
-            <Link to="/behandlinger" className="site-feature-card" style={styles.card}>
-              <h3 style={styles.cardTitle}>Reiki Healing</h3>
-              <p style={styles.cardText}>
-                En blid behandling, hvor livsenergi flyder gennem dig, så du kan finde ro og balance.
-              </p>
-            </Link>
+            {cardConfig.map((card) => {
+              const imageUrl = featuredImages[card.key];
 
-            <Link to="/kunst" className="site-feature-card" style={styles.card}>
-              <h3 style={styles.cardTitle}>Min Kunst</h3>
-              <p style={styles.cardText}>
-                Kreative praksisser, kunstnerisk nærvær og udtryk, der kan gøre plads til forandring og ro.
-              </p>
-            </Link>
-
-            <Link to="/uld" className="site-feature-card" style={styles.card}>
-              <h3 style={styles.cardTitle}>Filtning i Uld</h3>
-              <p style={styles.cardText}>
-                Tænkning, materialitet og naturens værdi i et roligt og jordet hverdagsrum.
-              </p>
-            </Link>
+              return (
+                <Link key={card.key} to={card.to} className="site-feature-card" style={styles.card}>
+                  {imageUrl && <img src={imageUrl} alt={card.title} style={styles.cardImage} loading="lazy" />}
+                  <div style={styles.cardBody}>
+                    <h3 style={styles.cardTitle}>{card.title}</h3>
+                    <p style={styles.cardText}>{card.text}</p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -180,12 +228,22 @@ const styles: Styles = {
     background: 'rgba(255, 255, 255, 0.5)',
     border: '1px solid rgba(29, 29, 31, 0.08)',
     borderRadius: '0',
-    padding: '28px 24px',
-    textAlign: 'center',
+    overflow: 'hidden',
     color: 'inherit',
     textDecoration: 'none',
     cursor: 'pointer',
     transition: 'transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
+    textAlign: 'left',
+  },
+  cardImage: {
+    width: '100%',
+    aspectRatio: '4 / 3',
+    objectFit: 'cover',
+    display: 'block',
+    backgroundColor: '#e8dccd',
+  },
+  cardBody: {
+    padding: '24px 22px 28px',
   },
   cardTitle: {
     fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
@@ -195,12 +253,13 @@ const styles: Styles = {
     margin: '0 0 12px 0',
     letterSpacing: '-0.02em',
     fontWeight: 600,
+    textAlign: 'center',
   },
   cardText: {
     fontSize: '15px',
     lineHeight: '1.65',
     color: '#4d4d4d',
-    marginBottom: '18px',
+    margin: 0,
+    textAlign: 'center',
   },
 };
-

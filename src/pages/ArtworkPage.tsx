@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import type { Styles } from '../css';
-import { artworkImageUrl, getArtwork, sanityConfigured, type ArtworkCategory, type Artwork } from '../lib/sanity';
+import { artworkImageUrl, getArtwork, sanityConfigured, type ArtworkCategory, type Artwork, type ArtworkGroup } from '../lib/sanity';
+
+const artworkGroupTitles: Record<ArtworkGroup, string> = {
+  'spiritual-art': 'Spiritual art',
+  christmas: 'Christmas',
+  nature: 'Nature',
+};
 
 type ArtworkPageProps = {
   category: ArtworkCategory;
@@ -46,6 +52,13 @@ export default function ArtworkPage({ category, title, subtitle }: ArtworkPagePr
   }, [artwork.length, selectedIndex]);
 
   const selectedItem = selectedIndex === null ? null : artwork[selectedIndex] ?? null;
+  const groupedArtwork = artwork.reduce<Map<ArtworkGroup | 'other', { item: Artwork; index: number }[]>>((groups, item, index) => {
+    const group = item.group ?? 'other';
+    const items = groups.get(group) ?? [];
+    items.push({ item, index });
+    groups.set(group, items);
+    return groups;
+  }, new Map());
 
   return (
     <div className="site-content-page" style={styles.page}>
@@ -54,17 +67,22 @@ export default function ArtworkPage({ category, title, subtitle }: ArtworkPagePr
         {hasError && <p style={styles.message}>Galleriet kunne ikke indlæses lige nu. Prøv igen senere.</p>}
         {sanityConfigured && !hasError && artwork.length === 0 && <p style={styles.message}>Der er endnu ingen værker i galleriet.</p>}
 
-        <div style={styles.grid}>
-          {artwork.map((item, index) => {
-            const imageUrl = artworkImageUrl(item.image);
-            if (!imageUrl) return null;
-            return (
-              <button key={item._id} type="button" onClick={() => setSelectedIndex(index)} style={styles.item} aria-label={item.title}>
-                <img src={imageUrl} alt={item.title} style={styles.image} loading="lazy" />
-              </button>
-            );
-          })}
-        </div>
+        {Array.from(groupedArtwork, ([group, items]) => (
+          <section key={group} style={styles.groupSection}>
+            <h2 style={styles.groupTitle}>{group === 'other' ? 'Øvrige værker' : artworkGroupTitles[group]}</h2>
+            <div style={styles.grid}>
+              {items.map(({ item, index }) => {
+                const imageUrl = artworkImageUrl(item.image);
+                if (!imageUrl) return null;
+                return (
+                  <button key={item._id} type="button" onClick={() => setSelectedIndex(index)} style={styles.item} aria-label={item.title}>
+                    <img src={imageUrl} alt={item.title} style={styles.image} loading="lazy" />
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+        ))}
 
         {selectedItem && (
           <div role="dialog" aria-modal="true" onClick={(event) => { if (event.target === event.currentTarget) setSelectedIndex(null); }} style={styles.modalBackdrop}>
@@ -88,6 +106,8 @@ export default function ArtworkPage({ category, title, subtitle }: ArtworkPagePr
 const styles: Styles = {
   page: { padding: '104px 24px 80px' },
   container: { maxWidth: '1100px', margin: '0 auto' },
+  groupSection: { marginBottom: '56px' },
+  groupTitle: { fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif', fontSize: '28px', color: '#1E3D14', margin: '0 0 24px', fontWeight: 600 },
   header: { maxWidth: '720px', margin: '0 auto 48px', textAlign: 'center' },
   title: { fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif', fontSize: '38px', color: '#1E3D14', margin: '0 0 16px', fontWeight: 600, letterSpacing: '0.08em' },
   subtitle: { fontSize: '18px', lineHeight: 1.6, color: '#4A6B35', margin: 0 },

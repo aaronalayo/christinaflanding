@@ -25,6 +25,19 @@ export const artwork = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'group',
+      title: 'Group',
+      description: 'Group this work under a section on its gallery page.',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Spiritual art', value: 'spiritual-art'},
+          {title: 'Christmas', value: 'christmas'},
+          {title: 'Nature', value: 'nature'},
+        ],
+      },
+    }),
+    defineField({
       name: 'image',
       title: 'Image',
       type: 'image',
@@ -49,11 +62,14 @@ export const artwork = defineType({
       title: 'title',
       media: 'image',
       category: 'category',
+      group: 'group',
     },
-    prepare({title, media, category}) {
+    prepare({title, media, category, group}) {
       return {
         title,
-        subtitle: category === 'uld' ? 'Uld' : 'Kunst',
+        subtitle: [category === 'uld' ? 'Uld' : 'Kunst', group]
+          .filter(Boolean)
+          .join(' · '),
         media,
       }
     },
