@@ -109,6 +109,41 @@ a[href]:not(.nav-link):hover {
   box-shadow: 0 10px 22px rgba(9, 10, 9, 0.18);
 }
 
+.site-hero-service-slide {
+  animation: heroFadeUp 0.8s ease-out both;
+}
+
+.site-hero-service-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.site-hero-service-indicator {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.site-hero-service-indicator.is-active {
+  background: #fff;
+}
+
+.site-hero-service-indicator:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.site-hero-service-indicator:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
 .site-feature-card:hover {
   transform: translateY(-2px);
   background-color: rgba(255, 255, 255, 0.72) !important;
@@ -168,6 +203,12 @@ a[href]:not(.nav-link):hover {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-hero-service-slide {
+    animation: none;
   }
 }
 

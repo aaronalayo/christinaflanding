@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Styles } from '../css';
 import heroBackground from '../assets/forside_foto_2.png';
-import { artworkImageUrl, getArtwork, getServices, sanityConfigured } from '../lib/sanity';
+import { artworkImageUrl, getArtwork, getServices, sanityConfigured, type Service } from '../lib/sanity';
 
 const cardConfig = [
   {
@@ -27,6 +27,8 @@ const cardConfig = [
 
 export default function Home() {
   const [featuredImages, setFeaturedImages] = useState<Record<string, string | undefined>>({});
+  const [services, setServices] = useState<Service[]>([]);
+  const [activeServiceIndex, setActiveServiceIndex] = useState(0);
 
   useEffect(() => {
     if (!sanityConfigured) {
@@ -35,21 +37,37 @@ export default function Home() {
 
     let isCurrent = true;
 
-    Promise.all([getServices(), getArtwork('kunst'), getArtwork('uld')])
-      .then(([services, kunstArtwork, uldArtwork]) => {
+    getServices()
+      .then((items) => {
+        if (isCurrent) {
+          setServices(items);
+          setFeaturedImages((currentImages) => ({
+            ...currentImages,
+            behandlinger: artworkImageUrl(items[0]?.image),
+          }));
+        }
+      })
+      .catch(() => {
+        if (isCurrent) {
+          console.error('Could not load homepage services from Sanity.');
+        }
+      });
+
+    Promise.all([getArtwork('kunst'), getArtwork('uld')])
+      .then(([kunstArtwork, uldArtwork]) => {
         if (!isCurrent) {
           return;
         }
 
-        setFeaturedImages({
-          behandlinger: artworkImageUrl(services[0]?.image),
+        setFeaturedImages((currentImages) => ({
+          ...currentImages,
           kunst: artworkImageUrl(kunstArtwork[0]?.image),
           uld: artworkImageUrl(uldArtwork[0]?.image),
-        });
+        }));
       })
       .catch(() => {
         if (isCurrent) {
-          setFeaturedImages({});
+          console.error('Could not load homepage artwork from Sanity.');
         }
       });
 
@@ -58,20 +76,69 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    if (services.length < 2) {
+      return;
+    }
+
+    const intervalId = window.setInterval(() => {
+      setActiveServiceIndex((currentIndex) => (currentIndex + 1) % services.length);
+    }, 6000);
+
+    return () => window.clearInterval(intervalId);
+  }, [services.length]);
+
+  const activeService = services[activeServiceIndex];
+  const bookingHref = activeService
+    ? `/booking?service=${encodeURIComponent(activeService.title)}`
+    : '/booking';
+
   return (
     <div style={styles.pageShell}>
       <section className="site-hero" style={styles.hero}>
         <div style={styles.heroContent}>
-          <div style={styles.heroTextBlock}>
-            <h1 className="site-hero-title" style={styles.heroTitle}>REIKI HEALING</h1>
-            <p className="site-hero-subtitle" style={styles.heroSubtitle}>
-              Blide, rogivende behandlinger, der hjælper dig med at komme ned i kroppen, finde ro og skabe plads til det, der virkelig betyder noget.
-            </p>
-          </div>
+          {activeService ? (
+            <div key={activeService._id} className="site-hero-service-slide">
+              <div style={styles.heroTextBlock}>
+                <h1 className="site-hero-title" style={styles.heroTitle}>{activeService.title}</h1>
+                <p className="site-hero-subtitle" style={styles.heroSubtitle}>
+                  {activeService.tagline || activeService.summary}
+                </p>
+              </div>
 
-          <div className="site-hero-buttons" style={styles.heroBtns}>
-            <Link to="/booking" style={styles.primaryBtn}>BOOK BEHANDLING</Link>
-          </div>
+              <div className="site-hero-buttons" style={styles.heroBtns}>
+                <Link to={bookingHref} style={styles.primaryBtn}>BOOK {activeService.title}</Link>
+              </div>
+
+              {services.length > 1 && (
+                <div className="site-hero-service-indicators" aria-label="Vælg behandling">
+                  {services.map((service, index) => (
+                    <button
+                      key={service._id}
+                      type="button"
+                      className={`site-hero-service-indicator${index === activeServiceIndex ? ' is-active' : ''}`}
+                      aria-label={`Vis ${service.title}`}
+                      aria-pressed={index === activeServiceIndex}
+                      onClick={() => setActiveServiceIndex(index)}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
+              <div style={styles.heroTextBlock}>
+                <h1 className="site-hero-title" style={styles.heroTitle}>REIKI HEALING</h1>
+                <p className="site-hero-subtitle" style={styles.heroSubtitle}>
+                  Blide, rogivende behandlinger, der hjælper dig med at komme ned i kroppen, finde ro og skabe plads til det, der virkelig betyder noget.
+                </p>
+              </div>
+
+              <div className="site-hero-buttons" style={styles.heroBtns}>
+                <Link to="/booking" style={styles.primaryBtn}>BOOK BEHANDLING</Link>
+              </div>
+            </>
+          )}
         </div>
       </section>
 
