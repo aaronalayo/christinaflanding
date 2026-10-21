@@ -81,7 +81,20 @@ function getGoogleCalendarUrl(booking: Booking | null) {
 
 // ─── Root ────────────────────────────────────────────────────────────────────
 
-export default function HealingInquiry({ serviceType }: { serviceType: string }) {
+export default function HealingInquiry({
+  serviceType,
+  serviceOptions,
+}: {
+  serviceType: string;
+  serviceOptions: string[];
+}) {
+  const [serviceSelection, setServiceSelection] = useState({
+    initialServiceType: serviceType,
+    selectedServiceType: serviceType,
+  });
+  const selectedServiceType = serviceSelection.initialServiceType === serviceType
+    ? serviceSelection.selectedServiceType
+    : serviceType;
   const [submittedBooking, setSubmittedBooking] = useState<Booking | null>(null);
   const [selectedDay,      setSelectedDay]      = useState<ScheduleEntry | null>(null);
   const [selectedDate,     setSelectedDate]     = useState<Date | null>(null);
@@ -131,7 +144,7 @@ export default function HealingInquiry({ serviceType }: { serviceType: string })
       name:         String(formData.get('name') || ''),
       email:        String(formData.get('email') || ''),
       phone:        String(formData.get('phone') || ''),
-      service_type: serviceType,
+      service_type: selectedServiceType,
       booking_date: dateKey(selectedDate),
       booking_time: selectedTime,
       status: selectedDay.efterAftale ? 'pending' as const : 'confirmed' as const,
@@ -231,7 +244,7 @@ export default function HealingInquiry({ serviceType }: { serviceType: string })
       <div style={{ textAlign: 'center', marginBottom: '28px' }}>
         {/* <h2 style={s.heading}>🌿 Book en Healingsession 🌿</h2> */}
         <p style={{ ...s.subheading, fontStyle: 'normal', marginBottom: '8px' }}>
-          Booking vedrørende: <strong>{serviceType}</strong>
+          Booking vedrørende: <strong>{selectedServiceType}</strong>
         </p>
         <h2 style={s.subheading}>Vælg dag, dato og tidspunkt — og udfyld dine oplysninger.</h2>
       </div>
@@ -282,9 +295,20 @@ export default function HealingInquiry({ serviceType }: { serviceType: string })
       )}
 
       {/* ── Step 4: form ── */}
-      <div style={{ marginTop: '24px', borderTop: '1.5px solid #7FAD65', paddingTop: '24px' }}>
+      <div style={{ marginTop: '16px', borderTop: '1.5px solid #7FAD65', paddingTop: '16px' }}>
         <StepLabel step="4" label="Dine oplysninger" done={false} />
-        <BookingForm onSubmit={handleFormSubmit} submitting={submitting} />
+        <BookingForm
+          onSubmit={handleFormSubmit}
+          submitting={submitting}
+          serviceOptions={serviceOptions}
+          selectedServiceType={selectedServiceType}
+          onServiceTypeChange={(nextServiceType) => {
+            setServiceSelection({
+              initialServiceType: serviceType,
+              selectedServiceType: nextServiceType,
+            });
+          }}
+        />
       </div>
     </div>
   );
@@ -494,12 +518,37 @@ function TimePicker({ entry, selectedDate, selectedTime, onSelect, isSlotBooked 
 
 // ─── Booking form ─────────────────────────────────────────────────────────────
 
-function BookingForm({ onSubmit, submitting }: {
+function BookingForm({
+  onSubmit,
+  submitting,
+  serviceOptions,
+  selectedServiceType,
+  onServiceTypeChange,
+}: {
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
   submitting: boolean;
+  serviceOptions: string[];
+  selectedServiceType: string;
+  onServiceTypeChange: (serviceType: string) => void;
 }) {
   return (
     <form onSubmit={onSubmit} style={s.form}>
+      <div style={s.formGroup}>
+        <label htmlFor="booking-service" style={s.label}>Behandling</label>
+        <select
+          id="booking-service"
+          name="service_type"
+          required
+          value={selectedServiceType}
+          onChange={(event) => onServiceTypeChange(event.target.value)}
+          style={s.input}
+        >
+          {serviceOptions.map((option) => (
+            <option key={option} value={option}>{option}</option>
+          ))}
+        </select>
+      </div>
+
       <div className="booking-form-row" style={s.row}>
         <div className="booking-form-group" style={s.formGroup}>
           <label style={s.label}>Dit Navn</label>
@@ -538,9 +587,9 @@ const s: Styles = {
   container:        { maxWidth: '620px', margin: '28px auto', padding: '26px', fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif', border: '1px solid #d9d0c8', borderRadius: '0', backgroundColor: '#f5f0ea', boxShadow: 'none' },
   heading:          { color: '#1f2c22', margin: '0 0 10px 0', fontWeight: '700', fontSize: '20px', letterSpacing: '-0.02em', fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif' },
   subheading:       { color: '#4f5f4d', margin: 0, fontSize: '14px', fontStyle: 'italic', fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif' },
-  form:             { display: 'flex', flexDirection: 'column', gap: '12px' },
-  row:              { display: 'flex', gap: '15px', flexWrap: 'wrap' },
-  formGroup:        { display: 'flex', flexDirection: 'column', gap: '6px', flex: '1 1 200px' },
+  form:             { display: 'flex', flexDirection: 'column', gap: '6px' },
+  row:              { display: 'flex', gap: '8px 15px', flexWrap: 'wrap' },
+  formGroup:        { display: 'flex', flexDirection: 'column', gap: '4px', flex: '1 1 100px' },
   label:            { fontSize: '13px', fontWeight: '700', color: '#1f2c22', fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif' },
   input:            { padding: '12px', borderRadius: '0', border: '1px solid #b8a896', fontSize: '15px', outline: 'none', backgroundColor: '#f1eae3', fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif', color: '#1f2c22' },
   inputPlaceholder: { color: '#6a5d52' },
