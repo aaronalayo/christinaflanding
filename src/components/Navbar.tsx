@@ -9,7 +9,7 @@ export default function Navbar() {
   const links = [
     { to: '/behandlinger', label: 'BEHANDLINGER' },
     { to: '/kunst', label: 'MIN KUNST' },
-    { to: '/uld', label: 'FILTNING I ULD' },
+    // { to: '/uld', label: 'FILTNING I ULD' },
     { to: '/om-mig', label: 'OM MIG' },
     { to: '/booking', label: 'BOOKING' },
     { to: '/kontakt', label: 'KONTAKT' },

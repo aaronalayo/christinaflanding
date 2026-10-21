@@ -24,7 +24,7 @@ export default function App() {
             <Route path="/behandlinger" element={<Services />} />
             <Route path="/behandlinger/:slug" element={<ServiceDetailPage />} />
             <Route path="/kunst" element={<ArtworkPage category="kunst" title="MIN KUNST" subtitle="Billedkunst, nærvær og materialer fra Christinas kreative praksis." />} />
-            <Route path="/uld" element={<ArtworkPage category="uld" title="ULD" subtitle="Filtning, fibre og håndlavede værker med naturen som medspiller." />} />
+            {/* <Route path="/uld" element={<ArtworkPage category="uld" title="ULD" subtitle="Filtning, fibre og håndlavede værker med naturen som medspiller." />} /> */}
             <Route path="/booking" element={<BookingPage />} />
             <Route path="/kontakt" element={<Contact />} />
             <Route path="/privatlivspolitik" element={<PrivacyPolicy />} />

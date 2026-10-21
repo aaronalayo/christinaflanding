@@ -1,10 +1,35 @@
 import HealingInquiry from '../HealingInquiry';
 import type { Styles } from '../css';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { getServices, type Service } from '../lib/sanity';
 
 export default function BookingPage() {
   const [searchParams] = useSearchParams();
-  const serviceType = searchParams.get('service')?.trim() || 'Healingsession';
+  const [services, setServices] = useState<Service[]>([]);
+  const [hasServiceError, setHasServiceError] = useState(false);
+
+  useEffect(() => {
+    let isCurrent = true;
+    getServices()
+      .then((items) => {
+        if (isCurrent) {
+          setServices(items);
+        }
+      })
+      .catch(() => {
+        if (isCurrent) {
+          setHasServiceError(true);
+        }
+      });
+
+    return () => {
+      isCurrent = false;
+    };
+  }, []);
+
+  const serviceType = searchParams.get('service')?.trim() || services[0]?.title || 'Healingsession';
+  const serviceOptions = [...new Set([serviceType, ...services.map((service) => service.title)])];
 
   return (
     <div className="site-booking-page" style={styles.page}>
@@ -13,11 +38,19 @@ export default function BookingPage() {
           {/* <span style={styles.badge}>Book behandlinger</span> */}
           <h1 className="site-page-title" style={styles.title}>Book behandling</h1>
           <p className="site-page-subtitle" style={styles.subtitle}>
-            Booking vedrørende: <strong>{serviceType}</strong>. Vælg en dato og et ledigt tidspunkt i kalenderen nedenfor. Når du har indsendt din forespørgsel, modtager du en bekræftelse på e-mail.
+            Vælg den behandling, du ønsker at booke, og derefter en dato og et ledigt tidspunkt. Når du har indsendt din forespørgsel, modtager du en bekræftelse på e-mail.
           </p>
         </div>
 
-        <HealingInquiry serviceType={serviceType} />
+        {hasServiceError && (
+          <p role="status" style={styles.serviceError}>
+            Behandlingerne kunne ikke indlæses. Du kan stadig sende en bookingforespørgsel.
+          </p>
+        )}
+        <HealingInquiry
+          serviceType={serviceType}
+          serviceOptions={serviceOptions}
+        />
       </div>
     </div>
   );
@@ -67,5 +100,10 @@ const styles: Styles = {
     margin: '0 auto',
     maxWidth: '650px',
     fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
+  },
+  serviceError: {
+    textAlign: 'center',
+    color: '#7a3026',
+    margin: '0 auto 16px',
   },
 };

@@ -17,12 +17,12 @@ const cardConfig = [
     to: '/kunst',
     text: 'Kreative praksisser, kunstnerisk nærvær og udtryk, der kan gøre plads til forandring og ro.',
   },
-  {
-    key: 'uld',
-    title: 'Filtning i Uld',
-    to: '/uld',
-    text: 'Tænkning, materialitet og naturens værdi i et roligt og jordet hverdagsrum.',
-  },
+  // {
+  //   key: 'uld',
+  //   title: 'Filtning i Uld',
+  //   to: '/uld',
+  //   text: 'Tænkning, materialitet og naturens værdi i et roligt og jordet hverdagsrum.',
+  // },
 ] as const;
 
 export default function Home() {
