@@ -9,7 +9,7 @@ export default function Contact() {
         <div className="site-page-header" style={styles.header}>
           <PageTitle className="site-page-title" style={styles.title}>KONTAKT</PageTitle>
           <p className="site-page-subtitle" style={styles.subtitle}>
-            Har du spørgsmål om behandlingerne, forløb eller specielle ønsker? Tøv ikke med at række ud.
+            Har du spørgsmål til behandlingerne ? Er du velkommen til at kontakte mig på sms eller mail.
           </p>
         </div>
 
@@ -36,7 +36,7 @@ export default function Contact() {
                   31 33 13 32
                 </a>
                 <p style={{ margin: '4px 0 0', fontSize: '13px', color: '#5A8048' }}>
-                  Send gerne en SMS, hvis jeg er optaget i en session.
+                  Send gerne en SMS, hvis jeg er i gang med en  behandling.
                 </p>
               </div>
             </div>
@@ -59,7 +59,7 @@ export default function Contact() {
                 <strong style={styles.infoLabel}>Behandlingstider</strong>
                 <p style={{ margin: 0, fontSize: '14px', color: '#3D5A2C', lineHeight: '1.6' }}>
                   Mandag – Onsdag: 09:30 – 13:30<br />
-                  Torsdag & Fredag: Efter individuel aftale<br />
+                  Torsdag & Fredag: Efter aftale<br />
                   Lørdag – Søndag: Lukket
                 </p>
               </div>
@@ -69,9 +69,9 @@ export default function Contact() {
           {/* Card 2: Quick Booking Action */}
           <div className="site-contact-card" style={{ ...styles.card, backgroundColor: '#E9E0D6', border: '1px solid rgba(30, 61, 20, 0.18)' }}>
             <h2 style={styles.cardHeading}>Klar til at booke?</h2>
-            <p style={{ fontSize: '15px', lineHeight: '1.7', color: '#2D5A1B', marginBottom: '24px' }}>
+            {/* <p style={{ fontSize: '15px', lineHeight: '1.7', color: '#2D5A1B', marginBottom: '24px' }}>
               Du behøver ikke vente på svar for at reservere en tid. Vores online kalender viser ledige tider i realtid, og du kan sikre din session med det samme.
-            </p>
+            </p> */}
 
             <Link to="/booking" style={styles.bookBtn}>
               BOOK BEHANDLING
@@ -111,7 +111,7 @@ const styles: Styles = {
     color: '#1E3D14',
     margin: '0 0 16px 0',
     fontWeight: 600,
-    letterSpacing: '-0.04em',
+    letterSpacing: '0.08em',
   },
   subtitle: {
     fontSize: '18px',

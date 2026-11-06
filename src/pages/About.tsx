@@ -20,7 +20,7 @@ export default function About() {
 
         <div className="site-content-card" style={styles.contentBox}>
           <p style={styles.text}>
-            Tak for at du er landet her. Det sætter jeg stor pris på.
+            Tak for, at du er landet her. Det sætter jeg stor pris på.
           </p>
           <p style={styles.text}>
             Første gang jeg lærte Reiki-healing at kende, var på en rejse i Nepal, hvor jeg tog et kursus i Kathmandu. I 2024 genoptog jeg Reiki-healingen, og jeg har nu Reiki 1, 2 og 3, hvor 3. grad er mestergraden inden for Reiki-healing.
@@ -32,10 +32,7 @@ export default function About() {
             Jeg har vandret på Caminoen i Spanien og rejst til Nepal to gange, hvor jeg har boet på et tibetansk buddhistisk kloster, arbejdet på et børnehjem og vandret i Himalaya.
           </p>
           <p style={styles.text}>
-            Jeg har arbejdet som handicaphjælper og med udviklingshæmmede, i børnehave og som skolelærer.
-          </p>
-          <p style={styles.text}>
-            I det meste af mit liv har jeg også arbejdet kunstnerisk, blandt andet med fotografi. Jeg har taget en læreruddannelse som billedkunstlærer, og jeg er uddannet arkitekt, kunstterapeut og healer. Kunstnerisk arbejde er en stor del af mit liv.
+            Jeg har arbejdet med mennesker som handicaphjælper, i børnehave og som skolelærer.
           </p>
           <p style={styles.text}>
             Jeg mærker et kald til healingen, og jeg glæder mig meget til at kunne hjælpe dig.
@@ -77,7 +74,7 @@ const styles: Styles = {
     color: '#1E3D14',
     margin: '0 0 16px 0',
     fontWeight: 600,
-    letterSpacing: '-0.04em',
+    letterSpacing: '0.08em',
   },
   photoSlot: {
     width: 'min(100%, 360px)',

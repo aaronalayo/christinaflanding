@@ -101,15 +101,21 @@ export default function ArtworkPage({ category, title, subtitle }: ArtworkPagePr
         ))}
 
         {selectedItem && (
-          <div role="dialog" aria-modal="true" onClick={(event) => { if (event.target === event.currentTarget) setSelectedIndex(null); }} style={styles.modalBackdrop}>
+          <div className="artwork-modal-backdrop" role="dialog" aria-modal="true" onClick={(event) => { if (event.target === event.currentTarget) setSelectedIndex(null); }} style={styles.modalBackdrop}>
             <button type="button" onClick={() => setSelectedIndex(null)} style={styles.closeButton} aria-label="Luk billede">×</button>
-            <div style={styles.modalCard}>
+            <div className="artwork-modal-card" style={styles.modalCard}>
               <div style={styles.modalViewport}>
                 <img src={artworkImageUrl(selectedItem.image)} alt={selectedItem.title} style={styles.modalImage} />
               </div>
               <div style={styles.controlsRow}>
                 <button type="button" onClick={() => setSelectedIndex((c) => c === null ? null : (c - 1 + artwork.length) % artwork.length)} style={styles.navButtonLeft} aria-label="Forrige billede">‹</button>
                 <button type="button" onClick={() => setSelectedIndex((c) => c === null ? null : (c + 1) % artwork.length)} style={styles.navButtonRight} aria-label="Næste billede">›</button>
+              </div>
+              <div className="artwork-modal-description" style={styles.modalDescription}>
+                <h2 style={styles.modalTitle}>{selectedItem.title}</h2>
+                {selectedItem.description && (
+                  <p className="artwork-modal-description-text" style={styles.modalDescriptionText}>{selectedItem.description}</p>
+                )}
               </div>
             </div>
           </div>
@@ -124,9 +130,9 @@ const styles: Styles = {
   container: { maxWidth: '1100px', margin: '0 auto' },
   groupSection: { marginBottom: '56px' },
   groupTitle: { fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif', fontSize: '28px', color: '#1E3D14', margin: '0 0 24px', fontWeight: 600 },
-  header: { maxWidth: '720px', margin: '0 auto 48px', textAlign: 'center' },
+  header: { width: '100%', margin: '0 auto 48px', textAlign: 'center' },
   title: { fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif', fontSize: '38px', color: '#1E3D14', margin: '0 0 16px', fontWeight: 600, letterSpacing: '0.08em' },
-  subtitle: { fontSize: '18px', lineHeight: 1.6, color: '#4A6B35', margin: 0 },
+  subtitle: { fontSize: '18px', lineHeight: 1.6, color: '#4A6B35', width: '100%', margin: '0 auto' },
   message: { textAlign: 'center', color: '#4A6B35', margin: '0 auto 36px' },
   grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '32px', alignItems: 'stretch' },
   item: { display: 'block', width: '100%', padding: 0, border: 'none', background: 'none', cursor: 'pointer', overflow: 'hidden', transition: 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)', outline: 'none', boxShadow: 'none' },
@@ -135,10 +141,13 @@ const styles: Styles = {
   itemTitle: { fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif', fontSize: '21px', color: '#1E3D14', margin: 0, fontWeight: 600 },
   description: { fontSize: '15px', lineHeight: 1.65, color: '#3D5A2C', margin: '10px 0 0' },
   modalBackdrop: { position: 'fixed', inset: 0, zIndex: 1000, backgroundColor: 'rgba(255, 255, 255, 0.98)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '60px 24px 24px', backdropFilter: 'blur(8px)' },
-  modalCard: { position: 'relative', width: '100%', maxWidth: '900px', display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '0 auto' },
-  modalViewport: { width: '100%', height: '65vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent' },
+  modalCard: { position: 'relative', width: '100%', maxWidth: '1100px', display: 'grid', gridTemplateColumns: 'minmax(0, 1.2fr) minmax(260px, 0.8fr)', gridTemplateRows: 'minmax(0, 65vh) auto', columnGap: '40px', rowGap: '18px', alignItems: 'center', margin: '0 auto' },
+  modalViewport: { gridColumn: '1', gridRow: '1', width: '100%', height: '65vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'transparent', minWidth: 0 },
   modalImage: { display: 'block', width: 'auto', maxWidth: '100%', maxHeight: '100%', objectFit: 'contain', boxShadow: '0 12px 40px rgba(0, 0, 0, 0.08)' },
-  controlsRow: { width: '100%', maxWidth: '480px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '24px' },
+  controlsRow: { gridColumn: '1', gridRow: '2', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', margin: 0 },
+  modalDescription: { gridColumn: '2', gridRow: '1 / span 2', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '24px', color: '#1E3D14', transform: 'translateY(-60px)' },
+  modalTitle: { fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif', fontSize: 'clamp(22px, 2.5vw, 32px)', lineHeight: 1.2, fontWeight: 600, margin: '0 0 18px' },
+  modalDescriptionText: { fontSize: '17px', lineHeight: 1.75, color: '#3D5A2C', margin: 0, whiteSpace: 'pre-line' },
   navButtonLeft: { border: 'none', background: 'none', color: '#1d1d1f', fontSize: '44px', cursor: 'pointer', width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0, outline: 'none', boxShadow: 'none', userSelect: 'none' },
   navButtonRight: { border: 'none', background: 'none', color: '#1d1d1f', fontSize: '44px', cursor: 'pointer', width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0, outline: 'none', boxShadow: 'none', userSelect: 'none' },
   closeButton: { position: 'absolute', top: '24px', right: '24px', border: 'none', background: 'none', color: '#1d1d1f', fontSize: '44px', cursor: 'pointer', width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1020, outline: 'none', boxShadow: 'none', userSelect: 'none' }

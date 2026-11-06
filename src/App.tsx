@@ -23,7 +23,15 @@ export default function App() {
             <Route path="/om-mig" element={<About />} />
             <Route path="/behandlinger" element={<Services />} />
             <Route path="/behandlinger/:slug" element={<ServiceDetailPage />} />
-            <Route path="/kunst" element={<ArtworkPage category="kunst" title="MIN KUNST" subtitle="Billedkunst, nærvær og materialer fra Christinas kreative praksis." />} />
+            <Route path="/kunst" element={<ArtworkPage category="kunst" title="MIN KUNST" subtitle="I det meste af mit liv har jeg arbejdet kunstnerisk. Jeg er uddannet billedkunstlærer og er også uddannet arkitekt og kunstterapeut. Kunstnerisk arbejde er en stor del af mit liv.
+
+
+
+Da jeg tog kunstterapiuddannelsen fandt jeg et særligt udtryk, og en måde at arbejde med min indre verden på. 
+
+
+
+Illustrationerne bevæger sig i universet, i naturen, med dyr, engle og alfer. Det er et trygt og kærligt univers. Jeg tegner også andre ting, det kan være iagtagelsestegning og klassisk tegning, eller maleri med forskellige medier." />} />
             {/* <Route path="/uld" element={<ArtworkPage category="uld" title="ULD" subtitle="Filtning, fibre og håndlavede værker med naturen som medspiller." />} /> */}
             <Route path="/booking" element={<BookingPage />} />
             <Route path="/kontakt" element={<Contact />} />
@@ -47,7 +55,7 @@ const styles: Styles = {
     fontFamily: '"Avenir Next", "Avenir", "Montserrat", "Helvetica Neue", "Segoe UI", sans-serif',
     color: '#1d1d1f',
   },
-   mainContent: {
+  mainContent: {
     flex: '1 0 auto',
     width: '100%',
     background: 'linear-gradient(180deg, #f7f3ee 0%, #f3d7c0 100%)',
