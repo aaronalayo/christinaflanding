@@ -18,10 +18,10 @@ export const artwork = defineType({
       options: {
         list: [
           { title: 'Kunst', value: 'kunst' },
-          { title: 'Uld', value: 'uld' },
         ],
         layout: 'radio',
       },
+      initialValue: 'kunst',
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -31,9 +31,9 @@ export const artwork = defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'Spiritual art', value: 'spiritual-art' },
-          { title: 'Christmas', value: 'christmas' },
-          { title: 'Nature', value: 'nature' },
+          { title: 'Uld', value: 'uld' },
+          { title: 'Illustrationer', value: 'illustrationer' },
+          { title: 'Tegning & maleri', value: 'tegning & maleri' },
         ],
       },
     }),
@@ -61,13 +61,12 @@ export const artwork = defineType({
     select: {
       title: 'title',
       media: 'image',
-      category: 'category',
       group: 'group',
     },
-    prepare({ title, media, category, group }) {
+    prepare({ title, media, group }) {
       return {
         title,
-        subtitle: [category === 'uld' ? 'Uld' : 'Kunst', group]
+        subtitle: ['Kunst', group]
           .filter(Boolean)
           .join(' · '),
         media,

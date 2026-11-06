@@ -3,10 +3,17 @@ import type { Styles } from '../css';
 import { artworkImageUrl, getArtwork, sanityConfigured, type ArtworkCategory, type Artwork, type ArtworkGroup } from '../lib/sanity';
 
 const artworkGroupTitles: Record<ArtworkGroup, string> = {
-  'spiritual-art': 'Spiritual art',
-  christmas: 'Christmas',
-  nature: 'Nature',
+  uld: 'Uld',
+  illustrationer: 'Illustrationer',
+  'tegning & maleri': 'Tegning & maleri',
 };
+
+const artworkGroupOrder: Array<ArtworkGroup | 'other'> = [
+  'illustrationer',
+  'tegning & maleri',
+  'other',
+  'uld',
+];
 
 type ArtworkPageProps = {
   category: ArtworkCategory;
@@ -53,12 +60,16 @@ export default function ArtworkPage({ category, title, subtitle }: ArtworkPagePr
 
   const selectedItem = selectedIndex === null ? null : artwork[selectedIndex] ?? null;
   const groupedArtwork = artwork.reduce<Map<ArtworkGroup | 'other', { item: Artwork; index: number }[]>>((groups, item, index) => {
-    const group = item.group ?? 'other';
+    const group = item.group && item.group in artworkGroupTitles ? item.group : 'other';
     const items = groups.get(group) ?? [];
     items.push({ item, index });
     groups.set(group, items);
     return groups;
   }, new Map());
+  const orderedArtworkGroups = artworkGroupOrder.flatMap((group) => {
+    const items = groupedArtwork.get(group);
+    return items ? [{ group, items }] : [];
+  });
 
   return (
     <div className="site-content-page" style={styles.page}>
@@ -67,7 +78,7 @@ export default function ArtworkPage({ category, title, subtitle }: ArtworkPagePr
         {hasError && <p style={styles.message}>Galleriet kunne ikke indlæses lige nu. Prøv igen senere.</p>}
         {sanityConfigured && !hasError && artwork.length === 0 && <p style={styles.message}>Der er endnu ingen værker i galleriet.</p>}
 
-        {Array.from(groupedArtwork, ([group, items]) => (
+        {orderedArtworkGroups.map(({ group, items }) => (
           <section key={group} style={styles.groupSection}>
             <h2 style={styles.groupTitle}>{group === 'other' ? 'Øvrige værker' : artworkGroupTitles[group]}</h2>
             <div style={styles.grid}>

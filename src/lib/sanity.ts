@@ -1,8 +1,8 @@
 import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 
-export type ArtworkCategory = 'kunst' | 'uld';
-export type ArtworkGroup = 'spiritual-art' | 'christmas' | 'nature';
+export type ArtworkCategory = 'kunst';
+export type ArtworkGroup = 'uld' | 'illustrationer' | 'tegning & maleri';
 
 export type ServiceSection = {
   _key: string;
@@ -64,11 +64,11 @@ export async function getArtwork(category: ArtworkCategory) {
   }
 
   return client.fetch<Artwork[]>(
-    `*[_type == "artwork" && category == $category] | order(order asc, _createdAt desc) {
+    `*[_type == "artwork" && (category == $category || ($category == "kunst" && category == "uld"))] | order(order asc, _createdAt desc) {
       _id,
       title,
-      category,
-      group,
+      "category": $category,
+      "group": select(category == "uld" => "uld", group),
       description,
       image
     }`,

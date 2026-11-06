@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { Styles } from '../css';
-import christinaPhoto from '../assets/christina_portrait.jpeg';
+import christinaPhoto from '../assets/IMG_8347.jpeg';
 
 export default function About() {
   return (
@@ -8,9 +8,6 @@ export default function About() {
       <div className="site-content-container" style={styles.container}>
         <div className="site-page-header" style={styles.header}>
           <h1 className="site-page-title" style={styles.title}>OM CHRISTINA FLANDING</h1>
-          <p className="site-page-subtitle" style={styles.subtitle}>
-            Healer, energiterapeut og formidler af ro, balance og personlig udvikling.
-          </p>
         </div>
 
         <div
@@ -21,31 +18,26 @@ export default function About() {
         </div>
 
         <div className="site-content-card" style={styles.contentBox}>
-          <h2 style={styles.heading}>Min rejse</h2>
           <p style={styles.text}>
-            Jeg hedder Christina, og tak for at du er kommet her forbi. Det sætter jeg stor pris på.
+            Tak for at du er landet her. Det sætter jeg stor pris på.
           </p>
           <p style={styles.text}>
-            I det meste af mit liv har jeg haft det spirituelle med mig.
-          </p>
-
-          <p style={styles.text}>
-            Mit første store kald var pilgrimsvandring på Caminoen i Spanien i 2009, hvor jeg gik 500 km på 3,5 uge. Rejsen var selvfølgelig ikke rigtig planlagt i god tid. Jeg havde hjertesorg, og jeg tænkte, at nu skulle jeg gå helt alene. Det var selvfølgelig slet ikke det, der kom til at ske. Men afsted kom jeg, alene, og måtte sige farvel til min familie i lufthavnen på min første rejse alene nogensinde.
+            Første gang jeg lærte Reiki-healing at kende, var på en rejse i Nepal, hvor jeg tog et kursus i Kathmandu. I 2024 genoptog jeg Reiki-healingen, og jeg har nu Reiki 1, 2 og 3, hvor 3. grad er mestergraden inden for Reiki-healing.
           </p>
           <p style={styles.text}>
-            Det blev en livsændrende oplevelse for mig, en rejse med virkelig mange intuitive oplevelser og øvelse i at være i nuet. Jeg mødte så meget kærlighed og fik en camino-familie, som jeg gik med. Vi kom fra alle mulige steder i verden. En australsk ven fortalte mig om alle sine fantastiske rejser i Nepal. Der blev sået et frø om en drøm om at rejse til Nepal, og han vidste jo ikke, at jeg var meget fascineret af tibetansk buddhisme.
+            Min egen vej har ikke været lige, og jeg har prøvet mange ting.
           </p>
           <p style={styles.text}>
-            Så jeg landede i Nepal året efter på endnu en rejse alene. Her tog jeg for første gang et kursus i Reiki-healing. Jeg vandrede i Himalaya og mødte fantastiske mennesker.
+            Jeg har vandret på Caminoen i Spanien og rejst til Nepal to gange, hvor jeg har boet på et tibetansk buddhistisk kloster, arbejdet på et børnehjem og vandret i Himalaya.
           </p>
           <p style={styles.text}>
-            Min anden rejse til Nepal i 2015 førte mig til Kopan Monastery i Kathmandu, hvor jeg boede på et tibetansk buddhistisk kloster på et 10-dages kursus for vesterlændinge. Her blev reinkarnation for første gang mere virkelig for mig. Det var, som om alt det, jeg havde lært og troede på, blev vendt helt på hovedet.
+            Jeg har arbejdet som handicaphjælper og med udviklingshæmmede, i børnehave og som skolelærer.
           </p>
           <p style={styles.text}>
-            I 2023/24 har jeg uddannet mig i Reiki 1, 2 og 3 og har taget kurser i meditation og krystaller. Reiki-healing og meditation har været en del af mit eget daglige liv i de sidste 2 år, og jeg har brugt det på mig selv, når jeg havde brug for ro og for at få ladet mit system op igen.
+            I det meste af mit liv har jeg også arbejdet kunstnerisk, blandt andet med fotografi. Jeg har taget en læreruddannelse som billedkunstlærer, og jeg er uddannet arkitekt, kunstterapeut og healer. Kunstnerisk arbejde er en stor del af mit liv.
           </p>
           <p style={styles.text}>
-            Ud over at være interesseret i spiritualitet har jeg altid beskæftiget mig med billedkunst. Jeg er uddannet arkitekt fra Kunstakademiets Arkitektskole i 2013, og derudover har jeg i 2023 færdiggjort en 3-årig kunstterapiuddannelse. Kunstnerisk arbejde er en stor del af mit liv.
+            Jeg mærker et kald til healingen, og jeg glæder mig meget til at kunne hjælpe dig.
           </p>
 
           <div style={styles.ctaBox}>
@@ -86,13 +78,6 @@ const styles: Styles = {
     fontWeight: 600,
     letterSpacing: '-0.04em',
   },
-  subtitle: {
-    fontSize: '18px',
-    lineHeight: '1.6',
-    color: '#4A6B35',
-    margin: 0,
-    fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
-  },
   photoSlot: {
     width: 'min(100%, 360px)',
     aspectRatio: '4 / 5',
@@ -120,13 +105,6 @@ const styles: Styles = {
     borderRadius: '0',
     padding: '40px 36px',
     boxShadow: '0 2px 12px rgba(40, 52, 36, 0.08)',
-  },
-  heading: {
-    fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
-    fontSize: '24px',
-    color: '#1E3D14',
-    margin: '28px 0 14px',
-    fontWeight: 600,
   },
   text: {
     fontSize: '16px',
@@ -178,4 +156,3 @@ const styles: Styles = {
     cursor: 'pointer',
   },
 };
-
