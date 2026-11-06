@@ -10,13 +10,13 @@ const cardConfig = [
     key: 'behandlinger',
     title: 'Behandlinger',
     to: '/behandlinger',
-    text: 'Udforsk behandlinger, der støtter ro, nærvær og balance.',
+    text: 'Her kan du se de behandlinger, jeg tilbyder.',
   },
   {
     key: 'kunst',
     title: 'Min Kunst',
     to: '/kunst',
-    text: 'Kreative praksisser, kunstnerisk nærvær og udtryk, der kan gøre plads til forandring og ro.',
+    text: 'Her kan du se mit kunstneriske arbejde.',
   },
   // {
   //   key: 'uld',
@@ -85,7 +85,7 @@ export default function Home() {
           </div>
 
           <div className="site-hero-buttons" style={styles.heroBtns}>
-            <Link to="/booking" style={styles.primaryBtn}>Book Behandling</Link>
+            <Link to="/booking" style={styles.primaryBtn}>BOOK BEHANDLING</Link>
           </div>
         </div>
       </section>
