@@ -30,7 +30,7 @@ export default function Footer() {
 
           {/* Col 3: Practical */}
           <div className="site-footer-column" style={styles.col}>
-            <div style={styles.colTitle}>Åbningstider</div>
+            <div style={styles.colTitle}>Adresse & Kontakt</div>
             <p style={{ ...styles.text, marginTop: '12px' }}>
               Herstedvesterstræde 41<br />
               2620 Albertslund<br />
