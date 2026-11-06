@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom';
 import type { Styles } from '../css';
 import christinaPhoto from '../assets/IMG_8347.jpeg';
+import PageTitle from '../components/PageTitle';
 
 export default function About() {
   return (
     <div className="site-content-page" style={styles.page}>
       <div className="site-content-container" style={styles.container}>
         <div className="site-page-header" style={styles.header}>
-          <h1 className="site-page-title" style={styles.title}>OM CHRISTINA FLANDING</h1>
+          <PageTitle className="site-page-title" style={styles.title}>OM CHRISTINA FLANDING</PageTitle>
         </div>
 
         <div

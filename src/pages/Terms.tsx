@@ -1,10 +1,11 @@
 import type { Styles } from '../css';
+import PageTitle from '../components/PageTitle';
 
 export default function Terms() {
   return (
     <main className="site-content-page" style={styles.page}>
       <article className="site-content-container" style={styles.container}>
-        <header style={styles.header}><h1 className="site-page-title" style={styles.title}>Vilkår for booking</h1><p style={styles.intro}>Praktiske vilkår for booking af behandlinger hos Christina Flanding.</p></header>
+        <header style={styles.header}><PageTitle className="site-page-title" style={styles.title}>Vilkår for booking</PageTitle><p style={styles.intro}>Praktiske vilkår for booking af behandlinger hos Christina Flanding.</p></header>
         <Section title="Booking"><p>En booking er først endelig, når du har modtaget en bekræftelse. Oplys korrekte kontaktoplysninger, så vi kan kontakte dig om aftalen.</p></Section>
         <Section title="Afbud og ændringer"><p>Hvis du bliver forhindret, bedes du melde afbud eller bede om ændring senest 24 timer før aftalen via telefon eller e-mail. Eventuelle gebyrer for sent afbud eller udeblivelse skal fremgå tydeligt af den konkrete pris- og afbudspolitik.</p></Section>
         <Section title="Betaling"><p>Pris og betalingsmåde oplyses før eller ved booking. Gem din kvittering eller bookingbekræftelse.</p></Section>

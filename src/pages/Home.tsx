@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Styles } from '../css';
+import { CrystalCluster } from '../components/PageTitle';
 import heroBackground from '../assets/forside_foto_2.png';
 import { artworkImageUrl, getArtwork, getServices, sanityConfigured } from '../lib/sanity';
 
@@ -84,11 +85,7 @@ export default function Home() {
           </div>
 
           <div className="site-hero-buttons" style={styles.heroBtns}>
-            <div style={styles.bookButtonGroup}>
-              <CrystalCluster small />
-              <Link to="/booking" style={styles.primaryBtn}>Book Behandling</Link>
-              <CrystalCluster flipped small />
-            </div>
+            <Link to="/booking" style={styles.primaryBtn}>Book Behandling</Link>
           </div>
         </div>
       </section>
@@ -130,35 +127,6 @@ export default function Home() {
       </section>
 
     </div>
-  );
-}
-
-function CrystalCluster({ flipped = false, small = false }: { flipped?: boolean; small?: boolean }) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 48 48"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      style={{
-        width: small ? '22px' : 'clamp(30px, 5vw, 46px)',
-        height: small ? '22px' : 'clamp(30px, 5vw, 46px)',
-        flexShrink: 0,
-        color: '#7A9274',
-        transform: flipped ? 'scaleX(-1)' : undefined,
-      }}
-    >
-      <path d="M19 42 17 17 23 5 30 17 29 42Z" />
-      <path d="m17 17 6 3 7-3M23 5l1 15-5 22M30 17l-6 3 5 22" />
-      <path d="m7 42-1-16 5-9 6 9-1 16Z" />
-      <path d="m6 26 5 3 6-3M11 17v12l-1 13M17 26l-6 3 5 13" />
-      <path d="m31 42-1-14 5-8 6 8-1 14Z" />
-      <path d="m30 28 5 3 6-3M35 20v11l-1 11M41 28l-6 3 5 11" />
-      <path d="M23 45h7M8 45h9M34 45h8" />
-    </svg>
   );
 }
 
@@ -217,14 +185,6 @@ const styles: Styles = {
     flexWrap: 'wrap',
     animation: 'heroFadeUp 1.2s ease-out both',
   },
-  bookButtonGroup: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexWrap: 'nowrap',
-    gap: '12px',
-  },
   primaryBtn: {
     display: 'inline-block',
     backgroundColor: 'rgba(255, 255, 255, 0.88)',
@@ -237,8 +197,6 @@ const styles: Styles = {
     border: '1px solid rgba(255, 255, 255, 0.55)',
     boxShadow: '0 12px 30px rgba(16, 18, 17, 0.18)',
     letterSpacing: '0.12em',
-    whiteSpace: 'nowrap',
-    width: 'auto',
     transition: 'transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
     cursor: 'pointer',
   },

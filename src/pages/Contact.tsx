@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
 import type { Styles } from '../css';
+import PageTitle from '../components/PageTitle';
 
 export default function Contact() {
   return (
     <div className="site-content-page" style={styles.page}>
       <div className="site-content-container" style={styles.container}>
         <div className="site-page-header" style={styles.header}>
-          <h1 className="site-page-title" style={styles.title}>KONTAKT</h1>
+          <PageTitle className="site-page-title" style={styles.title}>KONTAKT</PageTitle>
           <p className="site-page-subtitle" style={styles.subtitle}>
             Har du spørgsmål om behandlingerne, forløb eller specielle ønsker? Tøv ikke med at række ud.
           </p>
@@ -182,4 +183,3 @@ const styles: Styles = {
     transition: 'transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
   },
 };
-

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import type { Styles } from '../css';
 import { artworkImageUrl, getService, sanityConfigured, type Service } from '../lib/sanity';
+import PageTitle from '../components/PageTitle';
 
 export default function ServiceDetailPage() {
   const { slug = '' } = useParams();
@@ -50,7 +51,7 @@ export default function ServiceDetailPage() {
         {service && (
           <>
             <header style={styles.header}>
-              <h1 className="site-page-title" style={styles.title}>{service.title}</h1>
+              <PageTitle className="site-page-title" style={styles.title}>{service.title}</PageTitle>
               {service.tagline && <p className="site-page-subtitle" style={styles.subtitle}>{service.tagline}</p>}
               <Link to="/booking" style={{ ...styles.bookButton, marginTop: '14px' }}>BOOK BEHANDLING</Link>
             </header>

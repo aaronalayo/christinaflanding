@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { Styles } from '../css';
 import { artworkImageUrl, getArtwork, sanityConfigured, type ArtworkCategory, type Artwork, type ArtworkGroup } from '../lib/sanity';
+import PageTitle from '../components/PageTitle';
 
 const artworkGroupTitles: Record<ArtworkGroup, string> = {
   uld: 'Uld',
@@ -74,6 +75,10 @@ export default function ArtworkPage({ category, title, subtitle }: ArtworkPagePr
   return (
     <div className="site-content-page" style={styles.page}>
       <div className="site-content-container" style={styles.container}>
+        <header style={styles.header}>
+          <PageTitle className="site-page-title" style={styles.title}>{title}</PageTitle>
+          <p className="site-page-subtitle" style={styles.subtitle}>{subtitle}</p>
+        </header>
         {!sanityConfigured && <p style={styles.message}>Galleriet bliver snart opdateret med nye værker.</p>}
         {hasError && <p style={styles.message}>Galleriet kunne ikke indlæses lige nu. Prøv igen senere.</p>}
         {sanityConfigured && !hasError && artwork.length === 0 && <p style={styles.message}>Der er endnu ingen værker i galleriet.</p>}
