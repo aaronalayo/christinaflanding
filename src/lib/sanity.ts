@@ -11,6 +11,23 @@ export type ServiceSection = {
   bulletPoints?: string[];
 };
 
+export type AboutPageContent = {
+  title: string;
+  portrait?: {
+    asset?: {
+      _ref: string;
+    };
+  };
+  portraitAlt?: string;
+  paragraphs?: Array<{
+    _key: string;
+    text: string;
+  }>;
+  ctaText?: string;
+  ctaButtonLabel?: string;
+  ctaButtonLink?: string;
+};
+
 export type Service = {
   _id: string;
   title: string;
@@ -118,5 +135,26 @@ export async function getService(slug: string) {
       price
     }`,
     {slug},
+  );
+}
+
+export async function getAboutPage() {
+  if (!sanityConfigured) {
+    return null;
+  }
+
+  return client.fetch<AboutPageContent | null>(
+    `*[_type == "aboutPage" && _id == "aboutPage"][0] {
+      title,
+      portrait,
+      portraitAlt,
+      paragraphs[] {
+        _key,
+        text
+      },
+      ctaText,
+      ctaButtonLabel,
+      ctaButtonLink
+    }`,
   );
 }
