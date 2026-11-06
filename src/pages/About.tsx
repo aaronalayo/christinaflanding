@@ -1,53 +1,78 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Styles } from '../css';
 import christinaPhoto from '../assets/IMG_8347.jpeg';
 import PageTitle from '../components/PageTitle';
+import { artworkImageUrl, getAboutPage, type AboutPageContent } from '../lib/sanity';
+
+const defaultAboutPage: AboutPageContent = {
+  title: 'OM CHRISTINA FLANDING',
+  portraitAlt: 'Christina Flanding',
+  paragraphs: [
+    { _key: 'welcome', text: 'Tak for, at du er landet her. Det sætter jeg stor pris på.' },
+    { _key: 'reiki', text: 'Første gang jeg lærte Reiki-healing at kende, var på en rejse i Nepal, hvor jeg tog et kursus i Kathmandu. I 2024 genoptog jeg Reiki-healingen, og jeg har nu Reiki 1, 2 og 3, hvor 3. grad er mestergraden inden for Reiki-healing.' },
+    { _key: 'journey', text: 'Min egen vej har ikke været lige, og jeg har prøvet mange ting.' },
+    { _key: 'nepal', text: 'Jeg har vandret på Caminoen i Spanien og rejst til Nepal to gange, hvor jeg har boet på et tibetansk buddhistisk kloster, arbejdet på et børnehjem og vandret i Himalaya.' },
+    { _key: 'work', text: 'Jeg har arbejdet med mennesker som handicaphjælper, i børnehave og som skolelærer.' },
+    { _key: 'calling', text: 'Jeg mærker et kald til healingen, og jeg glæder mig meget til at kunne hjælpe dig.' },
+  ],
+  ctaText: 'Du er altid velkommen til at booke en behandling eller kontakte mig med eventuelle spørgsmål.',
+  ctaButtonLabel: 'BOOK BEHANDLING',
+  ctaButtonLink: '/booking',
+};
 
 export default function About() {
+  const [aboutPage, setAboutPage] = useState(defaultAboutPage);
+
+  useEffect(() => {
+    let isCurrent = true;
+    getAboutPage()
+      .then((content) => {
+        if (isCurrent && content) {
+          setAboutPage(content);
+        }
+      })
+      .catch((error: unknown) => {
+        console.error('Could not load About page content from Sanity.', error);
+      });
+
+    return () => {
+      isCurrent = false;
+    };
+  }, []);
+
+  const portraitUrl = artworkImageUrl(aboutPage.portrait);
+
   return (
     <div className="site-content-page" style={styles.page}>
       <div className="site-content-container" style={styles.container}>
         <div className="site-page-header" style={styles.header}>
-          <PageTitle className="site-page-title" style={styles.title}>OM CHRISTINA FLANDING</PageTitle>
+          <PageTitle className="site-page-title" style={styles.title}>{aboutPage.title}</PageTitle>
         </div>
 
         <div
           className="about-photo-slot"
           style={styles.photoSlot}
         >
-          <img src={christinaPhoto} alt="Christina Flanding" style={styles.photoImage} />
+          <img src={portraitUrl || christinaPhoto} alt={aboutPage.portraitAlt || ''} style={styles.photoImage} />
         </div>
 
         <div className="site-content-card" style={styles.contentBox}>
-          <p style={styles.text}>
-            Tak for, at du er landet her. Det sætter jeg stor pris på.
-          </p>
-          <p style={styles.text}>
-            Første gang jeg lærte Reiki-healing at kende, var på en rejse i Nepal, hvor jeg tog et kursus i Kathmandu. I 2024 genoptog jeg Reiki-healingen, og jeg har nu Reiki 1, 2 og 3, hvor 3. grad er mestergraden inden for Reiki-healing.
-          </p>
-          <p style={styles.text}>
-            Min egen vej har ikke været lige, og jeg har prøvet mange ting.
-          </p>
-          <p style={styles.text}>
-            Jeg har vandret på Caminoen i Spanien og rejst til Nepal to gange, hvor jeg har boet på et tibetansk buddhistisk kloster, arbejdet på et børnehjem og vandret i Himalaya.
-          </p>
-          <p style={styles.text}>
-            Jeg har arbejdet med mennesker som handicaphjælper, i børnehave og som skolelærer.
-          </p>
-          <p style={styles.text}>
-            Jeg mærker et kald til healingen, og jeg glæder mig meget til at kunne hjælpe dig.
-          </p>
+          {aboutPage.paragraphs?.map((paragraph) => (
+            <p key={paragraph._key} style={styles.text}>{paragraph.text}</p>
+          ))}
 
           <div style={styles.ctaBox}>
-            <h4 style={{ color: '#1E3D14', margin: '0 0 12px', fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif', fontWeight: 600 }}>
-Du er altid velkommen til at booke en behandling eller kontakte mig med eventuelle spørgsmål.
-            </h4>
-            {/* <p style={{ color: '#4A6B35', margin: '0 0 20px', fontSize: '15px' }}>
-              Du er altid velkommen til at booke en session eller kontakte mig med eventuelle spørgsmål.
-            </p> */}
-            <Link to="/booking" style={styles.ctaBtn}>
-              BOOK BEHANDLING
-            </Link>
+            {aboutPage.ctaText && (
+              <h4 style={{ color: '#1E3D14', margin: '0 0 12px', fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif', fontWeight: 600 }}>
+                {aboutPage.ctaText}
+              </h4>
+            )}
+            {aboutPage.ctaButtonLabel && (
+              <Link to={aboutPage.ctaButtonLink || '/booking'} style={styles.ctaBtn}>
+                {aboutPage.ctaButtonLabel}
+              </Link>
+            )}
           </div>
         </div>
       </div>
