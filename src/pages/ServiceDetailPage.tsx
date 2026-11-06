@@ -34,7 +34,6 @@ export default function ServiceDetailPage() {
   const hasError = currentResult?.hasError ?? false;
   const isLoading = currentResult === null;
   const imageUrl = service ? artworkImageUrl(service.image) : undefined;
-  const bookingHref = service ? `/booking?service=${encodeURIComponent(service.title)}` : '/booking';
   const introHeading = service?.sections?.find((section) => section.heading)?.heading
     ?? (service?.title.toLowerCase().startsWith('reiki') ? 'Om Reiki' : `Om ${service?.title ?? ''}`);
 
@@ -53,7 +52,7 @@ export default function ServiceDetailPage() {
             <header style={styles.header}>
               <h1 className="site-page-title" style={styles.title}>{service.title}</h1>
               {service.tagline && <p className="site-page-subtitle" style={styles.subtitle}>{service.tagline}</p>}
-              <Link to={bookingHref} style={{ ...styles.bookButton, marginTop: '14px' }}>BOOK BEHANDLING</Link>
+              <Link to="/booking" style={{ ...styles.bookButton, marginTop: '14px' }}>BOOK BEHANDLING</Link>
             </header>
 
             <div className="site-treatment-card" style={styles.treatmentCard}>
@@ -86,7 +85,7 @@ export default function ServiceDetailPage() {
                 </section>
               ))}
               <div style={{ marginTop: '28px' }}>
-                <Link to={bookingHref} style={styles.bookButton}>BOOK BEHANDLING</Link>
+                <Link to="/booking" style={styles.bookButton}>BOOK BEHANDLING</Link>
               </div>
             </div>
           </>

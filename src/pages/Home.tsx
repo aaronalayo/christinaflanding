@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Styles } from '../css';
 import heroBackground from '../assets/forside_foto_2.png';
-import { artworkImageUrl, getArtwork, getServices, sanityConfigured, type Service } from '../lib/sanity';
+import { artworkImageUrl, getArtwork, getServices, sanityConfigured } from '../lib/sanity';
 
 const cardConfig = [
   {
@@ -27,8 +27,6 @@ const cardConfig = [
 
 export default function Home() {
   const [featuredImages, setFeaturedImages] = useState<Record<string, string | undefined>>({});
-  const [services, setServices] = useState<Service[]>([]);
-  const [activeServiceIndex, setActiveServiceIndex] = useState(0);
 
   useEffect(() => {
     if (!sanityConfigured) {
@@ -38,12 +36,11 @@ export default function Home() {
     let isCurrent = true;
 
     getServices()
-      .then((items) => {
+      .then((services) => {
         if (isCurrent) {
-          setServices(items);
           setFeaturedImages((currentImages) => ({
             ...currentImages,
-            behandlinger: artworkImageUrl(items[0]?.image),
+            behandlinger: artworkImageUrl(services[0]?.image),
           }));
         }
       })
@@ -53,8 +50,8 @@ export default function Home() {
         }
       });
 
-    Promise.all([getArtwork('kunst'), getArtwork('uld')])
-      .then(([kunstArtwork, uldArtwork]) => {
+    getArtwork('kunst')
+      .then((kunstArtwork) => {
         if (!isCurrent) {
           return;
         }
@@ -62,7 +59,6 @@ export default function Home() {
         setFeaturedImages((currentImages) => ({
           ...currentImages,
           kunst: artworkImageUrl(kunstArtwork[0]?.image),
-          uld: artworkImageUrl(uldArtwork[0]?.image),
         }));
       })
       .catch(() => {
@@ -76,78 +72,38 @@ export default function Home() {
     };
   }, []);
 
-  useEffect(() => {
-    if (services.length < 2) {
-      return;
-    }
-
-    const intervalId = window.setInterval(() => {
-      setActiveServiceIndex((currentIndex) => (currentIndex + 1) % services.length);
-    }, 6000);
-
-    return () => window.clearInterval(intervalId);
-  }, [services.length]);
-
-  const activeService = services[activeServiceIndex];
-  const bookingHref = activeService
-    ? `/booking?service=${encodeURIComponent(activeService.title)}`
-    : '/booking';
-
   return (
     <div style={styles.pageShell}>
       <section className="site-hero" style={styles.hero}>
         <div style={styles.heroContent}>
-          {activeService ? (
-            <div key={activeService._id} className="site-hero-service-slide">
-              <div style={styles.heroTextBlock}>
-                <h1 className="site-hero-title" style={styles.heroTitle}>{activeService.title}</h1>
-                <p className="site-hero-subtitle" style={styles.heroSubtitle}>
-                  {activeService.tagline || activeService.summary}
-                </p>
-              </div>
+          <div style={styles.heroTextBlock}>
+            <h1 className="site-hero-title" style={styles.heroTitle}>REIKI HEALING</h1>
+            <p className="site-hero-subtitle" style={styles.heroSubtitle}>
+              Blide, rogivende behandlinger, der hjælper dig med at komme ned i kroppen, finde ro og skabe plads til det, der virkelig betyder noget.
+            </p>
+          </div>
 
-              <div className="site-hero-buttons" style={styles.heroBtns}>
-                <Link to={bookingHref} style={styles.primaryBtn}>BOOK {activeService.title}</Link>
-              </div>
-
-              {services.length > 1 && (
-                <div className="site-hero-service-indicators" aria-label="Vælg behandling">
-                  {services.map((service, index) => (
-                    <button
-                      key={service._id}
-                      type="button"
-                      className={`site-hero-service-indicator${index === activeServiceIndex ? ' is-active' : ''}`}
-                      aria-label={`Vis ${service.title}`}
-                      aria-pressed={index === activeServiceIndex}
-                      onClick={() => setActiveServiceIndex(index)}
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-          ) : (
-            <>
-              <div style={styles.heroTextBlock}>
-                <h1 className="site-hero-title" style={styles.heroTitle}>REIKI HEALING</h1>
-                <p className="site-hero-subtitle" style={styles.heroSubtitle}>
-                  Blide, rogivende behandlinger, der hjælper dig med at komme ned i kroppen, finde ro og skabe plads til det, der virkelig betyder noget.
-                </p>
-              </div>
-
-              <div className="site-hero-buttons" style={styles.heroBtns}>
-                <Link to="/booking" style={styles.primaryBtn}>BOOK BEHANDLING</Link>
-              </div>
-            </>
-          )}
+          <div className="site-hero-buttons" style={styles.heroBtns}>
+            <Link to="/booking" style={styles.primaryBtn}>Book Behandling</Link>
+          </div>
         </div>
       </section>
 
       <section className="site-section" style={styles.section}>
         <div style={styles.container}>
           <div style={styles.introBox}>
-            <h2 className="site-section-title" style={styles.sectionTitle}>Giv dig selv en pause</h2>
+            <div style={styles.welcomeHeading}>
+              <CrystalCluster />
+              <h2 className="site-section-title" style={styles.sectionTitle}>Velkommen</h2>
+              <CrystalCluster flipped />
+            </div>
+            <p style={styles.introLead}>
+              Hos mig kan du få ladet dit energisystem op og give dig selv en pause.
+            </p>
             <p style={styles.sectionText}>
-              Reiki healing er for dig, der oplever tankemylder, stress, uro eller bare har brug for et stille sted at komme tilbage til dig selv.
+              Reiki healing er en meget blid healingsmetode, hvor jeg har fokus på at lade kroppens
+              energicentre op igen (chakraer). Jeg arbejder med at fjerne blokeringer, så der kan
+              komme frit flow i hele kroppen.
             </p>
           </div>
 
@@ -170,6 +126,35 @@ export default function Home() {
       </section>
 
     </div>
+  );
+}
+
+function CrystalCluster({ flipped = false }: { flipped?: boolean }) {
+  return (
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 48 48"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      style={{
+        width: 'clamp(30px, 5vw, 46px)',
+        height: 'clamp(30px, 5vw, 46px)',
+        flexShrink: 0,
+        color: '#7A9274',
+        transform: flipped ? 'scaleX(-1)' : undefined,
+      }}
+    >
+      <path d="M19 42 17 17 23 5 30 17 29 42Z" />
+      <path d="m17 17 6 3 7-3M23 5l1 15-5 22M30 17l-6 3 5 22" />
+      <path d="m7 42-1-16 5-9 6 9-1 16Z" />
+      <path d="m6 26 5 3 6-3M11 17v12l-1 13M17 26l-6 3 5 13" />
+      <path d="m31 42-1-14 5-8 6 8-1 14Z" />
+      <path d="m30 28 5 3 6-3M35 20v11l-1 11M41 28l-6 3 5 11" />
+      <path d="M23 45h7M8 45h9M34 45h8" />
+    </svg>
   );
 }
 
@@ -239,7 +224,6 @@ const styles: Styles = {
     textDecoration: 'none',
     border: '1px solid rgba(255, 255, 255, 0.55)',
     boxShadow: '0 12px 30px rgba(16, 18, 17, 0.18)',
-    textTransform: 'uppercase',
     letterSpacing: '0.12em',
     transition: 'transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
     cursor: 'pointer',
@@ -268,6 +252,19 @@ const styles: Styles = {
     maxWidth: '720px',
     margin: '0 auto 42px',
   },
+  welcomeHeading: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 'clamp(12px, 3vw, 24px)',
+  },
+  introLead: {
+    fontSize: '21px',
+    lineHeight: '1.6',
+    color: '#1E3D14',
+    margin: '0 auto 16px',
+    fontWeight: 500,
+  },
   sectionTitle: {
     fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',
     fontSize: 'clamp(30px, 4vw, 48px)',
@@ -278,7 +275,7 @@ const styles: Styles = {
   },
   sectionText: {
     fontSize: '17px',
-    lineHeight: '1.7',
+    lineHeight: '1.8',
     color: '#4d4d4d',
     margin: 0,
   },
