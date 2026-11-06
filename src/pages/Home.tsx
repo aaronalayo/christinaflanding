@@ -79,12 +79,16 @@ export default function Home() {
           <div style={styles.heroTextBlock}>
             <h1 className="site-hero-title" style={styles.heroTitle}>REIKI HEALING</h1>
             <p className="site-hero-subtitle" style={styles.heroSubtitle}>
-              Blide, rogivende behandlinger, der hjælper dig med at komme ned i kroppen, finde ro og skabe plads til det, der virkelig betyder noget.
+              "Blide rolige behandlinger, så du kommer tilbage til dig selv."
             </p>
           </div>
 
           <div className="site-hero-buttons" style={styles.heroBtns}>
-            <Link to="/booking" style={styles.primaryBtn}>Book Behandling</Link>
+            <div style={styles.bookButtonGroup}>
+              <CrystalCluster small />
+              <Link to="/booking" style={styles.primaryBtn}>Book Behandling</Link>
+              <CrystalCluster flipped small />
+            </div>
           </div>
         </div>
       </section>
@@ -129,7 +133,7 @@ export default function Home() {
   );
 }
 
-function CrystalCluster({ flipped = false }: { flipped?: boolean }) {
+function CrystalCluster({ flipped = false, small = false }: { flipped?: boolean; small?: boolean }) {
   return (
     <svg
       aria-hidden="true"
@@ -140,8 +144,8 @@ function CrystalCluster({ flipped = false }: { flipped?: boolean }) {
       strokeLinecap="round"
       strokeLinejoin="round"
       style={{
-        width: 'clamp(30px, 5vw, 46px)',
-        height: 'clamp(30px, 5vw, 46px)',
+        width: small ? '22px' : 'clamp(30px, 5vw, 46px)',
+        height: small ? '22px' : 'clamp(30px, 5vw, 46px)',
         flexShrink: 0,
         color: '#7A9274',
         transform: flipped ? 'scaleX(-1)' : undefined,
@@ -213,6 +217,14 @@ const styles: Styles = {
     flexWrap: 'wrap',
     animation: 'heroFadeUp 1.2s ease-out both',
   },
+  bookButtonGroup: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexWrap: 'nowrap',
+    gap: '12px',
+  },
   primaryBtn: {
     display: 'inline-block',
     backgroundColor: 'rgba(255, 255, 255, 0.88)',
@@ -225,6 +237,8 @@ const styles: Styles = {
     border: '1px solid rgba(255, 255, 255, 0.55)',
     boxShadow: '0 12px 30px rgba(16, 18, 17, 0.18)',
     letterSpacing: '0.12em',
+    whiteSpace: 'nowrap',
+    width: 'auto',
     transition: 'transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease',
     cursor: 'pointer',
   },
@@ -280,8 +294,9 @@ const styles: Styles = {
     margin: 0,
   },
   grid: {
+    marginTop: '62px',
     display: 'flex',
-    gap: '22px',
+    gap: '34px',
     flexWrap: 'wrap',
     justifyContent: 'center',
   },

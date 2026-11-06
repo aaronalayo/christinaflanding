@@ -41,12 +41,12 @@ export default function About() {
           </p>
 
           <div style={styles.ctaBox}>
-            <h3 style={{ color: '#1E3D14', margin: '0 0 12px', fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif', fontWeight: 600 }}>
-              Vil du opleve en session?
-            </h3>
-            <p style={{ color: '#4A6B35', margin: '0 0 20px', fontSize: '15px' }}>
+            <h4 style={{ color: '#1E3D14', margin: '0 0 12px', fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif', fontWeight: 600 }}>
+Du er altid velkommen til at booke en behandling eller kontakte mig med eventuelle spørgsmål.
+            </h4>
+            {/* <p style={{ color: '#4A6B35', margin: '0 0 20px', fontSize: '15px' }}>
               Du er altid velkommen til at booke en session eller kontakte mig med eventuelle spørgsmål.
-            </p>
+            </p> */}
             <Link to="/booking" style={styles.ctaBtn}>
               BOOK BEHANDLING
             </Link>

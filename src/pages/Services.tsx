@@ -84,7 +84,12 @@ const styles: Styles = {
   },
   subtitle: { fontSize: '18px', lineHeight: 1.6, color: '#4A6B35', margin: 0 },
   message: { textAlign: 'center', color: '#4A6B35', margin: '0 auto 36px' },
-  grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '28px' },
+  grid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 320px))',
+    justifyContent: 'center',
+    gap: '28px',
+  },
   card: {
     display: 'block',
     overflow: 'hidden',
