@@ -37,6 +37,7 @@ const styles: Styles = {
   header: {
     textAlign: 'center',
     marginBottom: '20px',
+    marginTop: '20px',
   },
   title: {
     fontFamily: '"Avenir Next", "Avenir", "Helvetica Neue", "Segoe UI", sans-serif',

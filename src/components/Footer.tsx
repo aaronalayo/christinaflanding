@@ -10,7 +10,7 @@ export default function Footer() {
           <div className="site-footer-column" style={styles.col}>
             <div style={styles.brandTitle}>Christina Flanding</div>
             <p style={styles.text}>
-              Intuitiv healing, energiterapi og nærvær. Skab ro, balance og fornyet energi i krop og sind.
+              Intuitiv Reiki healing, energiterapi og nærvær. Skab ro, balance og fornyet energi i krop og sind.
             </p>
           </div>
 
@@ -21,7 +21,7 @@ export default function Footer() {
               <li><Link to="/" className="site-footer-link" style={styles.link}>Forside</Link></li>
               <li><Link to="/om-mig" className="site-footer-link" style={styles.link}>Om Christina</Link></li>
               <li><Link to="/behandlinger" className="site-footer-link" style={styles.link}>Behandlinger</Link></li>
-              <li><Link to="/booking" className="site-footer-link" style={styles.link}>Book session</Link></li>
+              <li><Link to="/booking" className="site-footer-link" style={styles.link}>Book behandling</Link></li>
               <li><Link to="/kontakt" className="site-footer-link" style={styles.link}>Kontakt</Link></li>
               <li><Link to="/privatlivspolitik" className="site-footer-link" style={styles.link}>Privatlivspolitik</Link></li>
               <li><Link to="/vilkaar" className="site-footer-link" style={styles.link}>Vilkår for booking</Link></li>
