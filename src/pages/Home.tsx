@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Styles } from '../css';
+import { CrystalCluster } from '../components/PageTitle';
 import heroBackground from '../assets/forside_foto_2.png';
 import { artworkImageUrl, getArtwork, getServices, sanityConfigured } from '../lib/sanity';
 
@@ -79,7 +80,7 @@ export default function Home() {
           <div style={styles.heroTextBlock}>
             <h1 className="site-hero-title" style={styles.heroTitle}>REIKI HEALING</h1>
             <p className="site-hero-subtitle" style={styles.heroSubtitle}>
-              Blide, rogivende behandlinger, der hjælper dig med at komme ned i kroppen, finde ro og skabe plads til det, der virkelig betyder noget.
+              "Blide rolige behandlinger, så du kommer tilbage til dig selv."
             </p>
           </div>
 
@@ -126,35 +127,6 @@ export default function Home() {
       </section>
 
     </div>
-  );
-}
-
-function CrystalCluster({ flipped = false }: { flipped?: boolean }) {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 48 48"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      style={{
-        width: 'clamp(30px, 5vw, 46px)',
-        height: 'clamp(30px, 5vw, 46px)',
-        flexShrink: 0,
-        color: '#7A9274',
-        transform: flipped ? 'scaleX(-1)' : undefined,
-      }}
-    >
-      <path d="M19 42 17 17 23 5 30 17 29 42Z" />
-      <path d="m17 17 6 3 7-3M23 5l1 15-5 22M30 17l-6 3 5 22" />
-      <path d="m7 42-1-16 5-9 6 9-1 16Z" />
-      <path d="m6 26 5 3 6-3M11 17v12l-1 13M17 26l-6 3 5 13" />
-      <path d="m31 42-1-14 5-8 6 8-1 14Z" />
-      <path d="m30 28 5 3 6-3M35 20v11l-1 11M41 28l-6 3 5 11" />
-      <path d="M23 45h7M8 45h9M34 45h8" />
-    </svg>
   );
 }
 
@@ -280,8 +252,9 @@ const styles: Styles = {
     margin: 0,
   },
   grid: {
+    marginTop: '62px',
     display: 'flex',
-    gap: '22px',
+    gap: '34px',
     flexWrap: 'wrap',
     justifyContent: 'center',
   },

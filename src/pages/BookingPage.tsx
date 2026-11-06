@@ -1,5 +1,6 @@
 import HealingInquiry from '../HealingInquiry';
 import type { Styles } from '../css';
+import PageTitle from '../components/PageTitle';
 
 export default function BookingPage() {
   const serviceType = 'Reiki Healing';
@@ -9,7 +10,7 @@ export default function BookingPage() {
     <div className="site-booking-page" style={styles.page}>
       <div className="site-booking-container" style={styles.container}>
         <div className="site-page-header" style={styles.header}>
-          <h1 className="site-page-title" style={styles.title}>Book behandling</h1>
+          <PageTitle className="site-page-title" style={styles.title}>Book behandling</PageTitle>
           <p className="site-page-subtitle" style={styles.subtitle}>
             Vælg den behandling, du ønsker at booke, og derefter en dato og et ledigt tidspunkt. Når du har indsendt din forespørgsel, modtager du en bekræftelse på e-mail.
           </p>
@@ -23,7 +24,6 @@ export default function BookingPage() {
     </div>
   );
 }
-
 const styles: Styles = {
   page: {
     padding: '104px 24px 80px',
@@ -43,7 +43,7 @@ const styles: Styles = {
     fontSize: 'clamp(2rem, 4vw, 2.5rem)',
     textTransform: 'uppercase',
     color: '#1f2c22',
-    margin: '0 0 16px 0',
+    margin: 0,
     fontWeight: 600,
     lineHeight: '0.96',
     letterSpacing: '0.08em',

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Styles } from '../css';
 import { artworkImageUrl, getServices, sanityConfigured, type Service } from '../lib/sanity';
+import PageTitle from '../components/PageTitle';
 
 export default function Services() {
   const [services, setServices] = useState<Service[]>([]);
@@ -32,7 +33,7 @@ export default function Services() {
     <div className="site-content-page" style={styles.page}>
       <div className="site-content-container" style={styles.container}>
         <header className="site-page-header" style={styles.header}>
-          <h1 className="site-page-title" style={styles.title}>BEHANDLINGER</h1>
+          <PageTitle className="site-page-title" style={styles.title}>BEHANDLINGER</PageTitle>
           <p className="site-page-subtitle" style={styles.subtitle}>
             Find den behandling, der passer til dig.
           </p>
@@ -84,7 +85,12 @@ const styles: Styles = {
   },
   subtitle: { fontSize: '18px', lineHeight: 1.6, color: '#4A6B35', margin: 0 },
   message: { textAlign: 'center', color: '#4A6B35', margin: '0 auto 36px' },
-  grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '28px' },
+  grid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 320px))',
+    justifyContent: 'center',
+    gap: '28px',
+  },
   card: {
     display: 'block',
     overflow: 'hidden',

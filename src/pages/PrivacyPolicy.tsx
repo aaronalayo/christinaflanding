@@ -1,4 +1,5 @@
 import type { Styles } from '../css';
+import PageTitle from '../components/PageTitle';
 
 export default function PrivacyPolicy() {
   return (
@@ -23,7 +24,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 }
 
 function LegalPage({ title, intro, children }: { title: string; intro: string; children: React.ReactNode }) {
-  return <main className="site-content-page" style={styles.page}><article className="site-content-container" style={styles.container}><header style={styles.header}><h1 className="site-page-title" style={styles.title}>{title}</h1><p style={styles.intro}>{intro}</p></header>{children}</article></main>;
+  return <main className="site-content-page" style={styles.page}><article className="site-content-container" style={styles.container}><header style={styles.header}><PageTitle className="site-page-title" style={styles.title}>{title}</PageTitle><p style={styles.intro}>{intro}</p></header>{children}</article></main>;
 }
 
 const styles: Styles = {
